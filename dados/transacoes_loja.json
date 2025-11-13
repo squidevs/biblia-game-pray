@@ -1,0 +1,30 @@
+{
+  "transacoes": [
+    {
+      "id": "txn_0001",
+      "userId": "1",
+      "itens": [
+        { "itemId": "100", "quantidade": 3, "precoUnitario": 10 }
+      ],
+      "total": 30,
+      "moeda": "Ouro da Fé",
+      "metodoPagamento": "sandbox",
+      "status": "completed",
+      "data": "2025-11-13T11:05:00Z",
+      "meta": { "bundle": false }
+    },
+    {
+      "id": "txn_0002",
+      "userId": "2",
+      "itens": [
+        { "itemId": "7", "quantidade": 1, "precoUnitario": 0 }
+      ],
+      "total": 0,
+      "moeda": "Ouro da Fé",
+      "metodoPagamento": "gift",
+      "status": "pending",
+      "data": "2025-11-13T11:08:00Z",
+      "meta": { "promocao": "boas_vindas" }
+    }
+  ]
+}

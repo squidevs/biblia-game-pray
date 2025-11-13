@@ -1,0 +1,232 @@
+{
+  "acoes": [
+    {
+      "id": "acao-orar-pai-nosso",
+      "categoria": "oracao",
+      "titulo": "Orar: Pai Nosso",
+      "descricao": "Oração modelo ensinada por Jesus em Mateus 6:9-13.",
+      "imagem": "/imagens/acoes/orar_pai_nosso.png",
+      "icone": "bi-chat-heart",
+
+      "configuracoes": {
+        "tempoSugerido": 10,
+        "tempoRecargaMinutos": 60,
+        "tipoDuracao": "minutos",
+        "repeticao": "diaria",
+        "permitirEvidencia": false
+      },
+
+      "efeitos": {
+        "atributosPositivos": {
+          "fe": 10,
+          "sabedoria": 5,
+          "espiritoSanto": 15,
+          "paz": 8,
+          "alegria": 5
+        },
+        "atributosNegativos": {
+          "pecado": -1,
+          "medo": -2,
+          "ansiedade": -3,
+          "ira": -1
+        },
+        "armadura": {
+          "espadaEspirito": 1,
+          "escudoFe": 1,
+          "capaceteSalvacao": 0,
+          "couracaJustica": 0,
+          "cintoVerdade": 0,
+          "sandaliasEvangelho": 0,
+          "oracao": 2
+        }
+      },
+
+      "recompensas": {
+        "xp": 20,
+        "itens": [],
+        "conquistas": []
+      },
+
+      "referenciaBiblica": {
+        "versao": "acf",
+        "livro": "Mateus",
+        "capitulo": 6,
+        "versiculos": "9-13",
+        "textoUrl": "https://www.bibliaonline.com.br/acf/mt/6/9-13"
+      },
+
+      "requisitos": {
+        "nivelMinimo": 1,
+        "itensNecessariosIDs": [],
+        "statusNecessarios": []
+      },
+
+      "status": {
+        "disponivel": true,
+        "ativo": false,
+        "bloqueado": false
+      },
+
+      "observacoes": "Ao iniciar, abrir modal com opção de selecionar outra oração ou inserir oração personalizada. Timer exibido em tempo real. Concluir aplica efeitos; desistir aplica penalidade: pecados +1 e perda de fe pequena."
+    },
+
+    {
+      "id": "acao-arrependimento-sincero",
+      "categoria": "arrependimento",
+      "titulo": "Arrependimento Sincero",
+      "descricao": "Confissão e busca por perdão divino — zera o contador de pecado.",
+      "imagem": "/imagens/acoes/arrepender_se.png",
+      "icone": "bi-arrow-clockwise",
+
+      "configuracoes": {
+        "tempoSugerido": 5,
+        "tempoRecargaMinutos": 60,
+        "tipoDuracao": "minutos",
+        "repeticao": "unica",
+        "permitirEvidencia": false
+      },
+
+      "efeitos": {
+        "atributosPositivos": {
+          "fe": 15,
+          "espiritoSanto": 20,
+          "paz": 10,
+          "alegria": 8
+        },
+        "atributosNegativos": {
+          "pecado": -100,
+          "culpa": -50,
+          "ansiedade": -5,
+          "medo": -3
+        },
+        "armadura": {
+          "couracaJustica": 5,
+          "capaceteSalvacao": 3,
+          "espadaEspirito": 2
+        }
+      },
+
+      "recompensas": {
+        "xp": 30,
+        "itens": [101],
+        "conquistas": []
+      },
+
+      "referenciaBiblica": {
+        "versao": "acf",
+        "livro": "1 João",
+        "capitulo": 1,
+        "versiculos": "9",
+        "textoUrl": "https://www.bibliaonline.com.br/acf/1jo/1/9"
+      },
+
+      "requisitos": [
+        {
+          "tipo": "atributo",
+          "atributo": "pecado",
+          "operador": ">",
+          "valor": 0
+        }
+      ],
+
+      "status": {
+        "disponivel": true,
+        "ativo": false,
+        "bloqueado": false
+      },
+
+      "observacoes": "Aplica pecado = 0 (zerar). Aplicar cool-down para evitar abuso."
+    },
+
+    {
+      "id": "acao-jejum-12h",
+      "categoria": "jejum",
+      "titulo": "Jejum de 12 Horas",
+      "descricao": "Abstinência de alimentos por 12 horas para focar em Deus.",
+      "imagem": "/imagens/acoes/jejum_12h.png",
+      "icone": "bi-sun",
+
+      "configuracoes": {
+        "tempoSugeridoMinutos": 720,
+        "tempoRecargaHoras": 24,
+        "tipoDuracao": "minutos",
+        "repeticao": "semanal",
+        "permitirEvidencia": false
+      },
+
+      "efeitos": {
+        "atributosPositivos": {
+          "fe": 25,
+          "espiritoSanto": 30,
+          "sabedoria": 15,
+          "temperanca": 20
+        },
+        "atributosNegativos": {
+          "preguica": -10,
+          "gula": -15,
+          "orgulho": -8
+        },
+        "armadura": {
+          "espadaEspirito": 8,
+          "capaceteSalvacao": 5,
+          "couracaJustica": 6
+        }
+      },
+
+      "recompensas": {
+        "xp": 50,
+        "itens": [67, 89],
+        "conquistas": []
+      },
+
+      "referenciaBiblica": {
+        "versao": "acf",
+        "livro": "Mateus",
+        "capitulo": 6,
+        "versiculos": "16-18",
+        "textoUrl": "https://www.bibliaonline.com.br/acf/mt/6/16-18"
+      },
+
+      "requisitos": {
+        "nivelMinimo": 3,
+        "itensNecessariosIDs": [],
+        "statusNecessarios": ["fe > 30"]
+      },
+
+      "status": {
+        "disponivel": true,
+        "ativo": false,
+        "bloqueado": false
+      },
+
+      "observacoes": "Jejum exige autorrelato ou evidência opcional. Penalidade por desistir: aumento de ansiedade e perda moderada de fe."
+    }
+  ],
+
+  "categorias": {
+    "oracao": [
+      "Pai Nosso",
+      "Oração de Gratidão",
+      "Oração de Intercessão",
+      "Oração de Louvor"
+    ],
+    "arrependimento": [
+      "Arrependimento Sincero",
+      "Confissão de Pecados"
+    ],
+    "jejum": [
+      "Jejum de 12 Horas",
+      "Jejum de 24 Horas",
+      "Jejum Parcial"
+    ],
+    "adoracao": [
+      "Louvor com Música",
+      "Adoração em Silêncio"
+    ],
+    "servico": [
+      "Ajudar Necessitado",
+      "Visitar Enfermos",
+      "Ensino Bíblico"
+    ]
+  }
+}

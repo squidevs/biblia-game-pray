@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "nome": "Biblia Gamepray - Relacionamentos (JSON)",
+    "versao": "0.1",
+    "descricao": "Lista de relacionamentos entre tabelas principais do protótipo. Útil para modelagem ER e migração para Postgres/Supabase.",
+    "geradoEm": "2025-11-13"
+  },
+  "relationships": [
+    {
+      "from": "usuarios",
+      "to": "status_player",
+      "type": "1:1",
+      "local_key": "id",
+      "foreign_key": "status_player.user_id",
+      "note": "Cada usuário tem um snapshot de status; status_player.user_id é PK e FK para usuarios.id"
+    },
+    {
+      "from": "usuarios",
+      "to": "avatar_configs",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "avatar_configs.user_id",
+      "note": "Um usuário pode ter múltiplos presets/seed históricos; avatar_config_id em usuarios pode apontar para o preset atual"
+    },
+    {
+      "from": "acoes",
+      "to": "missoes",
+      "type": "1:N",
+      "local_key": "acoes.id",
+      "foreign_key": "missoes.acao_id",
+      "note": "Uma ação é a definição; missões são instâncias atribuídas a usuários"
+    },
+    {
+      "from": "usuarios",
+      "to": "missoes",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "missoes.owner_id",
+      "note": "Usuário pode ter muitas missões (histórico)"
+    },
+    {
+      "from": "itens",
+      "to": "user_items",
+      "type": "1:N",
+      "local_key": "itens.id",
+      "foreign_key": "user_items.item_id",
+      "note": "Inventário registra múltiplas linhas para usuários e itens"
+    },
+    {
+      "from": "usuarios",
+      "to": "user_items",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "user_items.user_id"
+    },
+    {
+      "from": "itens",
+      "to": "shop_items",
+      "type": "1:1",
+      "local_key": "itens.id",
+      "foreign_key": "shop_items.item_id",
+      "note": "Um registro de loja referencia um item catálogo (pode haver múltiplas entradas por evento/preço)"
+    },
+    {
+      "from": "usuarios",
+      "to": "transacoes_loja",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "transacoes_loja.user_id"
+    },
+    {
+      "from": "itens",
+      "to": "transacoes_loja",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "transacoes_loja.item_id"
+    },
+    {
+      "from": "conquistas",
+      "to": "user_conquistas",
+      "type": "1:N",
+      "local_key": "conquistas.id",
+      "foreign_key": "user_conquistas.conquista_id"
+    },
+    {
+      "from": "usuarios",
+      "to": "user_conquistas",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "user_conquistas.user_id"
+    },
+    {
+      "from": "usuarios",
+      "to": "ranking",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "ranking.user_id",
+      "note": "Ranking contém entradas por período — usada para promoção/queda na liga semanal"
+    },
+    {
+      "from": "usuarios",
+      "to": "notificacoes",
+      "type": "1:N",
+      "local_key": "id",
+      "foreign_key": "notificacoes.user_id"
+    },
+    {
+      "from": "mensagem_templates",
+      "to": "notificacoes",
+      "type": "1:N (reference)",
+      "local_key": "mensagem_templates.chave",
+      "foreign_key": "notificacoes.tipo",
+      "note": "notificacoes.tipo pode mapear para uma mensagem template (chave) — optional"
+    },
+    {
+      "from": "missoes",
+      "to": "usuarios",
+      "type": "N:N (shared)",
+      "via": "mission_participants",
+      "note": "Missões compartilhadas podem ter vários participantes; tabela `mission_participants` sugerida com (missao_id, user_id, papel, confirmado)"
+    }
+  ],
+  "notes": "Para migração a Postgres/Supabase: mapear campos jsonb e criar índices GIN para consultas de atributos; criar FK e constraints em tabelas join para integridade referencial. Recomenda-se também gerar migrations/DDL a partir deste JSON."
+}

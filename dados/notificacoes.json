@@ -1,0 +1,24 @@
+{
+  "notificacoes": [
+    {
+      "id": "n_0001",
+      "userId": "1",
+      "tipo": "missao_lembrete",
+      "mensagem": "Sua missão diária 'Leia 1 capítulo' está disponível. Boa leitura!",
+      "scheduledAt": "2025-11-13T07:00:00Z",
+      "sentAt": null,
+      "lida": false,
+      "canal": "local_push"
+    },
+    {
+      "id": "n_0002",
+      "userId": "2",
+      "tipo": "promocional",
+      "mensagem": "Boas-vindas! Seu presente de início de jornada está disponível na loja.",
+      "scheduledAt": "2025-11-13T11:10:00Z",
+      "sentAt": "2025-11-13T11:10:30Z",
+      "lida": false,
+      "canal": "in_app"
+    }
+  ]
+}

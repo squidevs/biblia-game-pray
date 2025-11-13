@@ -1,0 +1,31 @@
+{
+  "about": {
+    "appName": "Christ.On",
+    "versao": "0.1.0",
+    "descricaoCurta": "PWA gamificada para estudo bíblico, devocionais e prática espiritual.",
+    "descricaoLonga": "Christ.On é um protótipo PWA pensado para transformar práticas espirituais em hábitos gamificados com respeito à privacidade e acessibilidade. Conteúdo local em JSON para prototipagem e fácil migração.",
+    "contato": {
+      "email": "contato@christ.on",
+      "site": "https://example.org",
+      "repositorio": "https://github.com/usuario/projeto"
+    },
+    "licenca": "MIT",
+    "politicas": {
+      "termos": "dados/TERMS.md",
+      "privacidade": "dados/PRIVACY.md"
+    },
+    "locales": {
+      "pt-BR": {
+        "tituloSobre": "Sobre o Christ.On",
+        "textoSobre": "Christ.On une hábitos, estudo bíblico e comunidade em uma experiência leve e acessível.",
+        "tutorial": [
+          "1. Configure seu avatar e preferências.",
+          "2. Complete missões diárias para ganhar XP e 'Ouro da Fé'.",
+          "3. Use consumíveis com sabedoria para manter streaks.",
+          "4. Compartilhe progressos com responsabilidade."
+        ]
+      }
+    },
+    "dataGeracao": "2025-11-13T11:12:00Z"
+  }
+}

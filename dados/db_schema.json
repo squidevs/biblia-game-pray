@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "nome": "Biblia Gamepray - DB Schema (JSON)",
+    "versao": "0.1",
+    "descricao": "Representação em JSON das tabelas principais usadas pelo protótipo. Destinado a documentar o modelo para Migração a Postgres/Supabase.",
+    "geradoEm": "2025-11-13"
+  },
+  "tables": [
+    {
+      "name": "usuarios",
+      "description": "Contas de usuário / jogadores.",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "email", "type": "string", "nullable": false },
+        { "name": "nome", "type": "string" },
+        { "name": "apelido", "type": "string", "nullable": true },
+        { "name": "senha_hash", "type": "string", "nullable": true, "note": "apenas se houver autenticação local" },
+        { "name": "created_at", "type": "datetime" },
+        { "name": "last_login", "type": "datetime", "nullable": true },
+        { "name": "avatar_config_id", "type": "int", "nullable": true, "fk": "avatar_configs.id" },
+        { "name": "status_player_id", "type": "string", "nullable": true, "fk": "status_player.user_id", "note": "user_id também é PK em status_player" }
+      ]
+    },
+    {
+      "name": "avatar_configs",
+      "description": "Seeds / presets de avatar (Avataaars / DiceBear).",
+      "columns": [
+        { "name": "id", "type": "int", "primary": true },
+        { "name": "user_id", "type": "uuid", "fk": "usuarios.id" },
+        { "name": "sid", "type": "string", "description": "seed string usada pelo gerador" },
+        { "name": "json_config", "type": "jsonb", "description": "opcional: objeto de configuração completo" },
+        { "name": "created_at", "type": "datetime" }
+      ]
+    },
+    {
+      "name": "status_player",
+      "description": "Estado canônico do jogador — snapshots das attributes (modelo armazenado em JSON para flexibilidade). PK = user_id",
+      "columns": [
+        { "name": "user_id", "type": "uuid", "primary": true, "fk": "usuarios.id" },
+        { "name": "atributos", "type": "jsonb", "description": "atributosPrincipais, armadura, dons, frutos, negativos" },
+        { "name": "sistema_progresso", "type": "jsonb" },
+        { "name": "progresso_nivel", "type": "jsonb" },
+        { "name": "hud_status", "type": "jsonb" },
+        { "name": "estatisticas", "type": "jsonb" },
+        { "name": "configuracoes", "type": "jsonb" },
+        { "name": "updated_at", "type": "datetime" }
+      ]
+    },
+    {
+      "name": "acoes",
+      "description": "Catálogo das ações (oração, jejum, arrependimento, etc.) — originário de `dados/acoes.json`.",
+      "columns": [
+        { "name": "id", "type": "string", "primary": true, "note": "ex.: 'acao-orar-pai-nosso'" },
+        { "name": "categoria", "type": "string" },
+        { "name": "titulo", "type": "string" },
+        { "name": "descricao", "type": "text" },
+        { "name": "imagem", "type": "string", "nullable": true },
+        { "name": "configuracoes", "type": "jsonb" },
+        { "name": "efeitos", "type": "jsonb" },
+        { "name": "recompensas", "type": "jsonb" },
+        { "name": "requisitos", "type": "jsonb" },
+        { "name": "status", "type": "jsonb" },
+        { "name": "observacoes", "type": "text", "nullable": true }
+      ]
+    },
+    {
+      "name": "missoes",
+      "description": "Instâncias de missões atribuídas/aceitas por usuários. Relaciona-se a `acoes` e a `usuarios`.",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "acao_id", "type": "string", "fk": "acoes.id" },
+        { "name": "owner_id", "type": "uuid", "fk": "usuarios.id" },
+        { "name": "tipo", "type": "string", "description": "diaria|semanal|mensal|especial" },
+        { "name": "status", "type": "string" },
+        { "name": "inicio", "type": "datetime" },
+        { "name": "expiracao", "type": "datetime", "nullable": true },
+        { "name": "evidencias", "type": "jsonb", "nullable": true },
+        { "name": "recompensa", "type": "jsonb" },
+        { "name": "progresso", "type": "jsonb" },
+        { "name": "shared_with", "type": "jsonb", "description": "array de user_ids para missões compartilhadas" }
+      ]
+    },
+    {
+      "name": "itens",
+      "description": "Catálogo de itens (permanentes e consumíveis) — vindo de `dados/itens.json`.",
+      "columns": [
+        { "name": "id", "type": "int", "primary": true },
+        { "name": "nome", "type": "string" },
+        { "name": "descricao", "type": "text" },
+        { "name": "tipo", "type": "string" },
+        { "name": "categoria", "type": "string" },
+        { "name": "raridade", "type": "string" },
+        { "name": "imagem", "type": "string" },
+        { "name": "efeitos", "type": "jsonb" },
+        { "name": "uso", "type": "jsonb", "nullable": true },
+        { "name": "requisitos", "type": "jsonb", "nullable": true },
+        { "name": "valor", "type": "jsonb", "nullable": true }
+      ]
+    },
+    {
+      "name": "user_items",
+      "description": "Inventário do usuário — tabela de junção (N:1 usuários -> user_items) contendo quantidade e estado do item.",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "user_id", "type": "uuid", "fk": "usuarios.id" },
+        { "name": "item_id", "type": "int", "fk": "itens.id" },
+        { "name": "quantidade", "type": "int" },
+        { "name": "equipado", "type": "boolean", "default": false },
+        { "name": "adquirido_em", "type": "datetime" }
+      ]
+    },
+    {
+      "name": "shop_items",
+      "description": "Lista de itens disponíveis na loja (pode referenciar `itens`).",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "item_id", "type": "int", "fk": "itens.id" },
+        { "name": "preco_moeda", "type": "int" },
+        { "name": "disponivel", "type": "boolean" }
+      ]
+    },
+    {
+      "name": "transacoes_loja",
+      "description": "Registros de compras — referência para `usuarios` e `itens`/`shop_items`.",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "user_id", "type": "uuid", "fk": "usuarios.id" },
+        { "name": "item_id", "type": "int", "fk": "itens.id" },
+        { "name": "quantidade", "type": "int" },
+        { "name": "preco_total", "type": "int" },
+        { "name": "moeda", "type": "string" },
+        { "name": "criado_em", "type": "datetime" }
+      ]
+    },
+    {
+      "name": "conquistas",
+      "description": "Definição de conquistas do sistema (66 planejadas).",
+      "columns": [
+        { "name": "id", "type": "int", "primary": true },
+        { "name": "chave", "type": "string", "unique": true },
+        { "name": "titulo", "type": "string" },
+        { "name": "descricao", "type": "text" },
+        { "name": "requisito", "type": "jsonb" },
+        { "name": "pontos", "type": "int" },
+        { "name": "imagem", "type": "string" }
+      ]
+    },
+    {
+      "name": "user_conquistas",
+      "description": "Junção usuário ↔ conquista (registro de quando obteve).",
+      "columns": [
+        { "name": "user_id", "type": "uuid", "fk": "usuarios.id" },
+        { "name": "conquista_id", "type": "int", "fk": "conquistas.id" },
+        { "name": "obtida_em", "type": "datetime" },
+        { "name": "_pk", "type": "composite", "columns": ["user_id","conquista_id"] }
+      ]
+    },
+    {
+      "name": "ranking",
+      "description": "Tabela de ranking por período (semana/mês).",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "user_id", "type": "uuid", "fk": "usuarios.id" },
+        { "name": "periodo_inicio", "type": "date" },
+        { "name": "periodo_tipo", "type": "string", "description": "semana|mes" },
+        { "name": "pontuacao", "type": "int" },
+        { "name": "posicao", "type": "int" }
+      ]
+    },
+    {
+      "name": "notificacoes",
+      "description": "Notificações enviadas para usuários (local).",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "user_id", "type": "uuid", "fk": "usuarios.id" },
+        { "name": "tipo", "type": "string" },
+        { "name": "titulo", "type": "string" },
+        { "name": "corpo", "type": "text" },
+        { "name": "lida", "type": "boolean", "default": false },
+        { "name": "criada_em", "type": "datetime" }
+      ]
+    },
+    {
+      "name": "mensagem_templates",
+      "description": "Templates para UI: sucesso/falha/recompensa/etc. (origem: dados/mensagem.json).",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "chave", "type": "string", "unique": true },
+        { "name": "titulo", "type": "string" },
+        { "name": "descricao", "type": "text" },
+        { "name": "imagem", "type": "string" },
+        { "name": "som_src", "type": "string" },
+        { "name": "estilo", "type": "jsonb" },
+        { "name": "metadados", "type": "jsonb" }
+      ]
+    },
+    {
+      "name": "estudos",
+      "description": "Conteúdos e progressões de estudo (path de lições).",
+      "columns": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "titulo", "type": "string" },
+        { "name": "nivel", "type": "int" },
+        { "name": "conteudo", "type": "jsonb" },
+        { "name": "requisitos", "type": "jsonb" }
+      ]
+    }
+  ]
+}

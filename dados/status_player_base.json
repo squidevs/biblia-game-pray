@@ -1,0 +1,120 @@
+{
+  "userID": "<usuario-id>",
+  "atributos": {
+    "nivel": 1,
+    "xp": 0,
+    "xpProximoNivel": 100,
+
+    "atributosPrincipais": {
+      "fe": 0,
+      "sabedoria": 0,
+      "espiritoSanto": 0,
+      "paz": 0,
+      "alegria": 0,
+      "paciencia": 0
+    },
+
+    "armaduraDeus": {
+      "cintoVerdade": 0,
+      "couracaJustica": 0,
+      "sandaliasEvangelho": 0,
+      "escudoFe": 0,
+      "capaceteSalvacao": 0,
+      "espadaEspirito": 0
+    },
+
+    "donsEspirituais": {
+      "amor": 0,
+      "gozo": 0,
+      "paz": 0,
+      "longanimidade": 0,
+      "benignidade": 0,
+      "bondade": 0,
+      "fe": 0,
+      "mansidao": 0,
+      "temperanca": 0
+    },
+
+    "frutosEspirito": {
+      "sabedoria": 0,
+      "entendimento": 0,
+      "conselho": 0,
+      "fortaleza": 0,
+      "ciencia": 0,
+      "piedade": 0,
+      "temorDeus": 0
+    },
+
+    "atributosNegativos": {
+      "pecado": 0,
+      "medo": 0,
+      "ansiedade": 0,
+      "ira": 0,
+      "inveja": 0,
+      "preguica": 0,
+      "orgulho": 0,
+      "gula": 0,
+      "luxuria": 0,
+      "mentira": 0,
+      "fofoca": 0
+    }
+  },
+
+  "sistemaProgresso": {
+    "tentativasEstudo": {
+      "atual": 5,
+      "maximo": 5,
+      "proximaRecarga": null,
+      "ultimoUso": null
+    },
+    "sequenciaAtual": 0,
+    "melhorSequencia": 0,
+    "diasOfensiva": 0,
+    "dataInicioOfensiva": null
+  },
+
+  "progressoNivel": {
+    "nivelId": "nivel-01",
+    "nivelOrdem": 1,
+    "nivelNome": "Chamado",
+    "posicaoNaLigaAtual": null,
+    "posicaoSemanaAnterior": null,
+    "historicoSemanal": [],
+    "ultimaAvaliacao": null
+  },
+
+  "hudStatus": {
+    "salvo": false,
+    "emPecado": false,
+    "emEspirito": false,
+    "casado": false,
+    "batizado": false,
+    "aceitouJesus": false
+  },
+
+  "estatisticas": {
+    "missoesCompletas": 0,
+    "missoesFalhas": 0,
+    "quizAcertos": 0,
+    "quizErros": 0,
+    "tempoOracaoMinutos": 0,
+    "diasConsecutivos": 0,
+    "itensColetados": 0,
+    "conquistasDesbloqueadas": 0,
+    "livrosEstudados": 0
+  },
+
+  "configuracoes": {
+    "notificacoes": true,
+    "som": true,
+    "temaEscuro": false,
+    "idioma": "pt-BR",
+    "acessibilidade": {
+      "+A": false,
+      "-A": false,
+      "libras": false,
+      "highContrast": false,
+      "tts": false
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "missoes": [
+    {
+      "id": 1,
+      "tipo": "diaria",
+      "titulo": "Oração Matinal - Pai Nosso",
+      "descricao": "Realizar a oração do Pai Nosso ao começar o dia. Incentivar foco e intenção ao orar.",
+      "categoria": "oracao",
+  "idAcao": "acao-orar-pai-nosso",
+      "requisitos": { "nivel": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 10, "itens": [], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "diaria", "horaSugerida": "manha" },
+      "evidenciaObrigatoria": false,
+      "evidenciasAceitas": [],
+      "status": "ativa",
+      "observacoes": "Missão básica de introdução. Requer possuir a 'Bíblia Sagrada' equipada/na mochila para habilitar estudos relacionados."
+    },
+
+    {
+      "id": 2,
+      "tipo": "diaria",
+      "titulo": "Leitura Bíblica - 1 Capítulo",
+      "descricao": "Ler um capítulo da Bíblia e marcar o versículo favorito.",
+      "categoria": "estudo",
+      "idAcao": null,
+      "requisitos": { "nivel": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 15, "itens": [158], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "diaria", "horaSugerida": "a escolher" },
+      "evidenciaObrigatoria": false,
+      "evidenciasAceitas": ["versiculoFavorito"],
+      "status": "ativa",
+      "observacoes": "Necessita ter a 'Bíblia Sagrada' (item id 1) no inventário para desbloquear conteúdos extra."
+    },
+
+    {
+      "id": 3,
+      "tipo": "diaria",
+      "titulo": "Momento de Gratidão",
+      "descricao": "Registrar no caderno devocional algo pelo qual é grato hoje.",
+      "categoria": "devocional",
+      "idAcao": null,
+      "requisitos": { "nivel": 1, "itensRequeridos": [7], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 8, "itens": [], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "diaria" },
+      "evidenciaObrigatoria": false,
+      "evidenciasAceitas": ["texto"],
+      "status": "ativa",
+      "observacoes": "Uso simples para incentivar consistência e journaling."
+    },
+
+    {
+      "id": 10,
+      "tipo": "semanal",
+      "titulo": "Visita Solidária",
+      "descricao": "Visitar alguém que precisa de companhia (enfermo, idoso) e registrar evidência fotográfica ou relato.",
+      "categoria": "servico",
+      "idAcao": null,
+      "requisitos": { "nivel": 2, "itensRequeridos": [157], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 120, "itens": [157], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "semanal" },
+      "evidenciaObrigatoria": true,
+      "evidenciasAceitas": ["foto", "audio", "video", "relato"],
+      "status": "ativa",
+      "observacoes": "Missão social que incentiva serviço. Pode pedir validação humana se configurado."
+    },
+
+    {
+      "id": 11,
+      "tipo": "semanal",
+      "titulo": "Culto em Comunidade",
+      "descricao": "Participar do culto da igreja e registrar presença (evidência opcional).",
+      "categoria": "social",
+      "idAcao": null,
+      "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 80, "itens": [], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "semanal" },
+      "evidenciaObrigatoria": false,
+      "evidenciasAceitas": ["checkin", "foto"],
+      "status": "ativa",
+      "observacoes": "Permite missões compartilhadas por líderes de célula."
+    },
+
+    {
+      "id": 20,
+      "tipo": "mensal",
+      "titulo": "Jejum Mensal (12h)",
+      "descricao": "Jejuar por 12 horas como prática de consagração e oração.",
+      "categoria": "jejum",
+      "idAcao": null,
+      "requisitos": { "nivel": 3, "itensRequeridos": [], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 300, "itens": [], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "mensal" },
+      "evidenciaObrigatoria": false,
+      "evidenciasAceitas": [],
+      "status": "ativa",
+      "observacoes": "Missão de disciplina espiritual. Pode combinar com estudos específicos."
+    },
+
+    {
+      "id": 21,
+      "tipo": "mensal",
+      "titulo": "Ação Comunitária - Mutirão",
+      "descricao": "Organizar ou participar de uma ação comunitária (limpeza, doação, reformas). Requer evidência.",
+      "categoria": "servico",
+      "idAcao": null,
+      "requisitos": { "nivel": 4, "itensRequeridos": [], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 500, "itens": [], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "mensal" },
+      "evidenciaObrigatoria": true,
+      "evidenciasAceitas": ["foto", "video", "relato"],
+      "status": "ativa",
+      "observacoes": "Missão de maior impacto social; ideal para missões compartilhadas."
+    },
+
+    {
+      "id": 30,
+      "tipo": "compartilhada",
+      "titulo": "Projeto Discipulado - Pequeno Grupo",
+      "descricao": "Criar/participar de um pequeno grupo de discipulado com 3 membros (mínimo 2) e completar 4 encontros no mês.",
+      "categoria": "discipulado",
+      "idAcao": null,
+      "requisitos": { "nivel": 5, "itensRequeridos": [147], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 200, "itens": [125], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "mensal" },
+      "evidenciaObrigatoria": true,
+      "evidenciasAceitas": ["atas", "foto", "checkin"],
+      "status": "ativa",
+      "shared": {
+        "criadorId": null,
+        "membros": [],
+        "maxMembros": 3,
+        "regraConclusao": "todos"  
+      },
+      "observacoes": "Missão projetada para colaboração e responsabilidade mútua. Pode usar itens sociais para buff no grupo."
+    },
+
+    {
+      "id": 31,
+      "tipo": "compartilhada",
+      "titulo": "Missão de Oração em Rede",
+      "descricao": "Convidar até 3 irmãos para orar juntos por um objetivo e testemunhar resultados.",
+      "categoria": "social",
+      "idAcao": null,
+      "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
+      "recompensas": { "xp": 50, "itens": [125], "moeda": 0, "conquistaId": null },
+      "repeticao": { "frequencia": "pontual" },
+      "evidenciaObrigatoria": false,
+      "evidenciasAceitas": ["audio", "relato"],
+      "status": "ativa",
+      "shared": {
+        "criadorId": null,
+        "membros": [],
+        "maxMembros": 3,
+        "regraConclusao": "um"  
+      },
+      "observacoes": "Bom para iniciantes. Uso de itens sociais pode dar bônus coletivos."
+    }
+  ]
+}

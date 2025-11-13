@@ -1,0 +1,143 @@
+{
+  "mensagens": {
+    "sucesso": {
+      "titulo": "Sucesso Épico!",
+      "descricao": "Você concluiu a tarefa com maestria — +XP e glória!",
+      "imagem": "assets/images/mensagem/sucesso.png",
+  "som": { "src": "assets/sounds/success.wav", "volume": 0.9, "loop": false },
+      "botao": { "label": "Próxima Aventura", "action": "close", "fechar": true },
+      "recompensa": { "xp": 30, "moeda": 10, "itens": [] },
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--sucesso", "corFundo": "#E6F7EA", "icone": "celebrate" },
+      "persist": true,
+      "tom": "divertido"
+    },
+    "falha": {
+      "titulo": "Quase lá!",
+      "descricao": "Não conseguiu desta vez — respire fundo e tente de novo. Erros fazem parte da jornada!",
+      "imagem": "assets/images/mensagem/falha.png",
+  "som": { "src": "assets/sounds/fail.wav", "volume": 0.8, "loop": false },
+      "botao": { "label": "Tentar de novo", "action": "retry", "fechar": false },
+      "recompensa": null,
+      "punicoes": { "heartsLost": 0, "xpPenaltyPercent": 0 },
+      "estilo": { "classeCss": "msg--falha", "corFundo": "#FFF4F4", "icone": "sad_face" },
+      "persist": false,
+      "tom": "encorajador"
+    },
+    "recompensa": {
+      "titulo": "Tesouro Encontrado!",
+      "descricao": "Um presente pelo seu esforço — aproveite sua recompensa.",
+      "imagem": "assets/images/mensagem/recompensa.png",
+  "som": { "src": "assets/sounds/reward.wav", "volume": 0.85, "loop": false },
+      "botao": { "label": "Ver inventário", "action": "open_inventory", "fechar": true },
+      "recompensa": { "xp": 60, "moeda": 25, "itens": [{ "itemId": "101", "quantidade": 1 }] },
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--recompensa", "corFundo": "#FFF9E6", "icone": "treasure" },
+      "persist": true,
+      "tom": "festivo"
+    },
+    "levelUp": {
+      "titulo": "Level UP! 🎉",
+      "descricao": "Você subiu de nível — novas possibilidades aguardam!",
+      "imagem": "assets/images/mensagem/levelup.png",
+  "som": { "src": "assets/sounds/level_up.wav", "volume": 1.0, "loop": false },
+      "botao": { "label": "Ver progresso", "action": "open_profile", "fechar": true },
+      "recompensa": { "xp": 0, "moeda": 0, "itens": [{ "itemId": "1", "quantidade": 1 }] },
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--levelup", "corFundo": "#EDF7FF", "icone": "rocket" },
+      "persist": true,
+      "tom": "euforico"
+    },
+    "levelDown": {
+      "titulo": "Ai... caiu um degrau",
+      "descricao": "Uma batida no caminho — revise e volte mais forte!",
+      "imagem": "assets/images/mensagem/leveldown.png",
+  "som": { "src": "assets/sounds/level_down.wav", "volume": 0.7, "loop": false },
+      "botao": { "label": "Ver dicas", "action": "open_tips", "fechar": true },
+      "recompensa": null,
+      "punicoes": { "heartsLost": 1, "xpPenaltyPercent": 10 },
+      "estilo": { "classeCss": "msg--leveldown", "corFundo": "#FFF0F0", "icone": "down_arrow" },
+      "persist": true,
+      "tom": "didatico"
+    },
+    "semDinheiro": {
+      "titulo": "Carteira vazia 😅",
+      "descricao": "Seu cofrinho está zerado. Volte à aventura e acumule Ouro da Fé.",
+      "imagem": "assets/images/mensagem/sem_dinheiro.png",
+  "som": { "src": "assets/sounds/warning.wav", "volume": 0.6, "loop": false },
+      "botao": { "label": "Ir para loja", "action": "open_store", "fechar": true },
+      "recompensa": null,
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--warning", "corFundo": "#FFF9E6", "icone": "wallet" },
+      "persist": false,
+      "sugestoes": ["Ganhe ouro completando missões diárias","Ver ofertas da loja"],
+      "tom": "jocoso"
+    },
+    "semCoracoes": {
+      "titulo": "Corações zerados ❤",
+      "descricao": "Seu tanque de coragem está vazio — recupere corações para tentar de novo.",
+      "imagem": "assets/images/mensagem/sem_coracoes.png",
+  "som": { "src": "assets/sounds/no_hearts.wav", "volume": 0.6, "loop": false },
+      "botao": { "label": "Recuperar corações", "action": "open_hearts_shop", "fechar": true },
+      "recompensa": null,
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--warning", "corFundo": "#FFF7F0", "icone": "heart_broken" },
+      "persist": false,
+      "sugestoes": ["Aguardar regeneração","Usar consumível para restaurar corações"],
+      "tom": "sugestivo"
+    },
+    "desistirConfirm": {
+      "titulo": "Desistir da missão?",
+      "descricao": "Se desistir, pode perder streaks e algumas recompensas. Tem certeza, aventureiro?",
+      "imagem": "assets/images/mensagem/confirm.png",
+  "som": { "src": "assets/sounds/confirm.wav", "volume": 0.7, "loop": false },
+      "botao": { "label": "Desistir", "action": "forfeit", "fechar": true },
+      "botaoSecundario": { "label": "Cancelar", "action": "close", "fechar": true },
+      "recompensa": null,
+      "punicoes": { "streakLost": true, "heartsLost": 1 },
+      "estilo": { "classeCss": "msg--confirm", "corFundo": "#FFFDFC", "icone": "help_outline" },
+      "persist": false,
+      "tom": "neutro"
+    },
+    "missaoConcluida": {
+      "titulo": "Missão Concluída — Glória!",
+      "descricao": "Uau! Missão finalizada com estilo. Toque para conferir sua recompensa e bolso carregado.",
+      "imagem": "assets/images/mensagem/mission_done.png",
+  "som": { "src": "assets/sounds/mission_done.wav", "volume": 0.95, "loop": false },
+      "botao": { "label": "Abrir missão", "action": "open_missao", "fechar": true },
+      "recompensa": { "xp": 120, "moeda": 70, "itens": [] },
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--mission", "corFundo": "#F0FFF4", "icone": "flag_checkered" },
+      "persist": true,
+      "tom": "epico"
+    },
+    "conquista": {
+      "titulo": "Conquista Desbloqueada! 🏆",
+      "descricao": "Você desbloqueou uma conquista — seu nome está entre os valentes!",
+      "imagem": "assets/images/mensagem/conquista.png",
+  "som": { "src": "assets/sounds/conquest.wav", "volume": 1.0, "loop": false },
+      "botao": { "label": "Ver troféus", "action": "open_achievements", "fechar": true },
+      "recompensa": { "xp": 200, "moeda": 100, "itens": [] },
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--conquista", "corFundo": "#FFF0FF", "icone": "trophy" },
+      "persist": true,
+      "tom": "triunfante"
+    },
+    "default": {
+      "titulo": "Mensagem",
+      "descricao": "Uma mensagem do sistema.",
+      "imagem": "assets/images/mensagem/default.png",
+      "botao": { "label": "Fechar", "action": "close", "fechar": true },
+      "recompensa": null,
+      "punicoes": null,
+      "estilo": { "classeCss": "msg--default", "corFundo": "#FFFFFF", "icone": "message" },
+      "persist": false,
+      "tom": "neutro"
+    }
+  },
+    "metadados": {
+    "versao": "0.1.2",
+    "dataGeracao": "2025-11-13T11:40:00Z",
+    "notas": "Sons oficiais baixados do Mixkit (renomeados). Arquivos movidos para assets/sounds/; backups dos sintéticos em assets/sounds/backup_synthetic/. Ajuste classes/paths no front-end se necessário."
+  }
+}

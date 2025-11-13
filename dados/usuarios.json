@@ -1,0 +1,90 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "uid": "u_maria_001",
+      "nome": "Matheus Bonotto",
+      "email": "matheus.bonotto@example.com",
+      "authProvider": "google",
+      "sid": "seed-maria-001",
+      "status_snapshot": {
+        "nivel": 1,
+        "xp": 0,
+        "sequenciaAtual": 0,
+        "fe": 0,
+        "sabedoria": 0,
+        "espiritoSanto": 100,
+        "pecado": 1,
+        "armaduraEquipada": ["Peitoral da Justiça", "Cinto da Verdade"],
+        "ultimaAtualizacao": "2025-11-13T09:12:00Z"
+      },
+      "inventario": [
+        { "itemId": 1, "quantidade": 1 },
+        { "itemId": 7, "quantidade": 1 },
+        { "itemId": 100, "quantidade": 10 },
+        { "itemId": 117, "quantidade": 1 }
+      ],
+      "conquistas": [],
+      "missoesAtivas": [
+        { "missaoId": 1, "progresso": 1, "ultimaAtualizacao": "2025-11-13T06:30:00Z" },
+        { "missaoId": 2, "progresso": 0, "ultimaAtualizacao": "2025-11-12T22:00:00Z" }
+      ],
+      "preferencias": {
+        "acessibilidade": {
+          "tts": true,
+          "libras": false,
+          "altoContraste": false,
+          "tamanhoFonte": "medio",
+          "modoTextoGrande": false
+        },
+        "notificacoes": { "push": true, "email": true }
+      },
+      "perfilPublico": true,
+      "reputacao": 45,
+      "criadoEm": "2025-09-02T10:00:00Z",
+      "ultimoLogin": "2025-11-13T09:15:12Z"
+    },
+
+    {
+      "id": 2,
+      "uid": "u_pedro_002",
+      "nome": "Pedro Silva",
+      "email": "pedro.silva@example.com",
+      "authProvider": "local",
+      "sid": "seed-pedro-042",
+      "status_snapshot": {
+        "nivel": 2,
+        "xp": 310,
+        "sequenciaAtual": 2,
+        "fe": 45,
+        "sabedoria": 12,
+        "espiritoSanto": 5,
+        "pecado": 6,
+        "armaduraEquipada": [],
+        "ultimaAtualizacao": "2025-11-12T20:00:00Z"
+      },
+      "inventario": [
+        { "itemId": 100, "quantidade": 3 },
+        { "itemId": 106, "quantidade": 1 }
+      ],
+      "conquistas": [3, 8],
+      "missoesAtivas": [
+        { "missaoId": 11, "progresso": 0, "ultimaAtualizacao": "2025-11-10T18:00:00Z" }
+      ],
+      "preferencias": {
+        "acessibilidade": {
+          "tts": false,
+          "libras": false,
+          "altoContraste": true,
+          "tamanhoFonte": "pequeno",
+          "modoTextoGrande": false
+        },
+        "notificacoes": { "push": true, "email": true }
+      },
+      "perfilPublico": false,
+      "reputacao": 12,
+      "criadoEm": "2025-10-15T14:20:00Z",
+      "ultimoLogin": "2025-11-12T21:05:40Z"
+    }
+  ]
+}

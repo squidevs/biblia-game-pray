@@ -1,0 +1,57 @@
+{
+  "config_global": {
+    "versao": "0.1.0",
+    "ambiente": "dev",
+    "featureFlags": {
+      "pwa_enabled": true,
+      "store_enabled": true,
+      "social_sharing": true,
+      "evidence_validation_autoflag": false,
+      "rankings_enabled": true,
+      "avatar_customization": true
+    },
+    "parametrosJogo": {
+      "hearts_base": 5,
+      "heart_regen_minutes": 60,
+      "xp_multiplier_default": 1.0,
+      "streak_multiplier": 0.05,
+      "max_slots_per_tipo": { "permanente": 6, "armadura": 6, "consumivel": 6 }
+    },
+    "cooldowns": {
+      "default_item_cooldown_minutos": 60,
+      "permissao_repeticao_missao_minutos": 5
+    },
+    "economia": {
+      "moeda_nome": "Ouro da Fé",
+      "moeda_simbolo": "●",
+      "preco_padrao_moeda_por_xp": 0.1
+    },
+    "pwa": {
+      "manifest_version": 2,
+      "service_worker_enabled": true
+    },
+    "lgpd": {
+      "dadosColetados": ["email","uid","sid","inventario","status_snapshot"],
+      "retencaoDiasPadrao": 365,
+      "controleConsentimento": true
+    },
+    "dataAtualizacao": "2025-11-13T11:00:00Z",
+    "niveis": [
+      { "id": "nivel-01", "ordem": 1, "nome": "Chamado", "descricao": "Início da jornada" },
+      { "id": "nivel-02", "ordem": 2, "nome": "Discípulo", "descricao": "Aprendizado e prática" },
+      { "id": "nivel-03", "ordem": 3, "nome": "Companheiro", "descricao": "Crescimento e apoio" },
+      { "id": "nivel-04", "ordem": 4, "nome": "Servo", "descricao": "Serviço ativo" },
+      { "id": "nivel-05", "ordem": 5, "nome": "Mestre", "descricao": "Ensina e lidera" },
+      { "id": "nivel-06", "ordem": 6, "nome": "Apóstolo", "descricao": "Alcance e plantio" },
+      { "id": "nivel-07", "ordem": 7, "nome": "Líder Espiritual", "descricao": "Nível mais alto" }
+    ],
+    "regrasNiveis": {
+      "frequenciaAvaliacao": "semanal",
+      "periodoAvaliacao": "semana_corrente",
+      "promocaoTop": 10,
+      "manterTop": 20,
+      "comportamento": "Ao fim do período semanal: se o jogador estiver entre os top 10 do seu nível, sobe para o próximo nível; se estiver entre 11 e 20, permanece no mesmo nível; se estiver abaixo de 20, desce para o nível anterior (se houver)."
+    },
+    "nivelInicialId": "nivel-01"
+  }
+}

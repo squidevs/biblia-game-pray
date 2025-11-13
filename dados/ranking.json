@@ -1,0 +1,90 @@
+{
+  "ranking": {
+    "config": {
+      "periodosSuportados": ["semanal","mensal","all-time"],
+      "metricas": ["xp_total","missoes_concluidas","reputacao"],
+      "regrasPontuacao": {
+        "xp_total": "1 ponto por XP",
+        "missoes_concluidas": "50 pontos por missão concluída",
+        "reputacao": "1 ponto por reputação"
+      }
+    },
+
+    "leaderboards": [
+      {
+        "id": "weekly-2025-11-10",
+        "periodo": "semanal",
+        "inicio": "2025-11-10T00:00:00Z",
+        "fim": "2025-11-17T00:00:00Z",
+        "metrica": "xp_total",
+        "entries": [
+          { "rank": 1, "userId": 2, "uid": "u_pedro_002", "nome": "Pedro Silva", "valor": 310, "meta": { "missoes_concluidas": 3, "reputacao": 12 } },
+          { "rank": 2, "userId": 1, "uid": "u_maria_001", "nome": "Matheus Bonotto", "valor": 0, "meta": { "missoes_concluidas": 1, "reputacao": 45 } }
+        ]
+      },
+
+      {
+        "id": "monthly-2025-11",
+        "periodo": "mensal",
+        "inicio": "2025-11-01T00:00:00Z",
+        "fim": "2025-12-01T00:00:00Z",
+        "metrica": "missoes_concluidas",
+        "entries": [
+          { "rank": 1, "userId": 2, "uid": "u_pedro_002", "nome": "Pedro Silva", "valor": 8, "meta": { "xp_total": 310, "reputacao": 12 } },
+          { "rank": 2, "userId": 1, "uid": "u_maria_001", "nome": "Matheus Bonotto", "valor": 4, "meta": { "xp_total": 0, "reputacao": 45 } }
+        ]
+      },
+
+      {
+        "id": "alltime",
+        "periodo": "all-time",
+        "metrica": "reputacao",
+        "entries": [
+          { "rank": 1, "userId": 1, "uid": "u_maria_001", "nome": "Matheus Bonotto", "valor": 45, "meta": { "xp_total": 0, "missoes_concluidas": 12 } },
+          { "rank": 2, "userId": 2, "uid": "u_pedro_002", "nome": "Pedro Silva", "valor": 12, "meta": { "xp_total": 310, "missoes_concluidas": 8 } }
+        ]
+      }
+    ],
+
+    "leaguesConfig": {
+      "descricao": "Configuração de ligas por nível (promoção semanal)",
+      "niveisPorOrdem": [
+        { "nivelId": "nivel-01", "nome": "Chamado", "ordem": 1 },
+        { "nivelId": "nivel-02", "nome": "Discípulo", "ordem": 2 },
+        { "nivelId": "nivel-03", "nome": "Companheiro", "ordem": 3 },
+        { "nivelId": "nivel-04", "nome": "Servo", "ordem": 4 },
+        { "nivelId": "nivel-05", "nome": "Mestre", "ordem": 5 },
+        { "nivelId": "nivel-06", "nome": "Apóstolo", "ordem": 6 },
+        { "nivelId": "nivel-07", "nome": "Líder Espiritual", "ordem": 7 }
+      ],
+      "regrasPromocao": {
+        "periodicidade": "semanal",
+        "promocaoTop": 10,
+        "manterTop": 20,
+        "descricao": "Ao final da semana, jogadores são avaliados por sua posição na lista do seu nível: top 10 = sobem; 11-20 = mantêm; >20 = descem (se possível)."
+      }
+    },
+
+    "levelLeaderboards": {
+      "note": "Estrutura prevista para armazenar leaderboards segmentadas por nível. Cada chave é um nivelId com snapshots semanais.",
+      "nivel-01": {},
+      "nivel-02": {},
+      "nivel-03": {},
+      "nivel-04": {},
+      "nivel-05": {},
+      "nivel-06": {},
+      "nivel-07": {}
+    },
+
+    "historicoSnapshots": [
+      {
+        "snapshotId": "snap-2025-11-13T10:10:00Z",
+        "criadoEm": "2025-11-13T10:10:00Z",
+        "dados": {
+          "weekly-2025-11-10": { "top": 10 },
+          "monthly-2025-11": { "top": 10 }
+        }
+      }
+    ]
+  }
+}
