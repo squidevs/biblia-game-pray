@@ -131,7 +131,7 @@ Itens permanentes, consumíveis e armaduras podem conceder efeitos temporários 
 ### Expandida
 ```
 ┌─────────────────────────────────────────────────┐
-| Logotipo                               500⛃ 5❤|
+| Logotipo |                         🔔➋ 500⛃ 5❤|
 │ [Avatar]                                        │
 │ Matheus Bonotto   [Espírito Santo 100%]         │
 │ Discípulo  Nv1    [Fé             100%]         │
