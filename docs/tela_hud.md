@@ -19,6 +19,7 @@
 ## Versão Expandida
 - HUD dobra de altura
 - Mostra barras de progresso, lista de pontos, slots maiores com nome do item, status detalhado
+- Recomenda-se exibir os frutos do Espírito (atributos positivos) e pecados (atributos negativos) em uma seção dedicada, com ícones e valores, facilitando o acompanhamento do progresso espiritual do jogador.
 - Accordion fecha ao tocar novamente no chevron ou fora da área expandida
 
 ## Microinterações e Acessibilidade

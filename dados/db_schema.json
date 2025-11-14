@@ -37,7 +37,7 @@
       "description": "Estado canônico do jogador — snapshots das attributes (modelo armazenado em JSON para flexibilidade). PK = user_id",
       "columns": [
         { "name": "user_id", "type": "uuid", "primary": true, "fk": "usuarios.id" },
-        { "name": "atributos", "type": "jsonb", "description": "atributosPrincipais, armadura, dons, frutos, negativos" },
+        { "name": "atributos", "type": "jsonb", "description": "atributosPrincipais, armadura, frutosEspirito, pecados" },
         { "name": "sistema_progresso", "type": "jsonb" },
         { "name": "progresso_nivel", "type": "jsonb" },
         { "name": "hud_status", "type": "jsonb" },

@@ -149,6 +149,32 @@ Notas e recomendações rápidas sobre a estrutura
 ***
 
 ## Entidades principais e contratos JSON (resumo) {#entidades}
+### Atributos Espirituais e Negativos
+
+No modelo do jogador, os atributos espirituais são representados pelos frutos do Espírito (Gálatas 5:22-23):
+
+- Amor
+- Alegria
+- Paz
+- Paciência
+- Bondade
+- Benignidade
+- Fidelidade
+- Mansidão
+- Domínio próprio
+
+Os atributos negativos (pecados) são:
+- Medo
+- Ansiedade
+- Ira
+- Inveja
+- Preguiça
+- Orgulho
+- Luxúria
+- Mentira
+- Fofoca
+
+Esses campos aparecem em `status_player_base.json` e são usados para progressão, penalidades e buffs no jogo. Recomenda-se exibir os frutos do Espírito e pecados na HUD, perfil e telas de progresso do jogador.
 
 Nota: os exemplos abaixo são contratuais — todos os campos marcados como obrigatórios devem existir mesmo que com valores nulos/zero.
 

@@ -9,9 +9,6 @@
       "fe": 0,
       "sabedoria": 0,
       "espiritoSanto": 0,
-      "paz": 0,
-      "alegria": 0,
-      "paciencia": 0
     },
 
     "armaduraDeus": {
@@ -23,37 +20,26 @@
       "espadaEspirito": 0
     },
 
-    "donsEspirituais": {
-      "amor": 0,
-      "gozo": 0,
-      "paz": 0,
-      "longanimidade": 0,
-      "benignidade": 0,
-      "bondade": 0,
-      "fe": 0,
-      "mansidao": 0,
-      "temperanca": 0
-    },
 
     "frutosEspirito": {
-      "sabedoria": 0,
-      "entendimento": 0,
-      "conselho": 0,
-      "fortaleza": 0,
-      "ciencia": 0,
-      "piedade": 0,
-      "temorDeus": 0
+      "amor": 0,
+      "alegria": 0,
+      "paz": 0,
+      "paciencia": 0,
+      "bondade": 0,
+      "benignidade": 0,
+      "fidelidade": 0,
+      "mansidao": 0,
+      "dominioProprio": 0
     },
 
-    "atributosNegativos": {
-      "pecado": 0,
+    "pecados": {
       "medo": 0,
       "ansiedade": 0,
       "ira": 0,
       "inveja": 0,
       "preguica": 0,
       "orgulho": 0,
-      "gula": 0,
       "luxuria": 0,
       "mentira": 0,
       "fofoca": 0
