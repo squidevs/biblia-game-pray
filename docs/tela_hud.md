@@ -45,7 +45,10 @@ A HUD é um painel fixo no topo da interface, projetado para apresentar o progre
 - Mantém todos elementos da minimizada
 - Grid completo da Armadura Divina (Efésios) à esquerda
 - Seção "Frutos do Espírito" (Gl 5:22-23) à direita, listando os 9 frutos com valores
-- Seção "Pecados" (atributos negativos) à direita, abaixo dos frutos, listando os 9 pecados com valores
+- Seção "Obras da carne" (atributos negativos agrupados) à direita, abaixo dos frutos, listando os 9 atributos agrupados com valores
+- Nomes de chaves sugeridos para integração JSON/UI:
+  - Frutos do Espírito: amor, alegria, paz, paciencia, bondade, benignidade, fidelidade, mansidao, dominioProprio
+  - Obras da carne: imoralidadeImpureza, idolatriaFeiticaria, inimizadeOdio, ciumesInveja, ira, dissensaoFaccao, orgiasBebedices, ambicaoEgoista, orgulhoEgoismo
 - Botão/área "Ver menos" para recolher HUD
 
 ## Melhorias Visuais e de UX Aplicadas
@@ -148,16 +151,16 @@ Itens permanentes, consumíveis e armaduras podem conceder efeitos temporários 
 |                             ♾︎  ♾︎               |
 | 0/100 0/100 0/100    [⏱︎] [❄︎] [⛑︎] [⛓︎] [] [☹] |
 |                      00:59        15:59         |      
-|Frutos do Espírito│ Gl 5:22-23    Pecados        │
-│ Amor: 0                           medo: 0       │
-│ Alegria: 0                        ansiedade: 0  │
-│ Paz: 0                            ira: 0        │
-│ Paciência: 0                      inveja: 0     │
-│ Bondade: 0                        preguiça: 0   │
-│ Benignidade: 0                    orgulho: 0    │
-│ Fidelidade: 0                     luxúria: 0    │
-│ Mansidão: 0                       mentira: 0    │
-│ Domínio próprio: 0                fofoca: 0     │
+|Frutos do Espírito│ Gl 5:22-23    Obras da carne │
+│ Amor: 0                 imoralidadeImpureza: 0  │
+│ Alegria: 0              idolatriaFeiticaria: 0  │
+│ Paz: 0                  inimizadeOdio: 0        │
+│ Paciência: 0            ciumesInveja: 0         │
+│ Bondade: 0              ira: 0                  │
+│ Benignidade: 0          dissensaoFaccao: 0      │
+│ Fidelidade: 0           orgiasBebedices: 0      │
+│ Mansidão: 0             ambicaoEgoista: 0       │
+│ Domínio próprio: 0      orgulhoEgoismo: 0       │
 └─────────────────────────────────────────────────┘
                   ▴ Ver menos
 ```
