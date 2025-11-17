@@ -164,15 +164,14 @@ No modelo do jogador, os atributos espirituais são representados pelos frutos d
 - Domínio próprio
 
 Os atributos negativos — Obras da carne (Gálatas 5:19–21, agrupados) — são:
-- Imoralidade sexual e impureza
-- Idolatria e feitiçaria
-- Inimizade e ódio
-- Ciúmes e inveja
-- Ira
-- Dissensão e facção
-- Orgias e bebedices
-- Ambição egoísta (porfias, contendas)
-- Egoísmo/orgulho
+- Imoralidade sexual e impureza (necessário generalizar)
+- Inimizade e ódio (necessário generalizar)
+- Ciúmes e inveja (necessário generalizar)
+- Ira (necessário generalizar)
+- Dissensão e facção (necessário generalizar)
+- Orgias e bebedices (necessário generalizar)
+- Ambição egoísta (porfias, contendas) (necessário generalizar)
+- Egoísmo/orgulho (necessário generalizar)
 
 Esses campos aparecem em `status_player_base.json` e são usados para progressão, penalidades e buffs no jogo. Recomenda-se exibir os frutos do Espírito e pecados na HUD, perfil e telas de progresso do jogador.
 

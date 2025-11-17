@@ -113,6 +113,46 @@ Itens permanentes, consumíveis e armaduras podem conceder efeitos temporários 
 └───────────────────────────────────────────────┘
 ```
 
+## Efeitos dos atributos espirituais e negativos
+
+### Frutos do Espírito (atributos positivos)
+Cada ponto aumenta benefícios e resistência a debuffs. Tooltips sugeridos:
+- **amor:** +Bônus em recompensas de grupo, reduz penalidades por inimizade.
+- **alegria:** +Aumenta XP ganho em missões, reduz efeitos de tristeza/debuff.
+- **paz:** +Reduz chance de debuffs de conflito, aumenta regeneração de corações.
+- **paciencia:** +Permite mais tentativas em quizzes, reduz penalidade por erros.
+- **bondade:** +Desbloqueia recompensas extras em missões colaborativas.
+- **benignidade:** +Aumenta chance de buffs ao ajudar outros jogadores.
+- **fidelidade:** +Bônus de streak diário, reduz perda de XP por falha.
+- **mansidao:** +Reduz impacto de debuffs de ira, facilita reconciliação em missões.
+- **dominioProprio:** +Reduz consumo de corações por erro, aumenta resistência a debuffs.
+
+### Obras da carne (atributos negativos agrupados)
+Cada ponto aumenta vulnerabilidade a debuffs e penalidades. Tooltips sugeridos:
+- **imoralidadeImpureza:** -Aumenta chance de penalidade em quizzes, bloqueia buffs de pureza.
+- **idolatriaFeiticaria:** -Reduz XP ganho, aumenta chance de debuffs aleatórios.
+- **inimizadeOdio:** -Bloqueia recompensas de grupo, aumenta penalidade por conflitos.
+- **ciumesInveja:** -Reduz ganhos em missões colaborativas, aumenta chance de perder itens.
+- **ira:** -Aumenta consumo de corações por erro, ativa debuff de vulnerabilidade.
+- **dissensaoFaccao:** -Reduz streak, aumenta penalidade por missões não concluídas.
+- **orgiasBebedices:** -Reduz regeneração de corações, aumenta chance de debuffs de lentidão.
+- **ambicaoEgoista:** -Bloqueia buffs de grupo, reduz recompensas coletivas.
+- **orgulhoEgoismo:** -Reduz chance de buffs, aumenta penalidade por falha em missões.
+
+### Mecânica de buffs/debuffs
+- Atributos positivos altos aumentam resistência a debuffs e desbloqueiam recompensas extras.
+- Atributos negativos altos aumentam vulnerabilidade a penalidades e bloqueiam buffs.
+- Itens, armaduras e missões podem conceder ou remover pontos nesses atributos, temporariamente ou permanentemente.
+- Recomenda-se exibir tooltips dinâmicos na HUD e nos menus de contexto dos itens.
+
+### Exemplo prático
+- Jogador com alto "alegria" recebe +10% XP em missões.
+- Jogador com alto "ira" perde 2 corações por erro em quiz ao invés de 1.
+- Item "Poção de Paz" reduz "inimizadeOdio" e aumenta "paz" por 1 hora.
+- Armadura "Escudo da Fidelidade" aumenta "fidelidade" e reduz debuffs de streak.
+
+Essas descrições podem ser usadas para tooltips, regras de balanceamento e integração nos contratos JSON.
+
 ## Hierarquia visual
 
 ### Minimizada

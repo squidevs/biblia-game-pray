@@ -12,12 +12,12 @@
     },
 
     "armaduraDeus": {
-      "cintoVerdade": 0,
-      "couracaJustica": 0,
-      "sandaliasEvangelho": 0,
-      "escudoFe": 0,
-      "capaceteSalvacao": 0,
-      "espadaEspirito": 0
+      "cintoVerdade": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
+      "couracaJustica": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
+      "sandaliasEvangelho": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
+      "escudoFe": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
+      "capaceteSalvacao": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
+      "espadaEspirito": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}}
     },
 
 
@@ -34,15 +34,16 @@
     },
 
     "pecados": {
-      "medo": 0,
-      "ansiedade": 0,
+    "obrasCarne": {
+      "imoralidadeSexual": 0,
+      "impureza": 0,
+      "idolatria": 0,
+      "inimizades": 0,
       "ira": 0,
+      "egoismo": 0,
       "inveja": 0,
-      "preguica": 0,
-      "orgulho": 0,
-      "luxuria": 0,
-      "mentira": 0,
-      "fofoca": 0
+      "embriaguez": 0,
+      "orgias": 0
     }
   },
 

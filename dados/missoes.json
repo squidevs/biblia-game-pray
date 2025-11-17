@@ -8,7 +8,13 @@
       "categoria": "oracao",
   "idAcao": "acao-orar-pai-nosso",
       "requisitos": { "nivel": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 10, "itens": [], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 10,
+        "itens": [],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "alegria": 1, "paz": 1 }
+      },
       "repeticao": { "frequencia": "diaria", "horaSugerida": "manha" },
       "evidenciaObrigatoria": false,
       "evidenciasAceitas": [],
@@ -24,7 +30,13 @@
       "categoria": "estudo",
       "idAcao": null,
       "requisitos": { "nivel": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 15, "itens": [158], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 15,
+        "itens": [158],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "sabedoria": 1, "bondade": 1 }
+      },
       "repeticao": { "frequencia": "diaria", "horaSugerida": "a escolher" },
       "evidenciaObrigatoria": false,
       "evidenciasAceitas": ["versiculoFavorito"],
@@ -40,7 +52,13 @@
       "categoria": "devocional",
       "idAcao": null,
       "requisitos": { "nivel": 1, "itensRequeridos": [7], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 8, "itens": [], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 8,
+        "itens": [],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "alegria": 1, "mansidao": 1 }
+      },
       "repeticao": { "frequencia": "diaria" },
       "evidenciaObrigatoria": false,
       "evidenciasAceitas": ["texto"],
@@ -56,7 +74,13 @@
       "categoria": "servico",
       "idAcao": null,
       "requisitos": { "nivel": 2, "itensRequeridos": [157], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 120, "itens": [157], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 120,
+        "itens": [157],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "bondade": 2, "ambicaoEgoista": -1 }
+      },
       "repeticao": { "frequencia": "semanal" },
       "evidenciaObrigatoria": true,
       "evidenciasAceitas": ["foto", "audio", "video", "relato"],
@@ -72,7 +96,13 @@
       "categoria": "social",
       "idAcao": null,
       "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 80, "itens": [], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 80,
+        "itens": [],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "alegria": 2, "inimizadeOdio": -1 }
+      },
       "repeticao": { "frequencia": "semanal" },
       "evidenciaObrigatoria": false,
       "evidenciasAceitas": ["checkin", "foto"],
@@ -88,7 +118,13 @@
       "categoria": "jejum",
       "idAcao": null,
       "requisitos": { "nivel": 3, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 300, "itens": [], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 300,
+        "itens": [],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "dominioProprio": 2, "orgiasBebedices": -2 }
+      },
       "repeticao": { "frequencia": "mensal" },
       "evidenciaObrigatoria": false,
       "evidenciasAceitas": [],
@@ -104,7 +140,13 @@
       "categoria": "servico",
       "idAcao": null,
       "requisitos": { "nivel": 4, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 500, "itens": [], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 500,
+        "itens": [],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "bondade": 3, "alegria": 2, "ambicaoEgoista": -2 }
+      },
       "repeticao": { "frequencia": "mensal" },
       "evidenciaObrigatoria": true,
       "evidenciasAceitas": ["foto", "video", "relato"],
@@ -120,7 +162,13 @@
       "categoria": "discipulado",
       "idAcao": null,
       "requisitos": { "nivel": 5, "itensRequeridos": [147], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 200, "itens": [125], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 200,
+        "itens": [125],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "fidelidade": 2, "dissensaoFaccao": -1 }
+      },
       "repeticao": { "frequencia": "mensal" },
       "evidenciaObrigatoria": true,
       "evidenciasAceitas": ["atas", "foto", "checkin"],
@@ -142,7 +190,13 @@
       "categoria": "social",
       "idAcao": null,
       "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": { "xp": 50, "itens": [125], "moeda": 0, "conquistaId": null },
+      "recompensas": {
+        "xp": 50,
+        "itens": [125],
+        "moeda": 0,
+        "conquistaId": null,
+        "atributos": { "mansidao": 1, "orgulhoEgoismo": -1 }
+      },
       "repeticao": { "frequencia": "pontual" },
       "evidenciaObrigatoria": false,
       "evidenciasAceitas": ["audio", "relato"],
