@@ -10,7 +10,10 @@
 - **Nome do usuário:** Fonte grande, bold, centralizado
 - **Nível e moedas:** Badges coloridos ao lado do nome
 - **Barra de XP:** Horizontal, logo abaixo do nome
+- **Barra de Espírito Santo:** Progresso azul animado, valor percentual destacado, ícone de notificação motivacional ao lado se necessário
 - **Pontos positivos/negativos:** Linha de ícones grandes, valores destacados
+  - Tooltips explicativos ao passar/tocar em cada atributo (fruto do Espírito/obra da carne)
+  - Cor de alerta se algum negativo ≥ 75 (bloqueio)
 
 ## Estatísticas Rápidas
 - Cards/blocos para:
@@ -24,9 +27,10 @@
 - Botões grandes, cor de destaque, ícone + texto
 - Atalhos para Missões, Estudos, Conquistas
 - Feedback visual ao tocar (leve aumento de escala, cor de fundo)
+- Acesso rápido à ação de confissão/arrependimento se status negativo alto
 
 ## Microinterações e Acessibilidade
-- Animação suave ao atualizar barra de XP
+- Animação suave ao atualizar barra de XP e Espírito Santo
 - Feedback tátil e visual ao tocar
 - Texto alternativo para ícones
 - Contraste alto
@@ -40,6 +44,7 @@
 |     [Avatar]                     |
 | Nome do usuário [Nível] [Moedas] |
 | [Barra de XP]                    |
+| [Barra de Espírito Santo 100%]   |
 | [Pontos + / -]                   |
 --------------------------------------
 | [Card] Missões completas         |
@@ -48,5 +53,6 @@
 --------------------------------------
 | [Atalho] Missões [Atalho] Estudos|
 | [Atalho] Conquistas              |
+| [Ação rápida] Confissão/Arrependimento |
 --------------------------------------
 ```

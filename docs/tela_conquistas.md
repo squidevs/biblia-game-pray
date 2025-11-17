@@ -23,6 +23,9 @@
     - **Recompensa:** Ícone (ex: moeda, troféu, item) + valor, alinhado à direita do card.
   - **Feedback visual:** Ao desbloquear, card faz animação de “pulse” ou brilho, badge muda de cor, ícone ganha cor viva.
   - **Interação:** Ao tocar no card, abre modal ou bottom sheet com detalhes completos.
+    - Tooltip explicativo ao passar/tocar, mostrando se há bloqueio por status negativo alto (ex: “Conquista bloqueada por inveja ≥ 75”)
+    - Ícone especial se a conquista ajuda a recuperar atributos positivos ou reduzir negativos (ex: “cura” ou “buff”)
+    - Se bloqueado por status negativo, card desabilitado e sugestão de ação rápida de confissão/arrependimento
 
 ## Modal/Bottom Sheet de Detalhes
 - **Fundo escurecido, modal centralizado ou bottom sheet ocupando 70% da altura.**

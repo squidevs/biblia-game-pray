@@ -9,6 +9,7 @@
 - Grid ou lista vertical de livros do testamento escolhido
 - Cada livro: card com nome, ícone/ilustração, barra de progresso (percentual de capítulos concluídos)
 - Livros bloqueados aparecem esmaecidos
+  - Tooltip explicativo ao passar/tocar, mostrando se há bloqueio por status negativo alto (ex: “Estudo bloqueado por impureza ≥ 75”)
 
 ## 3. Trilha de Capítulos (Roadmap)
 - Trilha visual (horizontal ou vertical) com todos os capítulos como “bolhas” conectadas
@@ -16,6 +17,8 @@
 - Capítulo atual: bolha destacada, animada
 - Capítulos futuros: bolha cinza/bloqueada
 - Ao tocar em um capítulo desbloqueado, inicia o ciclo de aprendizado
+  - Tooltip explicativo se bloqueado por status negativo
+  - Ícone especial se o capítulo ajuda a recuperar atributos positivos ou reduzir negativos (ex: “cura” ou “buff”)
 
 ## 4. Ciclo de Aprendizado do Capítulo
 Cada capítulo é dividido em 4 ciclos, apresentados em sequência:
@@ -43,12 +46,14 @@ Cada capítulo é dividido em 4 ciclos, apresentados em sequência:
 ## 5. Desbloqueio de Capítulo
 - Se nota final ≥ 75%: mensagem de parabéns, animação de desbloqueio, próximo capítulo liberado
 - Se nota < 75%: mensagem de incentivo, opção de refazer o quiz
+- Se bloqueado por status negativo, exibe sugestão de ação rápida de confissão/arrependimento
 
 ## Microinterações e Gamificação
 - Animações ao desbloquear capítulos (confete, brilho)
 - Estrelas ou medalhas por desempenho
 - Feedback visual/tátil ao responder quiz
 - Progresso global do livro/testamento sempre visível
+- Banner ou pop-up motivacional do Espírito Santo sugerindo estudo para restaurar atributo, se necessário
 
 ## Exemplo de Hierarquia Visual
 
@@ -81,5 +86,6 @@ Cada capítulo é dividido em 4 ciclos, apresentados em sequência:
 -------------------------------------------------
 | [Resultado: % de acertos, estrelas]           |
 | [Mensagem: Parabéns! Próximo capítulo liberado]|
+| [Banner] Sugestão do Espírito Santo           |
 -------------------------------------------------
 ```
