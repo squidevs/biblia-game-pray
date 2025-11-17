@@ -86,6 +86,8 @@
         "permitirEvidencia": false
       },
 
+        "cooldownMinutos": 60,
+
       "efeitos": {
         "atributosPositivos": {
           "fe": 15,
@@ -137,6 +139,59 @@
 
       "observacoes": "Aplica pecado = 0 (zerar). Aplicar cool-down para evitar abuso."
     },
+
+      {
+        "id": "acao-confissao-escolhida",
+        "categoria": "confissao",
+        "titulo": "Confissão de Obra da Carne",
+        "descricao": "O usuário escolhe qual obra da carne deseja confessar e recebe sugestão de oração personalizada.",
+        "imagem": "/imagens/acoes/confissao.png",
+        "icone": "bi-journal",
+
+        "configuracoes": {
+          "tempoSugerido": 7,
+          "tempoRecargaMinutos": 60,
+          "tipoDuracao": "minutos",
+          "repeticao": "unica",
+          "permitirEvidencia": false
+        },
+
+          "cooldownMinutos": 60,
+
+        "efeitos": {
+          "atributosPositivos": {
+            "dominioProprio": 10,
+            "mansidao": 5
+          },
+          "atributosNegativos": {
+            "obraDaCarneEscolhida": -15
+          }
+        },
+
+        "recompensas": {
+          "xp": 20,
+          "itens": [],
+          "conquistas": []
+        },
+
+        "referenciaBiblica": {
+          "versao": "acf",
+          "livro": "Tiago",
+          "capitulo": 5,
+          "versiculos": "16",
+          "textoUrl": "https://www.bibliaonline.com.br/acf/tg/5/16"
+        },
+
+        "requisitos": [],
+
+        "status": {
+          "disponivel": true,
+          "ativo": false,
+          "bloqueado": false
+        },
+
+        "observacoes": "Usuário escolhe qual obra da carne confessar; sistema sugere oração personalizada e reduz status negativo conforme faixas."
+      },
 
     {
       "id": "acao-jejum-12h",

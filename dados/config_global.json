@@ -19,7 +19,9 @@
     },
     "cooldowns": {
       "default_item_cooldown_minutos": 60,
-      "permissao_repeticao_missao_minutos": 5
+      "permissao_repeticao_missao_minutos": 5,
+      "confissao_cooldown_minutos": 60,
+      "arrependimento_cooldown_minutos": 60
     },
     "economia": {
       "moeda_nome": "Ouro da Fé",
@@ -52,6 +54,16 @@
       "manterTop": 20,
       "comportamento": "Ao fim do período semanal: se o jogador estiver entre os top 10 do seu nível, sobe para o próximo nível; se estiver entre 11 e 20, permanece no mesmo nível; se estiver abaixo de 20, desce para o nível anterior (se houver)."
     },
-    "nivelInicialId": "nivel-01"
+    "nivelInicialId": "nivel-01",
+    "espiritoSanto": {
+      "reduzPorHora": 1,
+      "travaBatizado": 50,
+      "travaNaoBatizado": 15,
+      "notificacoes": [85, 70, 55, 40, 25, 10]
+    },
+    "limites": {
+      "maxBuffs": 5,
+      "maxDebuffs": 5
+    }
   }
 }

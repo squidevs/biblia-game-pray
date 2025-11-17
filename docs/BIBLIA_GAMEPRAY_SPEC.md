@@ -91,31 +91,22 @@ Apresentamos abaixo a árvore de pastas sugerida com descrição curta de cada a
 │  │  └─ components/       # Component styles (cards, modais, HUD)
 │  └─ desktop/
 │     └─ base.css          # Desktop overrides e breakpoints
-├─ js/
-│  ├─ globais.js           # Inicialização, helpers, i18n minimal
-│  ├─ home/
-│  │  └─ home.js           # Comportamento da tela inicial
-│  ├─ missoes/
-│  │  └─ missoes.js        # Lógica de listagem/execução de missões
-│  ├─ acoes/
-│  │  └─ acoes.js          # Timers e workflows de Ações (oração/estudo)
-│  ├─ armadura/
 │  │  └─ armadura.js       # Equipamentos, buffs, slots
 │  ├─ perfil/
-│  │  └─ perfil.js         # Perfil, avatar editor, configurações de usuário
-│  └─ avatar/
-│     └─ avatar.js         # Integração Avataaars / DiceBear
-├─ dados/
-│  ├─ usuarios.json                # Perfis de usuário (seed, prefs mínimas)
-│  ├─ status_player_base.json      # Estado base do jogador (atributos, inventário)
-│  ├─ acoes.json                    # Ações possíveis (oração, jejum, estudo)
-│  ├─ missoes.json                  # Missões diárias/semanal/mensal/eventos
+
+### Faixas de Pontuação e Efeitos
+
+Todos os atributos (positivos e negativos) variam de 0 a 100 pontos. Os efeitos e penalidades são aplicados conforme a faixa em que o status se encontra:
+
+#### Fruto do Espírito (Positivos)
+
+#### Obras da Carne (Negativos)
+
+#### Exemplos de impacto:
+
+#### Recuperação de status:
 │  ├─ itens.json                    # Itens (consumíveis e permanentes)
 │  ├─ conquistas.json               # Lista de conquistas (66) com critérios
-│  ├─ estudos.json                  # Jornadas de estudo / trilhas (Duolingo-like)
-│  ├─ loja.json                     # Itens à venda / custos e ofertas
-│  ├─ avatar-configs.json           # Presets e seeds de avatar
-│  └─ config_global.json            # Parâmetros globais (niveis, heart timing, xp)
 ├─ assets/
 │  ├─ imagens/
 │  │  ├─ logo/                      # SVGs e variações da marca
@@ -164,14 +155,15 @@ No modelo do jogador, os atributos espirituais são representados pelos frutos d
 - Domínio próprio
 
 Os atributos negativos — Obras da carne (Gálatas 5:19–21, agrupados) — são:
-- Imoralidade sexual e impureza (necessário generalizar)
-- Inimizade e ódio (necessário generalizar)
-- Ciúmes e inveja (necessário generalizar)
-- Ira (necessário generalizar)
-- Dissensão e facção (necessário generalizar)
-- Orgias e bebedices (necessário generalizar)
-- Ambição egoísta (porfias, contendas) (necessário generalizar)
-- Egoísmo/orgulho (necessário generalizar)
+- Impureza (imoralidade sexual, sensualidade)
+- Idolatria (idolatria, feitiçaria)
+- Ódio (inimizade, hostilidade)
+- Inveja (ciúmes, inveja)
+- Ira (raiva, explosão de fúria)
+- Contenda (dissensão, facção, brigas)
+- Excessos (orgias, bebedices, vícios)
+- Egoísmo (egoísmo, busca por vantagem própria)
+- Orgulho (arrogância, soberba)
 
 Esses campos aparecem em `status_player_base.json` e são usados para progressão, penalidades e buffs no jogo. Recomenda-se exibir os frutos do Espírito e pecados na HUD, perfil e telas de progresso do jogador.
 

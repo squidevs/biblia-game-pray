@@ -1,0 +1,112 @@
+id,nome,tipo,quantidade,tempo_limite,preco,reutilizavel,qtdEspirito,qtdFe,fds-amor,fds-alegria,fds-paz,fds-paciencia,fds-bondade,fds-benignidade,fds-fidelidade,fds-mansidao,fds-dominioProprio,odc-imoralidadeImpureza,odc-idolatriaFeiticaria,odc-inimizadeOdio,odc-ciumesInveja,odc-ira,odc-dissensaoFaccao,odc-orgiasBebedices,odc-ambicaoEgoista,odc-orgulhoEgoismo
+177,Coroa da Vida,permanente,1,,0,sim,20,10,10,8,7,5,5,5,5,5,5,-5,-3,0,0,0,0,0,0,0
+178,Cinto da Verdade (Raro),armadura,1,,500,sim,0,7,0,0,0,0,0,0,0,5,0,-4,0,0,0,0,0,0,0
+179,Poção de Alegria,consumivel,1,30,20,nao,0,0,10,0,0,0,0,0,0,0,0,0,0,-2,0,0,0,0,0,0
+180,Sandálias do Evangelho,armadura,1,,1200,sim,0,0,0,0,0,12,10,0,0,0,0,0,-6,0,0,0,0,0,0,0
+181,Elixir de Paz,consumivel,1,45,40,nao,0,0,0,0,15,0,0,0,0,0,0,0,0,0,-10,0,0,0,0,0
+182,Espada do Espírito (Lendária),armadura,1,,2500,sim,0,0,0,0,0,0,0,15,12,0,0,0,0,0,0,0,-8,0,0,0
+183,Pão da Palavra,consumivel,1,60,15,nao,0,0,0,0,0,0,0,8,0,0,0,0,-2,0,0,0,0,0,0,0
+184,Escudo da Fé (Épico),armadura,1,,1800,sim,0,0,0,0,14,0,0,0,0,0,0,0,0,0,0,-10,0,0,0,0
+185,Fruto do Espírito — Benignidade,permanente,1,,0,sim,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,-7,0,0
+186,Poção de Fidelidade,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0
+187,Elixir de Mansidão,consumivel,1,45,30,nao,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,0
+188,Poção de Domínio Próprio,consumivel,1,60,35,nao,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0
+189,Poção de Amor,consumivel,1,30,20,nao,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+190,Poção de Alegria Maior,consumivel,1,60,40,nao,0,0,20,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+191,Poção de Paz Maior,consumivel,1,60,40,nao,0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+192,Poção de Paciência,consumivel,1,30,20,nao,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+193,Poção de Bondade,consumivel,1,30,20,nao,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+194,Poção de Benignidade,consumivel,1,30,20,nao,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0
+195,Poção de Fidelidade Maior,consumivel,1,60,40,nao,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0
+196,Poção de Mansidão Maior,consumivel,1,60,40,nao,0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,0,0
+197,Poção de Domínio Próprio Maior,consumivel,1,60,40,nao,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0
+198,Poção de Imoralidade,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0
+199,Poção de Idolatria,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0
+200,Poção de Inimizade,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0
+201,Poção de Ciúmes,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0
+202,Poção de Ira,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0
+203,Poção de Dissensão,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0
+204,Poção de Orgias,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0
+205,Poção de Ambição,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0
+206,Poção de Orgulho,consumivel,1,30,20,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+207,Elixir de Espírito,consumivel,1,60,50,nao,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+208,Elixir de Fé,consumivel,1,60,50,nao,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+209,Poção de Espírito e Fé,consumivel,1,60,60,nao,20,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+210,Poção de Buff Completo,consumivel,1,60,100,nao,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10
+211,Poção de Debuff Completo,consumivel,1,60,100,nao,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,10
+212,Poção de Buff/Debuff,consumivel,1,60,100,nao,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
+213,Armadura da Luz,armadura,1,,2000,sim,0,0,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,0
+214,Armadura das Trevas,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,10,10
+215,Armadura do Equilíbrio,armadura,1,,2000,sim,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10
+216,Armadura do Perdão,armadura,1,,2000,sim,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+217,Armadura da Alegria,armadura,1,,2000,sim,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+218,Armadura da Paz,armadura,1,,2000,sim,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+219,Armadura da Paciência,armadura,1,,2000,sim,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+220,Armadura da Bondade,armadura,1,,2000,sim,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0
+221,Armadura da Benignidade,armadura,1,,2000,sim,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0
+222,Armadura da Fidelidade,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0
+223,Armadura da Mansidão,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0
+224,Armadura do Domínio Próprio,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0
+225,Armadura da Imoralidade,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0
+226,Armadura da Idolatria,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0
+227,Armadura da Inimizade,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0
+228,Armadura do Ciúmes,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0
+229,Armadura da Ira,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0
+230,Armadura da Dissensão,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0
+231,Armadura das Orgias,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0
+232,Armadura da Ambição,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0
+233,Armadura do Orgulho,armadura,1,,2000,sim,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20
+234,Poção de Esperança,consumivel,1,30,25,nao,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+235,Poção de Gratidão,consumivel,1,30,25,nao,0,0,10,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+236,Poção de Humildade,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0
+237,Poção de Serviço,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0
+238,Poção de Intercessão,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0
+239,Poção de Sabedoria Divina,consumivel,1,60,50,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+240,Poção de Pureza,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,-10,0,0,0,0,0,0,0,0
+241,Poção de Perseverança,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0
+242,Poção de Disciplina,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+243,Poção de Consagração,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+244,Poção de Santidade,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,-10,0,0,0,0,0,0,0,0
+245,Poção de Comunhão,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+246,Poção de Renovação,consumivel,1,30,25,nao,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+247,Poção de Visão,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+248,Poção de Revelação,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+249,Poção de Unção,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+250,Poção de Sabedoria Prática,consumivel,1,30,25,nao,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+251,Poção de Sabedoria Espiritual,consumivel,1,30,25,nao,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+252,Poção de Sabedoria Emocional,consumivel,1,30,25,nao,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+253,Poção de Sabedoria Social,consumivel,1,30,25,nao,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0
+254,Poção de Sabedoria Familiar,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0
+255,Poção de Sabedoria Ministerial,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0
+256,Poção de Sabedoria Profissional,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0
+257,Poção de Sabedoria Acadêmica,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0
+258,Poção de Sabedoria Relacional,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0
+259,Poção de Sabedoria Financeira,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0
+260,Poção de Sabedoria Física,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0
+261,Poção de Sabedoria Mental,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0
+262,Poção de Sabedoria Moral,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0
+263,Poção de Sabedoria Ética,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0
+264,Poção de Sabedoria Universal,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0
+265,Poção de Sabedoria Eterna,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+266,Poção de Sabedoria Celestial,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+267,Poção de Sabedoria Suprema,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+268,Poção de Sabedoria Plena,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+269,Poção de Sabedoria Absoluta,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+270,Poção de Sabedoria Infinita,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+271,Poção de Sabedoria Divina Plena,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+272,Poção de Sabedoria Divina Suprema,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+273,Poção de Sabedoria Divina Absoluta,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+274,Poção de Sabedoria Divina Infinita,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+275,Poção de Sabedoria Divina Eterna,consumivel,1,30,25,nao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+276,Relíquia da Sabedoria,permanente,1,,0,sim,0,10,5,5,10,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0
+277,Medalhão da Paz,permanente,1,,0,sim,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+278,Anel da Fidelidade,permanente,1,,0,sim,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0
+279,Escultura do Amor,permanente,1,,0,sim,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+280,Placa da Benignidade,permanente,1,,0,sim,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0
+281,Chave da Mansidão,permanente,1,,0,sim,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0
+282,Estatueta da Paciência,permanente,1,,0,sim,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+283,Insígnia da Bondade,permanente,1,,0,sim,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+284,Orbe do Espírito,permanente,1,,0,sim,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+285,Pedra do Domínio Próprio,permanente,1,,0,sim,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0
+286,Amuleto da Alegria,permanente,1,,0,sim,0,0,10,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+287,Livro da Esperança,permanente,1,,0,sim,0,10,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

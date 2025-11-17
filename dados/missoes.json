@@ -22,6 +22,28 @@
       "observacoes": "Missão básica de introdução. Requer possuir a 'Bíblia Sagrada' equipada/na mochila para habilitar estudos relacionados."
     },
 
+      {
+        "id": 100,
+        "tipo": "especial",
+        "titulo": "Missão de Reconciliação",
+        "descricao": "Reconcilie-se com outro jogador para reduzir inimizade/ódio.",
+        "categoria": "social",
+        "idAcao": null,
+        "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
+        "recompensas": {
+          "xp": 30,
+          "itens": [],
+          "moeda": 0,
+          "conquistaId": null,
+          "atributos": { "amor": 5, "inimizadeOdio": -10 }
+        },
+        "repeticao": { "frequencia": "pontual" },
+        "evidenciaObrigatoria": false,
+        "evidenciasAceitas": ["texto"],
+        "status": "ativa",
+        "observacoes": "Reduz status negativo e aumenta positivo conforme faixas definidas."
+      },
+
     {
       "id": 2,
       "tipo": "diaria",

@@ -19,6 +19,34 @@
       "sentAt": "2025-11-13T11:10:30Z",
       "lida": false,
       "canal": "in_app"
+    },
+    {
+      "id": "n_espirito_001",
+      "tipo": "motivacional",
+      "mensagem": "O Espírito Santo sente sua ausência. Que tal uma missão ou estudo bíblico?",
+      "gatilho": "espiritoSanto <= 85",
+      "canal": "push"
+    },
+    {
+      "id": "n_espirito_002",
+      "tipo": "motivacional",
+      "mensagem": "Sua luz está diminuindo, busque fortalecer seu espírito!",
+      "gatilho": "espiritoSanto <= 70",
+      "canal": "push"
+    },
+    {
+      "id": "n_espirito_003",
+      "tipo": "motivacional",
+      "mensagem": "Busque o batismo para fortalecer seu espírito!",
+      "gatilho": "espiritoSanto <= 15 && batizado == false",
+      "canal": "push"
+    },
+    {
+      "id": "n_espirito_004",
+      "tipo": "motivacional",
+      "mensagem": "O Espírito Santo permanece com você!",
+      "gatilho": "espiritoSanto <= 50 && batizado == true",
+      "canal": "push"
     }
   ]
 }

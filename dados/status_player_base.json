@@ -4,13 +4,11 @@
     "nivel": 1,
     "xp": 0,
     "xpProximoNivel": 100,
-
     "atributosPrincipais": {
       "fe": 0,
       "sabedoria": 0,
-      "espiritoSanto": 0,
+      "espiritoSanto": 100
     },
-
     "armaduraDeus": {
       "cintoVerdade": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
       "couracaJustica": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
@@ -19,8 +17,6 @@
       "capaceteSalvacao": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
       "espadaEspirito": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}}
     },
-
-
     "frutosEspirito": {
       "amor": 0,
       "alegria": 0,
@@ -32,21 +28,48 @@
       "mansidao": 0,
       "dominioProprio": 0
     },
-
     "pecados": {
-    "obrasCarne": {
-      "imoralidadeSexual": 0,
-      "impureza": 0,
-      "idolatria": 0,
-      "inimizades": 0,
+      "obrasCarne": {
+        "imoralidadeSexual": 0,
+        "impureza": 0,
+        "idolatria": 0,
+        "inimizades": 0,
+        "ira": 0,
+        "egoismo": 0,
+        "inveja": 0,
+        "embriaguez": 0,
+        "orgias": 0
+      }
+    },
+    "obrasCarneAgrupadas": {
+      "imoralidadeImpureza": 0,
+      "idolatriaFeiticaria": 0,
+      "inimizadeOdio": 0,
+      "ciumesInveja": 0,
       "ira": 0,
-      "egoismo": 0,
-      "inveja": 0,
-      "embriaguez": 0,
-      "orgias": 0
+      "dissensaoFaccao": 0,
+      "orgiasBebedices": 0,
+      "ambicaoEgoista": 0,
+      "orgulhoEgoismo": 0
+    },
+    "limites": {
+      "maxBuffs": 5,
+      "maxDebuffs": 5
+    },
+    "espiritoSanto": {
+      "valor": 100,
+      "reduzPorHora": 1,
+      "travaBatizado": 50,
+      "travaNaoBatizado": 15,
+      "notificacoes": [85, 70, 55, 40, 25, 10],
+      "mensagemMotivacional": [
+        "O Espírito Santo sente sua ausência. Que tal uma missão ou estudo bíblico?",
+        "Sua luz está diminuindo, busque fortalecer seu espírito!",
+        "Busque o batismo para fortalecer seu espírito!",
+        "O Espírito Santo permanece com você!"
+      ]
     }
   },
-
   "sistemaProgresso": {
     "tentativasEstudo": {
       "atual": 5,
@@ -59,7 +82,6 @@
     "diasOfensiva": 0,
     "dataInicioOfensiva": null
   },
-
   "progressoNivel": {
     "nivelId": "nivel-01",
     "nivelOrdem": 1,
@@ -69,7 +91,6 @@
     "historicoSemanal": [],
     "ultimaAvaliacao": null
   },
-
   "hudStatus": {
     "salvo": false,
     "emPecado": false,
@@ -78,7 +99,10 @@
     "batizado": false,
     "aceitouJesus": false
   },
-
+  "auditoria": {
+    "logs": [],
+    "rollbackDisponivel": true
+  },
   "estatisticas": {
     "missoesCompletas": 0,
     "missoesFalhas": 0,
@@ -90,7 +114,6 @@
     "conquistasDesbloqueadas": 0,
     "livrosEstudados": 0
   },
-
   "configuracoes": {
     "notificacoes": true,
     "som": true,
