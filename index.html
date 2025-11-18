@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bíblia GamePray - Gamifique sua jornada espiritual">
+    <meta name="theme-color" content="#D4AF37">
+    <title>Bíblia GamePray</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="assets/logotipos/notext-perfil-logo/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="assets/logotipos/notext-perfil-logo/apple-touch-icon.png">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/globais.css">
+    <link rel="stylesheet" href="css/mobile/base.css">
+    <link rel="stylesheet" href="css/mobile/components.css">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <!-- Splash Screen / Boas-vindas -->
+    <div id="splash-screen" class="splash-screen" x-data="splashScreen()" x-show="show" x-transition>
+        <div class="splash-content">
+            <div class="splash-logo-container">
+                <img src="assets/logotipos/notext-logo/g446.webp" alt="Bíblia GamePray" class="splash-logo" @load="logoLoaded = true">
+                <div class="splash-halo" x-show="logoLoaded"></div>
+            </div>
+            <h1 class="splash-title" x-show="logoLoaded">Bíblia GamePray</h1>
+            <p class="splash-subtitle" x-show="logoLoaded">Jogando e Crescendo no Espírito</p>
+            <div class="splash-particles" x-show="logoLoaded">
+                <template x-for="i in Array(20).fill(0)" :key="i">
+                    <div class="particle"></div>
+                </template>
+            </div>
+            <button class="splash-skip" @click="pular()" x-show="showSkip">
+                Pular
+            </button>
+        </div>
+    </div>
+
+    <!-- Tela de Login -->
+    <div id="login-screen" class="screen" x-data="loginScreen()" x-show="$store.app.currentScreen === 'login'" x-transition>
+        <div class="login-container">
+            <img src="assets/logotipos/notext-logo/g446.webp" alt="Logo" class="login-logo">
+            <h2>Bem-vindo ao Bíblia GamePray</h2>
+            
+            <form @submit.prevent="handleLogin" class="login-form">
+                <div class="form-group">
+                    <i class="bi bi-person"></i>
+                    <input type="text" x-model="username" placeholder="Usuário ou email" required>
+                </div>
+                <div class="form-group">
+                    <i class="bi bi-lock"></i>
+                    <input :type="showPassword ? 'text' : 'password'" x-model="password" placeholder="Senha" required>
+                    <button type="button" @click="showPassword = !showPassword" class="toggle-password">
+                        <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                    </button>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" :disabled="loading">
+                    <span x-show="!loading">Entrar</span>
+                    <span x-show="loading">Carregando...</span>
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <a href="#" @click.prevent="$store.app.currentScreen = 'register'">Criar conta</a>
+                <a href="#" @click.prevent="handleForgotPassword">Esqueceu a senha?</a>
+            </div>
+            
+            <div x-show="error" class="alert alert-error" x-text="error"></div>
+        </div>
+    </div>
+
+    <!-- Tela de Registro -->
+    <div id="register-screen" class="screen" x-data="registerScreen()" x-show="$store.app.currentScreen === 'register'" x-transition>
+        <div class="register-container">
+            <img src="assets/logotipos/logo/logo.svg" alt="Logo" class="register-logo">
+            <h2>Criar Conta</h2>
+            
+            <form @submit.prevent="handleRegister" class="register-form">
+                <div class="form-group">
+                    <i class="bi bi-person"></i>
+                    <input type="text" x-model="form.nome" placeholder="Nome completo" required>
+                </div>
+                <div class="form-group">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" x-model="form.email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <i class="bi bi-lock"></i>
+                    <input :type="showPassword ? 'text' : 'password'" x-model="form.senha" placeholder="Senha" required>
+                    <button type="button" @click="showPassword = !showPassword" class="toggle-password">
+                        <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <i class="bi bi-lock"></i>
+                    <input :type="showPasswordConfirm ? 'text' : 'password'" x-model="form.senhaConfirm" placeholder="Confirmar senha" required>
+                    <button type="button" @click="showPasswordConfirm = !showPasswordConfirm" class="toggle-password">
+                        <i :class="showPasswordConfirm ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                    </button>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" :disabled="loading">
+                    <span x-show="!loading">Criar Conta</span>
+                    <span x-show="loading">Criando...</span>
+                </button>
+            </form>
+            
+            <div class="register-footer">
+                <a href="#" @click.prevent="$store.app.currentScreen = 'login'">Já tem conta? Entrar</a>
+            </div>
+            
+            <div x-show="error" class="alert alert-error" x-text="error"></div>
+            <div x-show="success" class="alert alert-success" x-text="success"></div>
+        </div>
+    </div>
+
+    <!-- HUD (Header Fixo) -->
+    <div id="hud" class="hud" x-data="hudComponent()" x-show="$store.app.currentScreen !== 'login' && $store.app.currentScreen !== 'register' && $store.app.currentScreen !== 'splash'" x-transition>
+        <div class="hud-minimized" @click="expanded = !expanded">
+            <div class="hud-left">
+                <img :src="getAvatarUrl()" alt="Avatar" class="hud-avatar">
+                <div class="hud-user-info">
+                    <span class="hud-username" x-text="user?.nome || 'Usuário'"></span>
+                    <span class="hud-level" x-text="'Nv' + (status?.atributos?.nivel || 1)"></span>
+                </div>
+            </div>
+            <div class="hud-right">
+                <div class="hud-stats">
+                    <span class="hud-coin"><i class="bi bi-circle-fill"></i> <span x-text="status?.hudStatus?.moeda || 100"></span></span>
+                    <span class="hud-heart"><i class="bi bi-heart-fill"></i> <span x-text="status?.sistemaProgresso?.tentativasEstudo?.atual || 0"></span></span>
+                </div>
+                <i :class="expanded ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="hud-toggle"></i>
+            </div>
+        </div>
+        
+        <div class="hud-expanded" x-show="expanded" x-transition>
+            <div class="hud-section">
+                <h3>Espírito Santo</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" :style="'width: ' + (status?.atributos?.atributosPrincipais?.espiritoSanto || 0) + '%'"></div>
+                    <span class="progress-text" x-text="(status?.atributos?.atributosPrincipais?.espiritoSanto || 0) + '%'"></span>
+                </div>
+            </div>
+            
+            <!-- Armadura Divina -->
+            <div class="hud-section">
+                <h3>Armadura Divina (Efésios 6)</h3>
+                <div class="armadura-grid">
+                    <div class="armadura-item" @click="abrirMenuArmadura('cintoVerdade')">
+                        <i class="bi bi-belt"></i>
+                        <span>Cinto da Verdade</span>
+                        <span class="armadura-valor" x-text="(status?.atributos?.armaduraDeus?.cintoVerdade?.valor || 0) + '/100'"></span>
+                    </div>
+                    <div class="armadura-item" @click="abrirMenuArmadura('couracaJustica')">
+                        <i class="bi bi-shield"></i>
+                        <span>Couraça da Justiça</span>
+                        <span class="armadura-valor" x-text="(status?.atributos?.armaduraDeus?.couracaJustica?.valor || 0) + '/100'"></span>
+                    </div>
+                    <div class="armadura-item" @click="abrirMenuArmadura('sandaliasEvangelho')">
+                        <i class="bi bi-boot"></i>
+                        <span>Sandálias do Evangelho</span>
+                        <span class="armadura-valor" x-text="(status?.atributos?.armaduraDeus?.sandaliasEvangelho?.valor || 0) + '/100'"></span>
+                    </div>
+                    <div class="armadura-item" @click="abrirMenuArmadura('escudoFe')">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Escudo da Fé</span>
+                        <span class="armadura-valor" x-text="(status?.atributos?.armaduraDeus?.escudoFe?.valor || 0) + '/100'"></span>
+                    </div>
+                    <div class="armadura-item" @click="abrirMenuArmadura('capaceteSalvacao')">
+                        <i class="bi bi-shield-fill"></i>
+                        <span>Capacete da Salvação</span>
+                        <span class="armadura-valor" x-text="(status?.atributos?.armaduraDeus?.capaceteSalvacao?.valor || 0) + '/100'"></span>
+                    </div>
+                    <div class="armadura-item" @click="abrirMenuArmadura('espadaEspirito')">
+                        <i class="bi bi-sword"></i>
+                        <span>Espada do Espírito</span>
+                        <span class="armadura-valor" x-text="(status?.atributos?.armaduraDeus?.espadaEspirito?.valor || 0) + '/100'"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slots de Itens -->
+            <div class="hud-section">
+                <h3>Itens Equipados</h3>
+                <div class="slots-container">
+                    <div class="slots-group">
+                        <h4>Permanentes</h4>
+                        <div class="slots-grid">
+                            <template x-for="(slot, index) in Array(6).fill(0)" :key="index">
+                                <div class="slot-item" @click="abrirMenuSlot('permanente', index)">
+                                    <i class="bi bi-box" x-show="!getSlotItem('permanente', index)"></i>
+                                    <img x-show="getSlotItem('permanente', index)" :src="getSlotItemImage('permanente', index)" alt="Item">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="slots-group">
+                        <h4>Consumíveis</h4>
+                        <div class="slots-grid">
+                            <template x-for="(slot, index) in Array(6).fill(0)" :key="index">
+                                <div class="slot-item" @click="abrirMenuSlot('consumivel', index)">
+                                    <i class="bi bi-box" x-show="!getSlotItem('consumivel', index)"></i>
+                                    <img x-show="getSlotItem('consumivel', index)" :src="getSlotItemImage('consumivel', index)" alt="Item">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Buffs e Debuffs -->
+            <div class="hud-section" x-show="buffsAtivos.length > 0 || debuffsAtivos.length > 0">
+                <h3>Efeitos Ativos</h3>
+                <div class="effects-grid">
+                    <template x-for="buff in buffsAtivos" :key="buff.id">
+                        <div class="effect-item effect-buff" :title="buff.nome + ': ' + buff.descricao">
+                            <i :class="buff.icone || 'bi bi-arrow-up-circle'"></i>
+                            <span x-text="buff.nome"></span>
+                            <span class="effect-timer" x-text="formatTimer(buff.tempoRestante)"></span>
+                        </div>
+                    </template>
+                    <template x-for="debuff in debuffsAtivos" :key="debuff.id">
+                        <div class="effect-item effect-debuff" :title="debuff.nome + ': ' + debuff.descricao">
+                            <i :class="debuff.icone || 'bi bi-arrow-down-circle'"></i>
+                            <span x-text="debuff.nome"></span>
+                            <span class="effect-timer" x-text="formatTimer(debuff.tempoRestante)"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            
+            <div class="hud-section">
+                <h3>Frutos do Espírito</h3>
+                <div class="attributes-grid">
+                    <template x-for="(value, key) in (status?.atributos?.frutosEspirito || {})" :key="key">
+                        <div class="attribute-item" :title="getTooltipFruto(key)">
+                            <span class="attribute-name" x-text="formatarNomeAtributo(key)"></span>
+                            <span class="attribute-value" :class="'faixa-' + getFaixaStatus(value).faixa" x-text="value"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            
+            <div class="hud-section">
+                <h3>Obras da Carne</h3>
+                <div class="attributes-grid">
+                    <template x-for="(value, key) in (status?.atributos?.obrasCarneAgrupadas || {})" :key="key">
+                        <div class="attribute-item negative" :title="getTooltipPecado(key)">
+                            <span class="attribute-name" x-text="formatarNomeAtributo(key)"></span>
+                            <span class="attribute-value" :class="'faixa-' + getFaixaStatus(value).faixa" x-text="value"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela Principal / Início -->
+    <div id="home-screen" class="screen" x-data="homeScreen()" x-show="$store.app.currentScreen === 'home'" x-transition>
+        <div class="container">
+            <div class="profile-section">
+                <img :src="getAvatarUrl()" alt="Avatar" class="profile-avatar">
+                <h2 x-text="user?.nome || 'Usuário'"></h2>
+                <div class="profile-badges">
+                    <span class="badge" x-text="'Nível ' + (status?.atributos?.nivel || 1)"></span>
+                    <span class="badge" x-text="(status?.hudStatus?.moeda || 100) + ' moedas'"></span>
+                </div>
+            </div>
+            
+            <div class="progress-section">
+                <div class="progress-item">
+                    <label>XP</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" :style="'width: ' + getXPPercentage() + '%'"></div>
+                        <span class="progress-text" x-text="(status?.atributos?.xp || 0) + ' / ' + (status?.atributos?.xpProximoNivel || 100)"></span>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <label>Espírito Santo</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" :style="'width: ' + (status?.atributos?.atributosPrincipais?.espiritoSanto || 0) + '%'"></div>
+                        <span class="progress-text" x-text="(status?.atributos?.atributosPrincipais?.espiritoSanto || 0) + '%'"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <div class="stat-card">
+                    <i class="bi bi-check-circle"></i>
+                    <span class="stat-value" x-text="status?.estatisticas?.missoesCompletas || 0"></span>
+                    <span class="stat-label">Missões Completas</span>
+                </div>
+                <div class="stat-card">
+                    <i class="bi bi-calendar-check"></i>
+                    <span class="stat-value" x-text="status?.estatisticas?.diasConsecutivos || 0"></span>
+                    <span class="stat-label">Dias Consecutivos</span>
+                </div>
+                <div class="stat-card">
+                    <i class="bi bi-trophy"></i>
+                    <span class="stat-value" x-text="status?.estatisticas?.conquistasDesbloqueadas || 0"></span>
+                    <span class="stat-label">Conquistas</span>
+                </div>
+            </div>
+            
+            <div class="shortcuts-section">
+                <button class="shortcut-btn" @click="$store.app.currentScreen = 'missoes'">
+                    <i class="bi bi-list-check"></i>
+                    <span>Missões</span>
+                </button>
+                <button class="shortcut-btn" @click="$store.app.currentScreen = 'estudos'">
+                    <i class="bi bi-book"></i>
+                    <span>Estudos</span>
+                </button>
+                <button class="shortcut-btn" @click="$store.app.currentScreen = 'conquistas'">
+                    <i class="bi bi-trophy"></i>
+                    <span>Conquistas</span>
+                </button>
+                <button class="shortcut-btn" @click="$store.app.currentScreen = 'loja'">
+                    <i class="bi bi-shop"></i>
+                    <span>Loja</span>
+                </button>
+                <button class="shortcut-btn" @click="$store.app.currentScreen = 'inventario'">
+                    <i class="bi bi-backpack"></i>
+                    <span>Inventário</span>
+                </button>
+                <button class="shortcut-btn" @click="$store.app.currentScreen = 'perfil'">
+                    <i class="bi bi-person"></i>
+                    <span>Perfil</span>
+                </button>
+                <button class="shortcut-btn" @click="$store.app.currentScreen = 'biblia'">
+                    <i class="bi bi-book"></i>
+                    <span>Bíblia</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Missões -->
+    <div id="missoes-screen" class="screen" x-data="missoesScreen()" x-show="$store.app.currentScreen === 'missoes'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Missões</h1>
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn" :class="{ active: filter === 'ativas' }" @click="filter = 'ativas'">Ativas</button>
+                <button class="filter-btn" :class="{ active: filter === 'concluidas' }" @click="filter = 'concluidas'">Concluídas</button>
+                <button class="filter-btn" :class="{ active: filter === 'falhadas' }" @click="filter = 'falhadas'">Falhadas</button>
+            </div>
+            
+            <div class="missoes-list">
+                <template x-for="missao in filteredMissoes" :key="missao.id">
+                    <div class="missao-card">
+                        <div class="missao-header">
+                            <h3 x-text="missao.titulo"></h3>
+                            <span class="missao-status" :class="'status-' + missao.status" x-text="missao.status"></span>
+                        </div>
+                        <p x-text="missao.descricao"></p>
+                        <div class="missao-recompensas">
+                            <span x-show="missao.recompensas?.xp"><i class="bi bi-star"></i> <span x-text="missao.recompensas.xp + ' XP'"></span></span>
+                            <span x-show="missao.recompensas?.moeda"><i class="bi bi-circle-fill"></i> <span x-text="missao.recompensas.moeda + ' moedas'"></span></span>
+                        </div>
+                        <button class="btn btn-primary btn-block" @click="missao.status === 'em_andamento' ? abrirModalEvidencia(missao) : iniciarMissao(missao)" :disabled="missao.status === 'concluida' || missao.status === 'falhada'">
+                            <span x-show="missao.status === 'ativa' || !missao.status">Iniciar</span>
+                            <span x-show="missao.status === 'em_andamento'">Registrar Evidência</span>
+                            <span x-show="missao.status === 'concluida'">Concluída</span>
+                            <span x-show="missao.status === 'falhada'">Falhada</span>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Visualizador de Bíblia -->
+    <div id="biblia-screen" class="screen" x-data="bibliaViewerScreen()" x-show="$store.app.currentScreen === 'biblia'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Bíblia</h1>
+            </div>
+            
+            <!-- Seleção de Livro e Capítulo -->
+            <div class="biblia-selector" x-show="!capituloCarregado">
+                <div class="testamento-selection">
+                    <div class="testamento-card" @click="selecionarTestamento('AT')">
+                        <i class="bi bi-book"></i>
+                        <h2>Antigo Testamento</h2>
+                    </div>
+                    <div class="testamento-card" @click="selecionarTestamento('NT')">
+                        <i class="bi bi-book-half"></i>
+                        <h2>Novo Testamento</h2>
+                    </div>
+                </div>
+                
+                <div class="livros-grid" x-show="testamentoSelecionado">
+                    <button class="btn-back" @click="testamentoSelecionado = null" x-show="testamentoSelecionado">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </button>
+                    <template x-for="livro in livrosFiltrados" :key="livro.nome">
+                        <div class="livro-card" @click="selecionarLivro(livro)">
+                            <h3 x-text="livro.nome"></h3>
+                        </div>
+                    </template>
+                </div>
+                
+                <div class="capitulos-selector" x-show="livroSelecionado && !capituloSelecionado">
+                    <button class="btn-back" @click="livroSelecionado = null">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </button>
+                    <h2 x-text="livroSelecionado?.nome"></h2>
+                    <div class="capitulos-grid">
+                        <template x-for="cap in Array(livroSelecionado?.capitulos || 1).fill(0).map((_, i) => i + 1)" :key="cap">
+                            <button class="capitulo-btn" @click="carregarCapitulo(cap)" x-text="cap"></button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualizador de Capítulo -->
+            <div class="biblia-reader" x-show="capituloCarregado">
+                <div class="reader-header">
+                    <button class="btn-back" @click="capituloCarregado = null; capituloSelecionado = null">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </button>
+                    <h2 x-text="capituloData?.livro + ' ' + capituloData?.capitulo"></h2>
+                    <button class="btn-icon" @click="toggleFavorito()">
+                        <i :class="isFavorito ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
+                    </button>
+                </div>
+                
+                <div class="versiculos-container">
+                    <template x-for="versiculo in capituloData?.versiculos || []" :key="versiculo.numero">
+                        <div class="versiculo-item" @click="selecionarVersiculo(versiculo)">
+                            <span class="versiculo-numero" x-text="versiculo.numero"></span>
+                            <span class="versiculo-texto" x-text="versiculo.texto"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Estudos -->
+    <div id="estudos-screen" class="screen" x-data="estudosScreen()" x-show="$store.app.currentScreen === 'estudos'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Estudos</h1>
+            </div>
+            
+            <!-- Seleção de Testamento -->
+            <div class="testamento-selection" x-show="!testamentoSelecionado && !livroSelecionado">
+                <div class="testamento-card" @click="selecionarTestamento('AT')">
+                    <i class="bi bi-book"></i>
+                    <h2>Antigo Testamento</h2>
+                    <p>39 livros</p>
+                </div>
+                <div class="testamento-card" @click="selecionarTestamento('NT')">
+                    <i class="bi bi-book-half"></i>
+                    <h2>Novo Testamento</h2>
+                    <p>27 livros</p>
+                </div>
+            </div>
+            
+            <!-- Seleção de Livro -->
+            <div class="livros-grid" x-show="testamentoSelecionado && !livroSelecionado">
+                <button class="btn-back" @click="testamentoSelecionado = null">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </button>
+                <h2 x-text="testamentoSelecionado === 'AT' ? 'Antigo Testamento' : 'Novo Testamento'"></h2>
+                <template x-for="livro in livrosFiltrados" :key="livro.nome">
+                    <div class="livro-card" @click="selecionarLivro(livro)">
+                        <h3 x-text="livro.nome"></h3>
+                        <div class="livro-progresso">
+                            <div class="progress-bar">
+                                <div class="progress-fill" :style="'width: ' + (livro.progresso || 0) + '%'"></div>
+                            </div>
+                            <span x-text="(livro.progresso || 0) + '%'"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <!-- Trilha de Capítulos -->
+            <div class="trilha-container" x-show="livroSelecionado">
+                <button class="btn-back" @click="livroSelecionado = null">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </button>
+                <h2 x-text="livroSelecionado?.nome"></h2>
+                <div class="trilha-capitulos">
+                    <template x-for="(cap, index) in Array(livroSelecionado?.capitulos || 1).fill(0).map((_, i) => i + 1)" :key="index">
+                        <div class="capitulo-bolha" 
+                             :class="{ 
+                                 'concluido': isCapituloConcluido(cap),
+                                 'atual': isCapituloAtual(cap),
+                                 'bloqueado': isCapituloBloqueado(cap)
+                             }"
+                             @click="iniciarCapitulo(cap)">
+                            <span x-text="cap"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            
+            <!-- Ciclo de Aprendizado -->
+            <div class="ciclo-container" x-show="capituloAtivo">
+                <button class="btn-back" @click="capituloAtivo = null">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </button>
+                <h2 x-text="'Capítulo ' + capituloAtivo + ' - ' + livroSelecionado?.nome"></h2>
+                
+                <div class="ciclo-progresso">
+                    <span x-text="'Ciclo ' + cicloAtual + ' de 4'"></span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" :style="'width: ' + (progressoCiclo || 0) + '%'"></div>
+                    </div>
+                </div>
+                
+                <!-- Ciclo 1: Leitura -->
+                <div x-show="cicloAtual === 1" class="ciclo-leitura">
+                    <div class="versiculo-container">
+                        <p class="versiculo-texto" x-text="versiculoAtual?.texto || 'Carregando versículo...'"></p>
+                        <p class="versiculo-referencia" x-text="versiculoAtual?.referencia || ''"></p>
+                    </div>
+                    <button class="btn btn-primary btn-block" @click="proximoVersiculo()">
+                        Próximo Versículo
+                    </button>
+                </div>
+                
+                <!-- Ciclo 2-3: Leitura + Quiz -->
+                <div x-show="cicloAtual === 2 || cicloAtual === 3" class="ciclo-quiz">
+                    <div class="versiculo-container">
+                        <p class="versiculo-texto" x-text="versiculoAtual?.texto || 'Carregando versículo...'"></p>
+                    </div>
+                    <div class="quiz-container">
+                        <h3>Mini-Quiz</h3>
+                        <p class="quiz-pergunta" x-text="perguntaAtual?.pergunta || 'Carregando pergunta...'"></p>
+                        <div class="quiz-opcoes">
+                            <template x-for="(opcao, index) in perguntaAtual?.opcoes || []" :key="index">
+                                <button class="quiz-opcao" 
+                                        :class="{ 'correta': respostaSelecionada === index && opcao.correta, 'errada': respostaSelecionada === index && !opcao.correta }"
+                                        @click="responderQuiz(index, opcao.correta)"
+                                        :disabled="respostaSelecionada !== null">
+                                    <span x-text="opcao.texto"></span>
+                                </button>
+                            </template>
+                        </div>
+                        <button class="btn btn-primary btn-block" @click="proximoCiclo()" x-show="respostaSelecionada !== null">
+                            Continuar
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Ciclo 4: Quiz Final -->
+                <div x-show="cicloAtual === 4" class="ciclo-quiz-final">
+                    <h3>Quiz Final do Capítulo</h3>
+                    <p class="quiz-progresso" x-text="'Pergunta ' + (perguntaIndex + 1) + ' de ' + perguntasFinais.length"></p>
+                    <p class="quiz-pergunta" x-text="perguntasFinais[perguntaIndex]?.pergunta || 'Carregando...'"></p>
+                    <div class="quiz-opcoes">
+                        <template x-for="(opcao, index) in perguntasFinais[perguntaIndex]?.opcoes || []" :key="index">
+                            <button class="quiz-opcao"
+                                    :class="{ 'correta': respostaSelecionada === index && opcao.correta, 'errada': respostaSelecionada === index && !opcao.correta }"
+                                    @click="responderQuizFinal(index, opcao.correta)"
+                                    :disabled="respostaSelecionada !== null">
+                                <span x-text="opcao.texto"></span>
+                            </button>
+                        </template>
+                    </div>
+                    <button class="btn btn-primary btn-block" @click="proximaPerguntaFinal()" x-show="respostaSelecionada !== null && perguntaIndex < perguntasFinais.length - 1">
+                        Próxima Pergunta
+                    </button>
+                    <button class="btn btn-primary btn-block" @click="finalizarQuiz()" x-show="respostaSelecionada !== null && perguntaIndex === perguntasFinais.length - 1">
+                        Finalizar Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Conquistas -->
+    <div id="conquistas-screen" class="screen" x-data="conquistasScreen()" x-show="$store.app.currentScreen === 'conquistas'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Conquistas</h1>
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn" :class="{ active: filter === 'todas' }" @click="filter = 'todas'">Todas</button>
+                <button class="filter-btn" :class="{ active: filter === 'desbloqueadas' }" @click="filter = 'desbloqueadas'">Desbloqueadas</button>
+                <button class="filter-btn" :class="{ active: filter === 'bloqueadas' }" @click="filter = 'bloqueadas'">Bloqueadas</button>
+            </div>
+            
+            <div class="conquistas-grid">
+                <template x-for="conquista in filteredConquistas" :key="conquista.id">
+                    <div class="conquista-card" :class="{ unlocked: conquista.unlocked }">
+                        <i :class="conquista.unlocked ? 'bi bi-trophy-fill' : 'bi bi-trophy'"></i>
+                        <h3 x-text="conquista.titulo"></h3>
+                        <p x-text="conquista.descricao"></p>
+                        <div class="conquista-recompensa" x-show="conquista.recompensa">
+                            <span x-show="conquista.recompensa.xp"><i class="bi bi-star"></i> <span x-text="conquista.recompensa.xp + ' XP'"></span></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Loja -->
+    <div id="loja-screen" class="screen" x-data="lojaScreen()" x-show="$store.app.currentScreen === 'loja'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Loja</h1>
+            </div>
+            
+            <div class="loja-items">
+                <template x-for="item in lojaItems" :key="item.id">
+                    <div class="loja-item-card">
+                        <img :src="getItemImage(item)" :alt="item.nome" class="item-image" @error="$el.src='assets/logotipos/notext-perfil-logo/perfil-colorido.png'">
+                        <h3 x-text="item.nome"></h3>
+                        <p x-text="item.descricao"></p>
+                        <div class="item-price">
+                            <i class="bi bi-circle-fill"></i>
+                            <span x-text="(item.preco?.moeda || item.preco || 0) + ' moedas'"></span>
+                        </div>
+                        <button class="btn btn-primary" @click="comprarItem(item)" :disabled="!podeComprar(item)">
+                            Comprar
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Inventário -->
+    <div id="inventario-screen" class="screen" x-data="inventarioScreen()" x-show="$store.app.currentScreen === 'inventario'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Inventário</h1>
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn" :class="{ active: filter === 'todos' }" @click="filter = 'todos'">Todos</button>
+                <button class="filter-btn" :class="{ active: filter === 'permanente' }" @click="filter = 'permanente'">Permanente</button>
+                <button class="filter-btn" :class="{ active: filter === 'consumivel' }" @click="filter = 'consumivel'">Consumível</button>
+                <button class="filter-btn" :class="{ active: filter === 'armadura' }" @click="filter = 'armadura'">Armadura</button>
+            </div>
+            
+            <div class="inventario-grid">
+                <template x-for="item in filteredInventario" :key="item.itemId">
+                    <div class="inventario-item-card">
+                        <img :src="getItemImage(item.itemId)" :alt="getItemName(item.itemId)" class="item-image">
+                        <h3 x-text="getItemName(item.itemId)"></h3>
+                        <span class="item-quantity" x-text="'x' + item.quantidade"></span>
+                        <button class="btn btn-primary" @click="usarItem(item)">Usar</button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Perfil -->
+    <div id="perfil-screen" class="screen" x-data="perfilScreen()" x-show="$store.app.currentScreen === 'perfil'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Perfil</h1>
+            </div>
+            
+            <div class="perfil-content">
+                <div class="perfil-avatar">
+                    <img :src="getAvatarUrl()" alt="Avatar" class="perfil-avatar-large">
+                    <button class="btn-edit-avatar" @click="abrirEditorAvatar()" title="Editar Avatar">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </div>
+                <h2 x-text="user?.nome || 'Usuário'"></h2>
+                <p x-text="user?.email"></p>
+                
+                <div class="perfil-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Nível</span>
+                        <span class="stat-value" x-text="status?.atributos?.nivel || 1"></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">XP</span>
+                        <span class="stat-value" x-text="status?.atributos?.xp || 0"></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Moedas</span>
+                        <span class="stat-value" x-text="status?.hudStatus?.moeda || 100"></span>
+                    </div>
+                </div>
+                
+                <button class="btn btn-secondary" @click="$store.app.currentScreen = 'configuracoes'">Configurações</button>
+                <button class="btn btn-danger" @click="handleLogout">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Evidência de Missão -->
+    <div id="modal-evidencia" class="modal-overlay" x-data="modalEvidencia()" x-show="mostrar" @click.self="fechar()" x-transition>
+        <div class="modal">
+            <div class="modal-header">
+                <h2 x-text="missaoSelecionada?.titulo || 'Registrar Evidência'"></h2>
+                <button class="modal-close" @click="fechar()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p x-text="missaoSelecionada?.descricao"></p>
+                
+                <div class="evidencia-tabs">
+                    <button class="tab-btn" :class="{ active: tipoEvidencia === 'texto' }" @click="tipoEvidencia = 'texto'">
+                        <i class="bi bi-text-paragraph"></i> Texto
+                    </button>
+                    <button class="tab-btn" :class="{ active: tipoEvidencia === 'imagem' }" @click="tipoEvidencia = 'imagem'">
+                        <i class="bi bi-image"></i> Imagem
+                    </button>
+                    <button class="tab-btn" :class="{ active: tipoEvidencia === 'audio' }" @click="tipoEvidencia = 'audio'">
+                        <i class="bi bi-mic"></i> Áudio
+                    </button>
+                </div>
+                
+                <div class="evidencia-content">
+                    <!-- Texto -->
+                    <div x-show="tipoEvidencia === 'texto'">
+                        <textarea x-model="evidenciaTexto" placeholder="Digite sua evidência (ex: versículo lido, reflexão, etc.)" class="form-textarea" rows="5"></textarea>
+                    </div>
+                    
+                    <!-- Imagem -->
+                    <div x-show="tipoEvidencia === 'imagem'">
+                        <input type="file" @change="handleImageUpload" accept="image/*" class="form-file">
+                        <div x-show="evidenciaImagem" class="preview-image">
+                            <img :src="evidenciaImagem" alt="Preview">
+                            <button @click="evidenciaImagem = null" class="btn btn-danger btn-sm">Remover</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Áudio -->
+                    <div x-show="tipoEvidencia === 'audio'">
+                        <div class="audio-recorder">
+                            <button class="btn btn-primary" @click="toggleGravacao()" x-text="gravando ? 'Parar Gravação' : 'Iniciar Gravação'">
+                                <i :class="gravando ? 'bi bi-stop-fill' : 'bi bi-mic-fill'"></i>
+                            </button>
+                            <audio x-show="evidenciaAudio" :src="evidenciaAudio" controls></audio>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" @click="fechar()">Cancelar</button>
+                    <button class="btn btn-primary" @click="submeterEvidencia()" :disabled="!podeSubmeter()">
+                        Submeter Evidência
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editor de Avatar -->
+    <div id="modal-avatar" class="modal-overlay" x-data="modalAvatarEditor()" x-show="mostrar" @click.self="fechar()" x-transition>
+        <div class="modal modal-large">
+            <div class="modal-header">
+                <h2>Editar Avatar</h2>
+                <button class="modal-close" @click="fechar()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="avatar-preview">
+                    <img :src="avatarUrlAtual" alt="Preview" class="avatar-preview-img">
+                </div>
+                
+                <div class="avatar-options">
+                    <h3>Gerar Novo Avatar</h3>
+                    <button class="btn btn-primary" @click="gerarNovoAvatar()">
+                        <i class="bi bi-shuffle"></i> Gerar Aleatório
+                    </button>
+                    
+                    <h3>Ou use um preset</h3>
+                    <div class="presets-grid">
+                        <template x-for="preset in presets" :key="preset.id">
+                            <div class="preset-card" @click="aplicarPreset(preset)" :class="{ active: presetSelecionado?.id === preset.id }">
+                                <img :src="getPresetUrl(preset)" alt="Preset">
+                                <span x-text="preset.nome"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" @click="fechar()">Cancelar</button>
+                    <button class="btn btn-primary" @click="salvarAvatar()">
+                        Salvar Avatar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Tutorial -->
+    <div id="tutorial-modal" class="modal-overlay tutorial-overlay" x-data="tutorialScreen()" x-show="mostrar" x-transition>
+        <div class="modal tutorial-modal">
+            <div class="tutorial-header">
+                <div class="tutorial-progress">
+                    <div class="tutorial-progress-bar">
+                        <div class="tutorial-progress-fill" :style="'width: ' + progresso + '%'"></div>
+                    </div>
+                    <span class="tutorial-progress-text" x-text="paginaAtual + ' / ' + totalPaginas"></span>
+                </div>
+                <button class="tutorial-skip" @click="pular()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            
+            <div class="tutorial-body">
+                <h2 class="tutorial-title" x-text="pagina.titulo"></h2>
+                <div class="tutorial-content" x-html="pagina.conteudo"></div>
+            </div>
+            
+            <div class="tutorial-footer">
+                <button class="btn btn-secondary" @click="paginaAnterior()" :disabled="paginaAtual === 1">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </button>
+                <button class="btn btn-primary" @click="proximaPagina()">
+                    <span x-show="paginaAtual < totalPaginas">Próximo</span>
+                    <span x-show="paginaAtual === totalPaginas">Finalizar</span>
+                    <i class="bi bi-arrow-right" x-show="paginaAtual < totalPaginas"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container" x-data="{ toasts: [] }" x-show="toasts.length > 0">
+        <template x-for="toast in toasts" :key="toast.id">
+            <div class="toast" :class="'toast-' + toast.type" x-text="toast.message"></div>
+        </template>
+    </div>
+
+    <!-- Navbar Fixa Inferior -->
+    <div id="navbar" class="navbar" x-data="{ activeTab: 'home' }" x-show="$store.app.currentScreen !== 'login' && $store.app.currentScreen !== 'register' && $store.app.currentScreen !== 'splash'" x-transition>
+        <button class="navbar-item" :class="{ active: activeTab === 'home' }" @click="activeTab = 'home'; $store.app.currentScreen = 'home'">
+            <i class="bi bi-house-door"></i>
+            <span>Início</span>
+        </button>
+        <button class="navbar-item" :class="{ active: activeTab === 'missoes' }" @click="activeTab = 'missoes'; $store.app.currentScreen = 'missoes'">
+            <i class="bi bi-list-check"></i>
+            <span>Missões</span>
+        </button>
+        <button class="navbar-item" :class="{ active: activeTab === 'inventario' }" @click="activeTab = 'inventario'; $store.app.currentScreen = 'inventario'">
+            <i class="bi bi-backpack"></i>
+            <span>Inventário</span>
+        </button>
+        <button class="navbar-item" :class="{ active: activeTab === 'estudos' }" @click="activeTab = 'estudos'; $store.app.currentScreen = 'estudos'">
+            <i class="bi bi-book"></i>
+            <span>Estudos</span>
+        </button>
+        <button class="navbar-item" :class="{ active: activeTab === 'conquistas' }" @click="activeTab = 'conquistas'; $store.app.currentScreen = 'conquistas'">
+            <i class="bi bi-trophy"></i>
+            <span>Conquistas</span>
+        </button>
+        <button class="navbar-item" @click="$dispatch('open-drawer')">
+            <i class="bi bi-list"></i>
+            <span>Mais</span>
+        </button>
+    </div>
+
+    <!-- Drawer (Menu Lateral) -->
+    <div id="drawer-overlay" class="drawer-overlay" x-data="{ open: false }" x-show="open" @click="open = false" @open-drawer.window="open = true" x-transition></div>
+    <div id="drawer" class="drawer" x-data="{ open: false }" :class="{ 'drawer-open': open }" @open-drawer.window="open = true" x-transition>
+        <div class="drawer-header">
+            <h2>Menu</h2>
+            <button @click="open = false" class="drawer-close">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="drawer-content">
+            <a href="#" class="drawer-item" @click.prevent="open = false; $store.app.currentScreen = 'perfil'">
+                <i class="bi bi-person"></i>
+                <span>Perfil</span>
+            </a>
+            <a href="#" class="drawer-item" @click.prevent="open = false; $store.app.currentScreen = 'ranking'">
+                <i class="bi bi-trophy"></i>
+                <span>Ranking</span>
+            </a>
+            <a href="#" class="drawer-item" @click.prevent="open = false; $store.app.currentScreen = 'loja'">
+                <i class="bi bi-shop"></i>
+                <span>Loja</span>
+            </a>
+            <a href="#" class="drawer-item" @click.prevent="open = false; $store.app.currentScreen = 'configuracoes'">
+                <i class="bi bi-gear"></i>
+                <span>Configurações</span>
+            </a>
+            <a href="#" class="drawer-item drawer-item-danger" @click.prevent="open = false; handleLogout()">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Tela de Configurações -->
+    <div id="configuracoes-screen" class="screen" x-data="configuracoesScreen()" x-show="$store.app.currentScreen === 'configuracoes'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Configurações</h1>
+            </div>
+            
+            <div class="config-section">
+                <h3>Notificações</h3>
+                <div class="config-item">
+                    <span>Notificações Push</span>
+                    <label class="switch">
+                        <input type="checkbox" x-model="config.notificacoes.push" @change="salvarConfig()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <h3>Áudio</h3>
+                <div class="config-item">
+                    <span>Sons do Jogo</span>
+                    <label class="switch">
+                        <input type="checkbox" x-model="config.som" @change="salvarConfig()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <h3>Ações Rápidas</h3>
+                <button class="btn btn-primary btn-block" @click="executarConfissao()">
+                    <i class="bi bi-heart"></i>
+                    <span>Confissão/Arrependimento</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Sobre -->
+    <div id="sobre-screen" class="screen" x-data="sobreScreen()" x-show="$store.app.currentScreen === 'sobre'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Sobre</h1>
+            </div>
+            
+            <div class="sobre-content">
+                <img src="assets/logotipos/logo/logo.svg" alt="Logo" class="sobre-logo">
+                <h2 x-text="about?.appName || 'Bíblia GamePray'"></h2>
+                <p class="sobre-version" x-text="'Versão ' + (about?.versao || '1.0.0')"></p>
+                <p class="sobre-descricao" x-text="about?.descricaoCurta || 'PWA gamificada para estudo bíblico e prática espiritual.'"></p>
+                
+                <div class="sobre-section">
+                    <h3>Contato</h3>
+                    <p x-text="about?.contato?.email || 'contato@gamepray.com'"></p>
+                </div>
+                
+                <div class="sobre-links">
+                    <a href="#" @click.prevent="$store.app.currentScreen = 'termos'" class="sobre-link">
+                        <i class="bi bi-file-text"></i>
+                        <span>Termos de Uso</span>
+                    </a>
+                    <a href="#" @click.prevent="$store.app.currentScreen = 'politica'" class="sobre-link">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Política de Privacidade</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Termos -->
+    <div id="termos-screen" class="screen" x-data="termosScreen()" x-show="$store.app.currentScreen === 'termos'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'sobre'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Termos de Uso</h1>
+            </div>
+            
+            <div class="termos-content">
+                <div class="termos-section">
+                    <h3>1. Aceitação dos Termos</h3>
+                    <p>Ao usar o Bíblia GamePray, você concorda com estes termos de uso.</p>
+                </div>
+                
+                <div class="termos-section">
+                    <h3>2. Uso do Aplicativo</h3>
+                    <p>O aplicativo é destinado a fins educacionais e de crescimento espiritual. Use com responsabilidade.</p>
+                </div>
+                
+                <div class="termos-section">
+                    <h3>3. Privacidade</h3>
+                    <p>Seus dados são protegidos conforme nossa <a href="#" @click.prevent="$store.app.currentScreen = 'politica'">Política de Privacidade</a>.</p>
+                </div>
+                
+                <div class="termos-section">
+                    <h3>4. Propriedade Intelectual</h3>
+                    <p>Todo o conteúdo do aplicativo é protegido por direitos autorais.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Política de Privacidade -->
+    <div id="politica-screen" class="screen" x-data="politicaScreen()" x-show="$store.app.currentScreen === 'politica'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'sobre'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Política de Privacidade</h1>
+            </div>
+            
+            <div class="politica-content">
+                <div class="politica-section">
+                    <h3>Coleta e Uso de Dados</h3>
+                    <p>O Bíblia GamePray coleta dados pessoais para garantir uma experiência segura e personalizada, conforme a LGPD.</p>
+                </div>
+                
+                <div class="politica-section">
+                    <h3>Quais dados coletamos?</h3>
+                    <ul>
+                        <li>Nome de usuário e e-mail</li>
+                        <li>Dados de perfil (avatar, conquistas, progresso)</li>
+                        <li>Estatísticas de jogo (nível, moedas, atributos espirituais)</li>
+                    </ul>
+                </div>
+                
+                <div class="politica-section">
+                    <h3>Direitos do Usuário</h3>
+                    <p>Você pode solicitar acesso, correção ou exclusão de seus dados a qualquer momento.</p>
+                </div>
+                
+                <div class="politica-section">
+                    <h3>Segurança</h3>
+                    <p>Utilizamos criptografia e boas práticas para proteger seus dados.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Ações Devocionais -->
+    <div id="acoes-screen" class="screen" x-data="acoesScreen()" x-show="$store.app.currentScreen === 'acoes'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Ações Devocionais</h1>
+            </div>
+            
+            <div class="acoes-filters">
+                <button class="filter-btn" :class="{ active: filter === 'todas' }" @click="filter = 'todas'">Todas</button>
+                <button class="filter-btn" :class="{ active: filter === 'oracao' }" @click="filter = 'oracao'">Oração</button>
+                <button class="filter-btn" :class="{ active: filter === 'meditacao' }" @click="filter = 'meditacao'">Meditação</button>
+                <button class="filter-btn" :class="{ active: filter === 'leitura' }" @click="filter = 'leitura'">Leitura</button>
+            </div>
+            
+            <div class="acoes-list">
+                <template x-for="acao in filteredAcoes" :key="acao.id">
+                    <div class="acao-card">
+                        <div class="acao-header">
+                            <i :class="acao.icone || 'bi bi-heart'"></i>
+                            <h3 x-text="acao.titulo"></h3>
+                        </div>
+                        <p x-text="acao.descricao"></p>
+                        <div class="acao-info">
+                            <span x-show="acao.configuracoes?.tempoSugerido">
+                                <i class="bi bi-clock"></i>
+                                <span x-text="acao.configuracoes.tempoSugerido + ' min'"></span>
+                            </span>
+                            <span x-show="acao.configuracoes?.tempoRecargaMinutos">
+                                <i class="bi bi-arrow-repeat"></i>
+                                <span x-text="'Recarga: ' + acao.configuracoes.tempoRecargaMinutos + ' min'"></span>
+                            </span>
+                        </div>
+                        <button class="btn btn-primary btn-block" @click="executarAcao(acao)" :disabled="!podeExecutar(acao)">
+                            Executar Ação
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Ofensiva Diária -->
+    <div id="ofensiva-screen" class="screen" x-data="ofensivaScreen()" x-show="$store.app.currentScreen === 'ofensiva'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Ofensiva Diária</h1>
+            </div>
+            
+            <div class="ofensiva-content">
+                <div class="ofensiva-mascote">
+                    <i class="bi bi-dove"></i>
+                    <p class="ofensiva-mensagem" x-text="mensagemMotivacional"></p>
+                </div>
+                
+                <div class="ofensiva-dia">
+                    <div class="ofensiva-dia-numero" x-text="diasConsecutivos"></div>
+                    <p class="ofensiva-dia-texto">dia de ofensiva</p>
+                </div>
+                
+                <div class="ofensiva-semana">
+                    <template x-for="(dia, index) in diasSemana" :key="index">
+                        <div class="ofensiva-dia-semana" :class="{ 'ativo': dia.ativo, 'futuro': dia.futuro }">
+                            <span class="dia-nome" x-text="dia.nome"></span>
+                            <i class="bi bi-check-circle-fill" x-show="dia.ativo"></i>
+                        </div>
+                    </template>
+                </div>
+                
+                <div class="ofensiva-recompensas">
+                    <h3>Recompensas Diárias</h3>
+                    <div class="recompensas-grid">
+                        <template x-for="(recompensa, index) in recompensasDiarias" :key="index">
+                            <div class="recompensa-card" :class="{ 'disponivel': recompensa.disponivel, 'coletada': recompensa.coletada }">
+                                <i :class="recompensa.icone"></i>
+                                <span x-text="recompensa.nome"></span>
+                                <button class="btn btn-sm" @click="coletarRecompensa(recompensa)" :disabled="!recompensa.disponivel || recompensa.coletada">
+                                    <span x-show="!recompensa.coletada">Coletar</span>
+                                    <span x-show="recompensa.coletada">Coletado</span>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                
+                <div class="ofensiva-acoes">
+                    <button class="btn btn-primary btn-block" @click="definirLembrete()">
+                        <i class="bi bi-bell"></i>
+                        Me lembre amanhã
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Ranking -->
+    <div id="ranking-screen" class="screen" x-data="rankingScreen()" x-show="$store.app.currentScreen === 'ranking'" x-transition>
+        <div class="container">
+            <div class="screen-header">
+                <button class="btn-back" @click="$store.app.currentScreen = 'home'">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <h1>Ranking</h1>
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn" :class="{ active: filter === 'geral' }" @click="filter = 'geral'">Geral</button>
+                <button class="filter-btn" :class="{ active: filter === 'amigos' }" @click="filter = 'amigos'">Amigos</button>
+            </div>
+            
+            <div class="ranking-list">
+                <template x-for="(jogador, index) in ranking" :key="jogador.id">
+                    <div class="ranking-item" :class="{ 'top-3': index < 3 }">
+                        <div class="ranking-position" x-text="index + 1"></div>
+                        <img :src="getAvatarUrl(jogador)" alt="Avatar" class="ranking-avatar">
+                        <div class="ranking-info">
+                            <h3 x-text="jogador.nome"></h3>
+                            <span class="ranking-score" x-text="jogador.pontuacao + ' pontos'"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/globais.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/screens.js"></script>
+    <script src="js/integrations.js"></script>
+    <script src="js/game-systems.js"></script>
+    <script src="js/missoes-system.js"></script>
+    <script src="js/missoes-modal.js"></script>
+    <script src="js/estudos-system.js"></script>
+    <script src="js/conquistas-system.js"></script>
+    <script src="js/splash-screen.js"></script>
+    <script src="js/biblia-viewer.js"></script>
+    <script src="js/biblia-viewer-screen.js"></script>
+    <script src="js/avatar-editor.js"></script>
+    <script src="js/tutorial-system.js"></script>
+    <script src="js/tutorial-screen.js"></script>
+    <script src="js/sync-queue.js"></script>
+    <script src="js/sync-handler.js"></script>
+    <script src="js/queue-ui.js"></script>
+    
+    <!-- Verificar se ConquistasSystem está disponível antes de usar -->
+    <script>
+        if (typeof ConquistasSystem === 'undefined') {
+            window.ConquistasSystem = {
+                verificarConquistas: async () => {},
+                verificarCriterio: () => false
+            };
+        }
+    </script>
+        <script>
+            // Receber mensagens do Service Worker para processar fila de sincronização
+            if (navigator.serviceWorker && navigator.serviceWorker.addEventListener) {
+                navigator.serviceWorker.addEventListener('message', (event) => {
+                    try {
+                        const data = event.data;
+                        if (data && data.type === 'process-queue' && window.SyncQueue && typeof window.SyncQueue.processQueue === 'function') {
+                            window.SyncQueue.processQueue();
+                        }
+                    } catch (e) {
+                        console.error('Erro ao processar mensagem do service worker', e);
+                    }
+                });
+            }
+        </script>
+    
+    <script>
+        // Inicialização do app
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Registrar service worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registrado'))
+                    .catch(err => console.error('Erro ao registrar Service Worker:', err));
+            }
+            
+            // Verificar se usuário está logado
+            const currentUser = DataManager.getCurrentUser();
+            if (currentUser) {
+                Alpine.store('app').currentScreen = 'home';
+                await Alpine.store('app').loadUserData(currentUser);
+                
+                // Inicializar sistemas automáticos
+                await inicializarSistemasAutomáticos(currentUser.id);
+            } else {
+                Alpine.store('app').currentScreen = 'splash';
+            }
+        });
+        
+        // Sistemas automáticos (regeneração, atualizações)
+        async function inicializarSistemasAutomáticos(userId) {
+            // Regenerar corações
+            await GameSystems.regenerarCoracoes(userId);
+            
+            // Atualizar Espírito Santo
+            await GameSystems.atualizarEspiritoSanto(userId);
+            
+            // Verificar conquistas
+            await ConquistasSystem.verificarConquistas(userId);
+            
+            // Resetar missões diárias (se necessário)
+            await MissoesSystem.resetarMissoesDiarias();
+            
+            // Atualizar status no store
+            const status = await DataManager.getUserStatus(userId);
+            Alpine.store('app').statusData = status;
+            
+            // Verificar conquistas periodicamente
+            setInterval(async () => {
+                const user = Alpine.store('app').currentUser;
+                if (user) {
+                    await ConquistasSystem.verificarConquistas(user.id);
+                }
+            }, 60000); // A cada minuto
+            
+            // Regenerar corações periodicamente
+            setInterval(async () => {
+                const user = Alpine.store('app').currentUser;
+                if (user) {
+                    await GameSystems.regenerarCoracoes(user.id);
+                    const status = await DataManager.getUserStatus(user.id);
+                    Alpine.store('app').statusData = status;
+                }
+            }, 60000); // A cada minuto
+            
+            // Atualizar Espírito Santo periodicamente
+            setInterval(async () => {
+                const user = Alpine.store('app').currentUser;
+                if (user) {
+                    await GameSystems.atualizarEspiritoSanto(user.id);
+                    const status = await DataManager.getUserStatus(user.id);
+                    Alpine.store('app').statusData = status;
+                }
+            }, 3600000); // A cada hora
+        }
+    </script>
+</body>
+</html>
+

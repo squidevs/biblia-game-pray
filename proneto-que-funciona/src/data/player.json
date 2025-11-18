@@ -1,0 +1,80 @@
+{
+  "id": "matheus_bonotto",
+  "name": "Matheus Bonotto",
+  "avatar": "espírito_santo.jpg",
+  "spiritLevel": 1,
+  "wisdom": 20,
+  "sin": 1,
+  "status": "Casado(a)",
+  "streak": 1,
+  "lastActivity": "2025-11-10T08:30:00Z",
+  "armorPieces": {
+    "beltOfTruth": {
+      "equipped": true,
+      "integrity": 85,
+      "level": 2
+    },
+    "breastplateOfRighteousness": {
+      "equipped": true,
+      "integrity": 92,
+      "level": 3
+    },
+    "sandalsOfPeace": {
+      "equipped": false,
+      "integrity": 0,
+      "level": 0
+    },
+    "shieldOfFaith": {
+      "equipped": true,
+      "integrity": 78,
+      "level": 2
+    },
+    "helmetOfSalvation": {
+      "equipped": true,
+      "integrity": 95,
+      "level": 3
+    },
+    "swordOfSpirit": {
+      "equipped": false,
+      "integrity": 0,
+      "level": 0
+    },
+    "cloakOfWisdom": {
+      "equipped": true,
+      "integrity": 65,
+      "level": 1
+    }
+  },
+  "completedMissions": [
+    "nao_mentir_001",
+    "estudar_biblia_001"
+  ],
+  "activeMissions": [
+    "nao_fofocar_001",
+    "declarar_amor_001"
+  ],
+  "achievements": [
+    "genesis_inicio_jornada",
+    "salmos_louvor_constante"
+  ],
+  "inventory": {
+    "biblia_sagrada": 1,
+    "oleo_uncao": 4,
+    "agua_vida": 1,
+    "corpo_cristo": 2
+  },
+  "settings": {
+    "notifications": true,
+    "theme": "light",
+    "bibleVersion": "NVI",
+    "coupleMode": false
+  },
+  "stats": {
+    "totalPrayers": 45,
+    "totalConfessions": 8,
+    "totalMissionsCompleted": 23,
+    "totalWisdomEarned": 1250,
+    "longestStreak": 12,
+    "daysActive": 28
+  }
+}
