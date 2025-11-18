@@ -162,7 +162,7 @@ Essas descrições podem ser usadas para tooltips, regras de balanceamento e int
 | Logotipo                               500⛃ 5❤|
 │ [Avatar]                                        │
 │ Matheus Bonotto   [Espírito Santo 100%]         │
-│ Discípulo  Nv1    [Fé             100%]         │
+│ Discípulo  Nv1    [éF             100%]         │
 │                                                 │
 │ PERMANENTE                      CONSUMÍVEIS     |
 |   ♾︎   ♾︎                          ➎             |

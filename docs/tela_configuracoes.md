@@ -48,6 +48,8 @@
 ## Exemplo de Hierarquia Visual
 
 ```
+
+_Tecnologias e Notas: Alpine.js(CDN), PWA, Web Speech API (TTS), Avataaars/DiceBear, EmailJS, Web Push, IndexedDB. Atualizado em 2025-11-18._
 --------------------------------------
 | < Voltar |    Configurações        |
 --------------------------------------

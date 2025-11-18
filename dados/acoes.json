@@ -1,4 +1,10 @@
 {
+  "_meta": {
+    "updatedAt": "2025-11-18T00:00:00Z",
+    "updatedBy": "assistant",
+    "technologies": ["PWA","Alpine.js (CDN)","Web Speech API (TTS)","Avataaars/DiceBear","EmailJS","Web Push","IndexedDB"],
+    "note": "Dados protótipo locais em /dados/. Migração para Supabase documentada em docs/BIBLIA_GAMEPRAY_SPEC.md"
+  },
   "acoes": [
     {
       "id": "acao-orar-pai-nosso",

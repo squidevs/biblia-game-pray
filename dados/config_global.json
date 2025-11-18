@@ -1,4 +1,10 @@
 {
+  "_meta": {
+    "updatedAt": "2025-11-18T00:00:00Z",
+    "updatedBy": "assistant",
+    "technologies": ["PWA","Alpine.js (CDN)","Web Speech API (TTS)","Avataaars/DiceBear","EmailJS","Web Push","IndexedDB"],
+    "note": "Config global: flags para PWA e migração para Supabase documentadas em docs/BIBLIA_GAMEPRAY_SPEC.md"
+  },
   "config_global": {
     "versao": "0.1.0",
     "ambiente": "dev",

@@ -1,4 +1,10 @@
 {
+  "_meta": {
+    "updatedAt": "2025-11-18T00:00:00Z",
+    "updatedBy": "assistant",
+    "technologies": ["PWA","Alpine.js (CDN)","Web Speech API (TTS)","Avataaars/DiceBear","EmailJS","Web Push","IndexedDB"],
+    "note": "Seeds/avatares: salvar sid para reprodutibilidade; ver docs/TECNOLOGIAS.md"
+  },
   "avatarConfigs": {
     "service": "dicebear",
     "version": "1",
