@@ -1,0 +1,100 @@
+@media (max-width: 1023px) {
+  .app-body {
+    padding: var(--space-3);
+  }
+
+  .app-shell {
+    border-radius: var(--radius-md);
+  }
+
+  .app-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .app-header__actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app-main {
+    padding: var(--space-4);
+  }
+
+  .screen__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-navbar {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: var(--space-2);
+  }
+
+  .drawer__panel {
+    width: min(360px, 85vw);
+  }
+
+  .hud__primary {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hud__resources {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .hud__slots {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hud__expanded {
+    grid-template-columns: 1fr;
+  }
+
+  .missions__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .missions__filters {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mission-card__actions {
+    flex-direction: column;
+  }
+
+  .inventory-card__actions,
+  .shop-card__actions {
+    flex-direction: column;
+  }
+
+  .perfil__hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .perfil__settings-list {
+    grid-template-columns: 1fr;
+  }
+
+  .config {
+    grid-template-columns: 1fr;
+  }
+
+  .achievements__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ranking-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .app-footer {
+    font-size: 0.8rem;
+  }
+}
+

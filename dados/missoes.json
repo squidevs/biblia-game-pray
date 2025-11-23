@@ -1,235 +1,165 @@
 {
   "missoes": [
     {
-      "id": 1,
-      "tipo": "diaria",
-      "titulo": "Oração Matinal - Pai Nosso",
-      "descricao": "Realizar a oração do Pai Nosso ao começar o dia. Incentivar foco e intenção ao orar.",
+      "id": "m001",
+      "titulo": "Oração Matinal",
+      "descricao": "Dedique 5 minutos para oração pela manhã",
+      "tipo": "devocional",
       "categoria": "oracao",
-  "idAcao": "acao-orar-pai-nosso",
-      "requisitos": { "nivel": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 10,
-        "itens": [],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "alegria": 1, "paz": 1 }
+      "duracao": "5min",
+      "xp": 50,
+      "moedas": 10,
+      "status": "disponivel",
+      "requisitos": {
+        "nivel_minimo": 1,
+        "obras_max": 74
       },
-      "repeticao": { "frequencia": "diaria", "horaSugerida": "manha" },
-      "evidenciaObrigatoria": false,
-      "evidenciasAceitas": [],
-      "status": "ativa",
-      "observacoes": "Missão básica de introdução. Requer possuir a 'Bíblia Sagrada' equipada/na mochila para habilitar estudos relacionados."
+      "icone": "self_improvement"
     },
-
-      {
-        "id": 100,
-        "tipo": "especial",
-        "titulo": "Missão de Reconciliação",
-        "descricao": "Reconcilie-se com outro jogador para reduzir inimizade/ódio.",
-        "categoria": "social",
-        "idAcao": null,
-        "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
-        "recompensas": {
-          "xp": 30,
-          "itens": [],
-          "moeda": 0,
-          "conquistaId": null,
-          "atributos": { "amor": 5, "inimizadeOdio": -10 }
-        },
-        "repeticao": { "frequencia": "pontual" },
-        "evidenciaObrigatoria": false,
-        "evidenciasAceitas": ["texto"],
-        "status": "ativa",
-        "observacoes": "Reduz status negativo e aumenta positivo conforme faixas definidas."
-      },
-
     {
-      "id": 2,
-      "tipo": "diaria",
-      "titulo": "Leitura Bíblica - 1 Capítulo",
-      "descricao": "Ler um capítulo da Bíblia e marcar o versículo favorito.",
+      "id": "m002",
+      "titulo": "Leitura Diária",
+      "descricao": "Leia 1 capítulo da Bíblia",
+      "tipo": "devocional",
       "categoria": "estudo",
-      "idAcao": null,
-      "requisitos": { "nivel": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 15,
-        "itens": [158],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "sabedoria": 1, "bondade": 1 }
+      "duracao": "10min",
+      "xp": 100,
+      "moedas": 20,
+      "status": "disponivel",
+      "requisitos": {
+        "nivel_minimo": 1,
+        "obras_max": 74
       },
-      "repeticao": { "frequencia": "diaria", "horaSugerida": "a escolher" },
-      "evidenciaObrigatoria": false,
-      "evidenciasAceitas": ["versiculoFavorito"],
-      "status": "ativa",
-      "observacoes": "Necessita ter a 'Bíblia Sagrada' (item id 1) no inventário para desbloquear conteúdos extra."
+      "icone": "menu_book"
     },
-
     {
-      "id": 3,
-      "tipo": "diaria",
-      "titulo": "Momento de Gratidão",
-      "descricao": "Registrar no caderno devocional algo pelo qual é grato hoje.",
-      "categoria": "devocional",
-      "idAcao": null,
-      "requisitos": { "nivel": 1, "itensRequeridos": [7], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 8,
-        "itens": [],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "alegria": 1, "mansidao": 1 }
+      "id": "m003",
+      "titulo": "Compartilhar Versículo",
+      "descricao": "Compartilhe um versículo com alguém hoje",
+      "tipo": "social",
+      "categoria": "compartilhamento",
+      "duracao": "5min",
+      "xp": 75,
+      "moedas": 15,
+      "status": "disponivel",
+      "requisitos": {
+        "nivel_minimo": 2,
+        "obras_max": 74
       },
-      "repeticao": { "frequencia": "diaria" },
-      "evidenciaObrigatoria": false,
-      "evidenciasAceitas": ["texto"],
-      "status": "ativa",
-      "observacoes": "Uso simples para incentivar consistência e journaling."
+      "icone": "share"
     },
-
     {
-      "id": 10,
-      "tipo": "semanal",
-      "titulo": "Visita Solidária",
-      "descricao": "Visitar alguém que precisa de companhia (enfermo, idoso) e registrar evidência fotográfica ou relato.",
-      "categoria": "servico",
-      "idAcao": null,
-      "requisitos": { "nivel": 2, "itensRequeridos": [157], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 120,
-        "itens": [157],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "bondade": 2, "ambicaoEgoista": -1 }
+      "id": "m004",
+      "titulo": "Ajudar Alguém",
+      "descricao": "Pratique um ato de bondade hoje",
+      "tipo": "servico",
+      "categoria": "bondade",
+      "duracao": "30min",
+      "xp": 150,
+      "moedas": 30,
+      "status": "disponivel",
+      "requisitos": {
+        "nivel_minimo": 3,
+        "obras_max": 74
       },
-      "repeticao": { "frequencia": "semanal" },
-      "evidenciaObrigatoria": true,
-      "evidenciasAceitas": ["foto", "audio", "video", "relato"],
-      "status": "ativa",
-      "observacoes": "Missão social que incentiva serviço. Pode pedir validação humana se configurado."
+      "icone": "volunteer_activism"
     },
-
     {
-      "id": 11,
-      "tipo": "semanal",
-      "titulo": "Culto em Comunidade",
-      "descricao": "Participar do culto da igreja e registrar presença (evidência opcional).",
-      "categoria": "social",
-      "idAcao": null,
-      "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 80,
-        "itens": [],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "alegria": 2, "inimizadeOdio": -1 }
+      "id": "m005",
+      "titulo": "Jejum de Mídias",
+      "descricao": "Fique 1 hora sem redes sociais e entretenimento digital",
+      "tipo": "disciplina",
+      "categoria": "abstinencia",
+      "duracao": "1h",
+      "xp": 120,
+      "moedas": 25,
+      "status": "disponivel",
+      "requisitos": {
+        "nivel_minimo": 5,
+        "obras_max": 74
       },
-      "repeticao": { "frequencia": "semanal" },
-      "evidenciaObrigatoria": false,
-      "evidenciasAceitas": ["checkin", "foto"],
-      "status": "ativa",
-      "observacoes": "Permite missões compartilhadas por líderes de célula."
+      "icone": "phonelink_off"
     },
-
     {
-      "id": 20,
-      "tipo": "mensal",
-      "titulo": "Jejum Mensal (12h)",
-      "descricao": "Jejuar por 12 horas como prática de consagração e oração.",
-      "categoria": "jejum",
-      "idAcao": null,
-      "requisitos": { "nivel": 3, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 300,
-        "itens": [],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "dominioProprio": 2, "orgiasBebedices": -2 }
+      "id": "m006",
+      "titulo": "Memorizar Versículo",
+      "descricao": "Memorize um versículo do dia",
+      "tipo": "devocional",
+      "categoria": "memorizacao",
+      "duracao": "15min",
+      "xp": 200,
+      "moedas": 40,
+      "status": "disponivel",
+      "requisitos": {
+        "nivel_minimo": 4,
+        "obras_max": 74
       },
-      "repeticao": { "frequencia": "mensal" },
-      "evidenciaObrigatoria": false,
-      "evidenciasAceitas": [],
-      "status": "ativa",
-      "observacoes": "Missão de disciplina espiritual. Pode combinar com estudos específicos."
+      "icone": "psychology"
     },
-
     {
-      "id": 21,
-      "tipo": "mensal",
-      "titulo": "Ação Comunitária - Mutirão",
-      "descricao": "Organizar ou participar de uma ação comunitária (limpeza, doação, reformas). Requer evidência.",
-      "categoria": "servico",
-      "idAcao": null,
-      "requisitos": { "nivel": 4, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 500,
-        "itens": [],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "bondade": 3, "alegria": 2, "ambicaoEgoista": -2 }
+      "id": "m007",
+      "titulo": "Gratidão",
+      "descricao": "Liste 3 motivos de gratidão hoje",
+      "tipo": "reflexao",
+      "categoria": "gratidao",
+      "duracao": "5min",
+      "xp": 60,
+      "moedas": 12,
+      "status": "disponivel",
+      "requisitos": {
+        "nivel_minimo": 1,
+        "obras_max": 89
       },
-      "repeticao": { "frequencia": "mensal" },
-      "evidenciaObrigatoria": true,
-      "evidenciasAceitas": ["foto", "video", "relato"],
-      "status": "ativa",
-      "observacoes": "Missão de maior impacto social; ideal para missões compartilhadas."
+      "icone": "favorite"
     },
-
     {
-      "id": 30,
-      "tipo": "compartilhada",
-      "titulo": "Projeto Discipulado - Pequeno Grupo",
-      "descricao": "Criar/participar de um pequeno grupo de discipulado com 3 membros (mínimo 2) e completar 4 encontros no mês.",
-      "categoria": "discipulado",
-      "idAcao": null,
-      "requisitos": { "nivel": 5, "itensRequeridos": [147], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 200,
-        "itens": [125],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "fidelidade": 2, "dissensaoFaccao": -1 }
+      "id": "m008",
+      "titulo": "Culto em Família",
+      "descricao": "Reúna sua família para um momento de devoção",
+      "tipo": "social",
+      "categoria": "familia",
+      "duracao": "30min",
+      "xp": 250,
+      "moedas": 50,
+      "status": "bloqueado",
+      "requisitos": {
+        "nivel_minimo": 10,
+        "obras_max": 49
       },
-      "repeticao": { "frequencia": "mensal" },
-      "evidenciaObrigatoria": true,
-      "evidenciasAceitas": ["atas", "foto", "checkin"],
-      "status": "ativa",
-      "shared": {
-        "criadorId": null,
-        "membros": [],
-        "maxMembros": 3,
-        "regraConclusao": "todos"  
-      },
-      "observacoes": "Missão projetada para colaboração e responsabilidade mútua. Pode usar itens sociais para buff no grupo."
+      "icone": "family_restroom"
     },
-
     {
-      "id": 31,
-      "tipo": "compartilhada",
-      "titulo": "Missão de Oração em Rede",
-      "descricao": "Convidar até 3 irmãos para orar juntos por um objetivo e testemunhar resultados.",
-      "categoria": "social",
-      "idAcao": null,
-      "requisitos": { "nivel": 1, "itensRequeridos": [], "conquistasRequeridas": [] },
-      "recompensas": {
-        "xp": 50,
-        "itens": [125],
-        "moeda": 0,
-        "conquistaId": null,
-        "atributos": { "mansidao": 1, "orgulhoEgoismo": -1 }
+      "id": "m009",
+      "titulo": "Doar a quem precisa",
+      "descricao": "Doe roupas, alimentos ou recursos a quem precisa",
+      "tipo": "servico",
+      "categoria": "doacao",
+      "duracao": "1h",
+      "xp": 300,
+      "moedas": 60,
+      "status": "bloqueado",
+      "requisitos": {
+        "nivel_minimo": 15,
+        "obras_max": 49
       },
-      "repeticao": { "frequencia": "pontual" },
-      "evidenciaObrigatoria": false,
-      "evidenciasAceitas": ["audio", "relato"],
-      "status": "ativa",
-      "shared": {
-        "criadorId": null,
-        "membros": [],
-        "maxMembros": 3,
-        "regraConclusao": "um"  
+      "icone": "volunteer_activism"
+    },
+    {
+      "id": "m010",
+      "titulo": "Confissão e Arrependimento",
+      "descricao": "Reflita sobre suas ações e arrependa-se sinceramente",
+      "tipo": "reflexao",
+      "categoria": "arrependimento",
+      "duracao": "15min",
+      "xp": 100,
+      "moedas": 0,
+      "efeito": "reduce_obras_carne",
+      "status": "sempre_disponivel",
+      "requisitos": {
+        "nivel_minimo": 1,
+        "obras_max": 100
       },
-      "observacoes": "Bom para iniciantes. Uso de itens sociais pode dar bônus coletivos."
+      "icone": "church"
     }
   ]
 }

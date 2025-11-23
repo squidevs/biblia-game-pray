@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="description" content="Bíblia GamePray - PWA gamificado" />
+    <meta name="theme-color" content="#D4AF37" />
+    <meta name="color-scheme" content="light dark" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Bíblia GamePray</title>
+
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="assets/logotipos/notext-perfil-logo/favicon.svg"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="assets/logotipos/notext-perfil-logo/apple-touch-icon.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <link rel="stylesheet" href="css/globais.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/mobile/base.css" />
+    <link
+      rel="stylesheet"
+      href="css/desktop/base.css"
+      media="(min-width: 1024px)"
+    />
+
+  </head>
+  <body class="app-body">
+    <noscript>
+      Ative o JavaScript para aproveitar o Bíblia GamePray em sua totalidade.
+    </noscript>
+
+    <!-- Splash Screen -->
+    <div class="splash" data-splash>
+      <div class="splash__content">
+        <img
+          src="assets/logotipos/notext-perfil-logo/favicon-96x96.png"
+          alt="Logo Bíblia GamePray"
+          class="splash__logo"
+          data-splash-logo
+        />
+        <h1 class="splash__title">Biblia Gamepray</h1>
+        <p class="splash__tagline">Onde fé e hábito se encontram</p>
+        <div class="splash__loader"></div>
+      </div>
+      <button class="splash__skip" data-splash-skip aria-label="Pular introdução">
+        Pular
+      </button>
+    </div>
+
+    <!-- Tutorial: Tela cheia, 7 páginas conforme docs/tutorial_primeiro_acesso.md -->
+    <div
+      id="screen-tutorial"
+      class="tutorial-screen screen--fullscreen"
+      data-screen="tutorial"
+      role="dialog"
+      aria-label="Tutorial Interativo - Primeiro Acesso"
+      x-data="tutorialStore()"
+      x-init="console.log('[Tutorial] x-init chamado'); console.log('[Tutorial] this:', $data); init(); console.log('[Tutorial] Após init, métodos disponíveis:', { hasNextStep: typeof $data.nextStep === 'function', hasPrevStep: typeof $data.prevStep === 'function', hasSkip: typeof $data.skip === 'function' });"
+    >
+      <div class="tutorial-screen__container">
+        <!-- Barra de Progresso no topo -->
+        <header class="tutorial-screen__header">
+          <div class="tutorial-screen__progress">
+            <div class="tutorial-screen__progress-bar" x-bind:style="`width: ${progress}%`"></div>
+          </div>
+          <p class="tutorial-screen__step-label">Etapa <span x-text="currentStep"></span> de <span x-text="totalSteps"></span></p>
+        </header>
+
+        <!-- Conteúdo centralizado -->
+        <div class="tutorial-screen__content">
+          <div class="tutorial-screen__icon">
+            <span class="material-symbols-outlined" x-text="currentStepData.icon" aria-hidden="true"></span>
+          </div>
+          
+          <h2 class="tutorial-screen__title" x-text="currentStepData.title"></h2>
+          <p class="tutorial-screen__description" x-text="currentStepData.description"></p>
+          
+          <!-- Imagem ilustrativa (placeholder se não existir) -->
+          <div class="tutorial-screen__illustration">
+            <img
+              x-bind:src="currentStepData.image"
+              x-bind:alt="`Ilustração: ${currentStepData.title}`"
+              @error="$el.src = 'assets/logotipos/notext-perfil-logo/perfil-colorido.png'"
+            />
+          </div>
+        </div>
+
+        <!-- Rodapé com navegação -->
+        <footer class="tutorial-screen__footer">
+          <button
+            type="button"
+            class="tutorial-screen__skip-btn"
+            @click="skip()"
+            onclick="console.log('[DEBUG] Botão skip clicado!'); if (typeof window.tutorialStore === 'function') { const store = window.tutorialStore(); if (store && typeof store.skip === 'function') { store.skip(); } else { console.error('[DEBUG] store.skip não é função!', store); } } else { console.error('[DEBUG] tutorialStore não disponível!'); }"
+            aria-label="Pular tutorial"
+          >
+            Pular tutorial
+          </button>
+          
+          <div class="tutorial-screen__nav">
+            <button
+              type="button"
+              class="tutorial-screen__nav-btn tutorial-screen__nav-btn--prev"
+              @click="prevStep()"
+              onclick="console.log('[DEBUG] Botão prev clicado!'); if (typeof window.tutorialStore === 'function') { const store = window.tutorialStore(); if (store && typeof store.prevStep === 'function') { store.prevStep(); } else { console.error('[DEBUG] store.prevStep não é função!', store); } } else { console.error('[DEBUG] tutorialStore não disponível!'); }"
+              x-bind:disabled="isFirstStep"
+              x-show="!isFirstStep"
+              aria-label="Página anterior"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+              Voltar
+            </button>
+            
+            <button
+              type="button"
+              class="tutorial-screen__nav-btn tutorial-screen__nav-btn--next"
+              @click="nextStep()"
+              onclick="console.log('[DEBUG] Botão next clicado!'); if (typeof window.tutorialStore === 'function') { const store = window.tutorialStore(); if (store && typeof store.nextStep === 'function') { store.nextStep(); } else { console.error('[DEBUG] store.nextStep não é função!', store); } } else { console.error('[DEBUG] tutorialStore não disponível!'); }"
+              aria-label="Próxima página"
+            >
+              <span x-show="!isLastStep">
+                Próximo <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </span>
+              <span x-show="isLastStep">Começar!</span>
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <div class="drawer" data-drawer aria-hidden="true">
+      <div class="drawer__overlay" data-drawer-close tabindex="-1"></div>
+      <aside
+        class="drawer__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu lateral Bíblia GamePray"
+      >
+        <header class="drawer__header">
+          <div>
+            <p class="app-eyebrow">Menu contextual</p>
+            <h2>Acesso rápido & bloqueios</h2>
+            <p class="drawer__hint">
+              Algumas áreas podem ser bloqueadas conforme o status espiritual.
+            </p>
+          </div>
+          <button
+            class="icon-btn"
+            type="button"
+            data-drawer-close
+            aria-label="Fechar menu lateral"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </header>
+
+        <div class="drawer__banner" role="status" aria-live="polite">
+          <strong>Motivação</strong>
+          <p>
+            “Algumas funcionalidades exigem frutos do Espírito acima de 50. Que
+            tal investir em uma leitura devocional agora?”
+          </p>
+          <button class="btn btn--ghost btn--sm" type="button">
+            Ir para confissão
+          </button>
+        </div>
+
+        <nav class="drawer__menu" aria-label="Atalhos adicionais">
+          <button data-screen-target="perfil" class="drawer__item">
+            <span class="material-symbols-outlined">person</span>
+            <span>Perfil</span>
+          </button>
+          <button data-screen-target="configuracoes" class="drawer__item">
+            <span class="material-symbols-outlined">tune</span>
+            <span>Configurações</span>
+          </button>
+          <button data-screen-target="loja" class="drawer__item">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span>Loja</span>
+          </button>
+          <button data-screen-target="ranking" class="drawer__item">
+            <span class="material-symbols-outlined">emoji_events</span>
+            <span>Ranking</span>
+          </button>
+          <button data-screen-target="tutorial" class="drawer__item">
+            <span class="material-symbols-outlined">help</span>
+            <span>Tutorial</span>
+          </button>
+          <button data-screen-target="sobre" class="drawer__item" disabled>
+            <span class="material-symbols-outlined">info</span>
+            <span>Sobre</span>
+            <small>Bloqueado - status mínimo requerido</small>
+          </button>
+          <button class="drawer__item drawer__item--danger" type="button">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Sair</span>
+          </button>
+        </nav>
+      </aside>
+    </div>
+
+    <div id="app" class="app-shell">
+      <!-- HUD: Conforme wireframe EXATO tela_hud.md linhas 159-207 -->
+      <!-- ESCONDIDO em: splash, login, tutorial -->
+      <section
+        class="hud"
+        x-data="hudStore()"
+        x-init="console.log('[HUD] x-init chamado'); init().then(() => console.log('[HUD] init() completo')).catch(err => console.error('[HUD] ERRO no init:', err));"
+        x-bind:class="{'hud--expanded': expanded}"
+        x-show="!['splash', 'login', 'tutorial', ''].includes(window.location.hash.replace('#', ''))"
+        aria-live="polite"
+        role="banner"
+        aria-label="HUD - Status Espiritual"
+      >
+        <div class="hud__loading" x-show="loading" x-cloak>
+          <span class="material-symbols-outlined hud__loading-icon">progress_activity</span>
+          <p>Carregando status espiritual...</p>
+        </div>
+
+        <div class="hud__content" x-show="!loading">
+          <!-- HUD MINIMIZADA: Wireframe linha 161-173 -->
+          <div class="hud__primary">
+            <!-- Linha 1: Logo | Espaço | Recursos (500● 5❤) -->
+            <div class="hud__topbar">
+              <img 
+                src="assets/logotipos/notext-perfil-logo/favicon-96x96.png" 
+                alt="Logo Bíblia GamePray" 
+                class="hud__logo"
+                width="32"
+                height="32"
+              />
+              <div class="hud__resources">
+                <span class="hud__resource" :aria-label="`${formatNumber(coins)} Ouro da Fé`">
+                  <span class="hud__currency-symbol">●</span>
+                  <strong x-text="formatNumber(coins)"></strong>
+                </span>
+                <span class="hud__resource" :aria-label="`${hearts} de ${heartsMax} corações`">
+                  <span>❤</span>
+                  <strong x-text="`${hearts}/${heartsMax}`"></strong>
+                </span>
+              </div>
+            </div>
+
+            <!-- Linha 2-3: Avatar + Nome + Título + Nível (mesma linha conforme wireframe) -->
+            <div class="hud__profile">
+              <img 
+                x-bind:src="avatar" 
+                x-bind:alt="`Avatar de ${userName}`" 
+                class="hud__avatar"
+                width="40"
+                height="40"
+              />
+              <div class="hud__identity">
+                <div class="hud__name-row">
+                  <span class="hud__name" x-text="userName"></span>
+                  <span class="hud__title" x-text="title"></span>
+                  <span class="hud__badge" x-text="`Nv${level}`"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Linha 4-5: Barras Espírito Santo + Fé (conforme wireframe) -->
+            <div class="hud__bars">
+              <div class="hud__bar">
+                <div class="hud__bar-label">
+                  <span>Espírito Santo</span>
+                  <span x-text="spiritLabel"></span>
+                </div>
+                <div class="hud__bar-track">
+                  <span 
+                    class="hud__bar-fill hud__bar-fill--spirit" 
+                    x-bind:style="`width: ${spirit}%`"
+                  ></span>
+                </div>
+              </div>
+              <div class="hud__bar">
+                <div class="hud__bar-label">
+                  <span>Fé</span>
+                  <span x-text="`${xpPercent}%`"></span>
+                </div>
+                <div class="hud__bar-track">
+                  <span 
+                    class="hud__bar-fill" 
+                    x-bind:style="`width: ${xpPercent}%`"
+                  ></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Linha 6-9: PERMANENTE + CONSUMÍVEIS (grid 3x2 cada) -->
+            <div class="hud__items">
+              <div class="hud__item-section">
+                <header class="hud__item-header">
+                  <p>PERMANENTE</p>
+                  <small class="hud__item-count" x-text="`${permanentSlots.filter(s => s).length}/${permanentSlots.length}`"></small>
+                </header>
+                <div class="hud__slots hud__slots--grid">
+                  <template x-for="(slot, index) in permanentSlots" :key="`perm-${index}`">
+                    <button
+                      class="hud-slot"
+                      type="button"
+                      x-bind:class="{'hud-slot--filled': slot, [`hud-slot--rarity-${slotRarity(slot)}`]: slot}"
+                      @click="openContext('permanente', slot)"
+                      x-bind:aria-label="slotLabel(slot, `Slot permanente ${index + 1}`)"
+                    >
+                      <template x-if="slot?.imagem">
+                        <img x-bind:src="slot.imagem" x-bind:alt="slot.nome" class="hud-slot__image" />
+                      </template>
+                      <span x-show="!slot?.imagem && slot" class="hud-slot__icon" x-text="slotAbbr(slot)"></span>
+                      <span x-show="!slot" class="hud-slot__icon">□</span>
+                      <span x-show="slot?.quantidade > 1" class="hud-slot__quantity" x-text="slot.quantidade"></span>
+                      <span x-show="slot?.raridade" class="hud-slot__rarity-indicator" x-bind:class="`hud-slot__rarity-indicator--${slot.raridade}`"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+
+              <div class="hud__item-section">
+                <header class="hud__item-header">
+                  <p>CONSUMÍVEIS</p>
+                  <small class="hud__item-count" x-text="`${consumableSlots.filter(s => s).length}/${consumableSlots.length}`"></small>
+                </header>
+                <div class="hud__slots hud__slots--grid">
+                  <template x-for="(slot, index) in consumableSlots" :key="`cons-${index}`">
+                    <button
+                      class="hud-slot hud-slot--consumable"
+                      type="button"
+                      x-bind:class="{'hud-slot--filled': slot, [`hud-slot--rarity-${slotRarity(slot)}`]: slot}"
+                      @click="openContext('consumivel', slot)"
+                      x-bind:aria-label="slotLabel(slot, `Slot consumível ${index + 1}`)"
+                    >
+                      <template x-if="slot?.imagem">
+                        <img x-bind:src="slot.imagem" x-bind:alt="slot.nome" class="hud-slot__image" />
+                      </template>
+                      <span x-show="!slot?.imagem && slot" class="hud-slot__icon" x-text="slotAbbr(slot)"></span>
+                      <span x-show="!slot" class="hud-slot__icon">□</span>
+                      <span x-show="slot?.quantidade > 1" class="hud-slot__quantity" x-text="slot.quantidade"></span>
+                      <span x-show="slot?.raridade" class="hud-slot__rarity-indicator" x-bind:class="`hud-slot__rarity-indicator--${slot.raridade}`"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botão Expandir: Centralizado conforme wireframe -->
+            <button
+              class="hud__toggle-btn"
+              type="button"
+              @click="toggleExpanded()"
+              :aria-expanded="expanded"
+              aria-label="Expandir ou recolher HUD"
+            >
+              <span x-text="expanded ? '▴ Ver menos' : '▾ Ver mais'"></span>
+            </button>
+          </div>
+
+          <!-- HUD EXPANDIDA: Wireframe linha 177-205 -->
+          <div class="hud__expanded" x-show="expanded" x-transition>
+            <!-- Divisor visual -->
+            <div class="hud__divider"></div>
+
+            <!-- Armadura Divina (Efésios) - Grid 2x3 -->
+            <div class="hud__armor-section">
+              <header class="hud__armor-header">
+                <h3>Armadura Divina (Efésios)</h3>
+              </header>
+              <div class="hud__armor-grid">
+                <template x-for="piece in armorPieces" :key="piece.key">
+                  <div class="hud-armor__piece">
+                    <span 
+                      class="material-symbols-outlined hud-armor__icon" 
+                      x-text="piece.icon"
+                      :title="piece.label"
+                      aria-hidden="true"
+                    ></span>
+                    <small x-text="`${piece.valor}/100`"></small>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- Efeitos ativos + Frutos + Obras (lado a lado) -->
+            <div class="hud__expanded-content">
+              <!-- Coluna Esquerda: Efeitos ativos -->
+              <div class="hud__effects-section">
+                <header class="hud__effects-header">
+                  <h3>Efeitos ativos</h3>
+                  <small>♾︎ ♾︎</small>
+                </header>
+                <div class="hud-effects">
+                  <template x-for="buff in buffs" :key="buff.id">
+                    <div class="hud-effects__pill hud-effects__pill--buff">
+                      <span class="material-symbols-outlined" x-text="buff.icone" aria-hidden="true"></span>
+                      <small x-text="buff.tempoRestante"></small>
+                    </div>
+                  </template>
+                  <template x-for="debuff in debuffs" :key="debuff.id">
+                    <div class="hud-effects__pill hud-effects__pill--debuff">
+                      <span class="material-symbols-outlined" x-text="debuff.icone" aria-hidden="true"></span>
+                      <small x-text="debuff.tempoRestante"></small>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Colunas Direitas: Frutos + Obras (lado a lado) -->
+              <div class="hud__attributes-section">
+                <!-- Frutos do Espírito (Gálatas 5:22-23) -->
+                <article class="hud__panel hud__panel--fruits">
+                  <header>
+                    <h3>Frutos do Espírito</h3>
+                    <small>Gl 5:22-23</small>
+                  </header>
+                  <ul class="hud__attribute-list">
+                    <template x-for="fruit in fruits" :key="fruit.key">
+                      <li class="hud__attribute-item">
+                        <span x-text="fruit.label"></span>
+                        <strong x-text="fruit.valor"></strong>
+                      </li>
+                    </template>
+                  </ul>
+                </article>
+
+                <!-- Obras da Carne (agrupadas) -->
+                <article class="hud__panel hud__panel--works">
+                  <header>
+                    <h3>Obras da carne</h3>
+                  </header>
+                  <ul class="hud__attribute-list hud__attribute-list--negative">
+                    <template x-for="work in works" :key="work.key">
+                      <li 
+                        class="hud__attribute-item"
+                        x-bind:class="{'hud__attribute-item--warning': work.valor >= 75}"
+                      >
+                        <span x-text="work.label"></span>
+                        <strong x-text="work.valor"></strong>
+                      </li>
+                    </template>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- Menu de Contexto (wireframe linha 208-249) -->
+          <!-- Só aparece se HUD estiver visível E slot selecionado -->
+          <div 
+            class="hud__context" 
+            x-show="selectedSlot && !['splash', 'login', 'tutorial', ''].includes(window.location.hash.replace('#', ''))" 
+            x-transition
+          >
+            <header class="hud__context-header">
+              <strong x-text="selectedSlot?.item?.nome ?? 'Slot vazio'"></strong>
+              <button
+                class="icon-btn"
+                type="button"
+                aria-label="Fechar menu de contexto"
+                @click="closeContext"
+              >
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </header>
+            <p class="hud__context-description" x-text="selectedSlot?.item?.descricao ?? 'Sem item equipado.'"></p>
+            <div class="hud__context-actions">
+              <button class="btn btn--primary" type="button">Ver</button>
+              <button class="btn btn--ghost" type="button">Trocar</button>
+              <button class="btn btn--ghost" type="button">Remover</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main
+        class="app-main"
+        role="main"
+        aria-live="polite"
+        aria-label="Conteúdo das telas"
+      >
+        <section
+          id="screen-inicio"
+          class="screen"
+          data-screen="inicio"
+          role="tabpanel"
+          aria-label="Tela Início"
+          x-data="inicioStore()"
+          x-init="console.log('[Início] x-init chamado'); init().then(() => console.log('[Início] init() completo')).catch(err => console.error('[Início] ERRO no init:', err));"
+        >
+          <template x-if="loading">
+            <div class="screen__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Carregando painel inicial...</p>
+            </div>
+          </template>
+
+          <!-- Tela Início: Conforme wireframe EXATO tela_inicio.md -->
+          <div class="inicio" x-show="!loading">
+            <!-- Header: "Início" + botão Perfil -->
+            <header class="inicio__header">
+              <h1 class="inicio__header-title">Início</h1>
+              <button
+                class="inicio__header-profile-btn"
+                type="button"
+                data-screen-target="perfil"
+                aria-label="Abrir perfil"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">person</span>
+                <span>Perfil</span>
+              </button>
+            </header>
+
+            <!-- Avatar GRANDE (64-80px) centralizado -->
+            <div class="inicio__avatar-section">
+              <img 
+                x-bind:src="avatar" 
+                x-bind:alt="`Avatar de ${userName}`" 
+                class="inicio__avatar"
+                width="80"
+                height="80"
+              />
+            </div>
+
+            <!-- Nome + Nível + Moedas (mesma linha) -->
+            <div class="inicio__identity">
+              <h2 class="inicio__name" x-text="userName"></h2>
+              <div class="inicio__badges">
+                <span class="inicio__badge" x-text="`Nv${level}`"></span>
+                <span class="inicio__badge inicio__badge--coins">
+                  <span class="inicio__currency-symbol">●</span>
+                  <strong x-text="formatNumber(coins)"></strong>
+                </span>
+              </div>
+            </div>
+
+            <!-- Barra de XP -->
+            <div class="inicio__bar">
+              <div class="inicio__bar-label">
+                <span>XP</span>
+                <span x-text="`${xpPercent}%`"></span>
+              </div>
+              <div class="inicio__bar-track">
+                <span
+                  class="inicio__bar-fill"
+                  x-bind:style="`width: ${xpPercent}%`"
+                ></span>
+              </div>
+            </div>
+
+            <!-- Barra de Espírito Santo -->
+            <div class="inicio__bar inicio__bar--spirit">
+              <div class="inicio__bar-label">
+                <span>Espírito Santo</span>
+                <span x-text="`${spiritPercent}%`"></span>
+              </div>
+              <div class="inicio__bar-track">
+                <span
+                  class="inicio__bar-fill inicio__bar-fill--spirit"
+                  x-bind:style="`width: ${spiritPercent}%`"
+                ></span>
+              </div>
+            </div>
+
+            <!-- Pontos positivos/negativos (linha de ícones) -->
+            <div class="inicio__attributes" x-show="fruits.length || works.length">
+              <div class="inicio__attributes-positive">
+                <template x-for="fruit in fruits.slice(0, 3)" :key="fruit.key">
+                  <div class="inicio__attribute-item inicio__attribute-item--positive" :title="fruit.label">
+                    <span class="material-symbols-outlined" aria-hidden="true">favorite</span>
+                    <strong x-text="fruit.valor"></strong>
+                  </div>
+                </template>
+              </div>
+              <div class="inicio__attributes-negative">
+                <template x-for="work in works.slice(0, 3)" :key="work.key">
+                  <div 
+                    class="inicio__attribute-item inicio__attribute-item--negative"
+                    x-bind:class="{'inicio__attribute-item--warning': work.valor >= 75}"
+                    :title="work.label"
+                  >
+                    <span class="material-symbols-outlined" aria-hidden="true">warning</span>
+                    <strong x-text="work.valor"></strong>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- Cards de Estatísticas (3 cards) -->
+            <section class="inicio__stats">
+              <template x-for="card in statsCards" :key="card.label">
+                <article class="inicio__stat-card">
+                  <span class="material-symbols-outlined inicio__stat-icon" x-text="card.icon" aria-hidden="true"></span>
+                  <strong class="inicio__stat-value" x-text="card.value"></strong>
+                  <p class="inicio__stat-label" x-text="card.label"></p>
+                </article>
+              </template>
+            </section>
+
+            <!-- Atalhos Rápidos (3 botões) -->
+            <section class="inicio__quick">
+              <a 
+                class="inicio__quick-link" 
+                href="#missoes"
+                data-screen-target="missoes"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">map</span>
+                <span>Missões</span>
+              </a>
+              <a 
+                class="inicio__quick-link" 
+                href="#estudos"
+                data-screen-target="estudos"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+                <span>Estudos</span>
+              </a>
+              <a 
+                class="inicio__quick-link" 
+                href="#conquistas"
+                data-screen-target="conquistas"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">trophy</span>
+                <span>Conquistas</span>
+              </a>
+            </section>
+
+            <!-- Ação rápida: Confissão/Arrependimento (condicional) -->
+            <section
+              class="inicio__confession"
+              x-show="alertWorks.length"
+              x-transition
+              x-cloak
+            >
+              <div class="inicio__confession-content">
+                <h3 class="inicio__confession-title">Atenção ao seu status espiritual</h3>
+                <p class="inicio__confession-text">
+                  Algumas obras da carne estão elevadas. Considere confessar ou realizar ações de recuperação.
+                </p>
+                <ul class="inicio__confession-list">
+                  <template x-for="work in alertWorks" :key="work.key">
+                    <li class="inicio__confession-item">
+                      <span x-text="work.label"></span>
+                      <strong x-text="work.valor"></strong>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+              <a 
+                class="inicio__confession-btn btn btn--primary" 
+                href="#configuracoes"
+                data-screen-target="configuracoes"
+              >
+                Confissão/Arrependimento
+              </a>
+            </section>
+          </div>
+        </section>
+
+        <section
+          id="screen-sobre"
+          class="screen"
+          data-screen="sobre"
+          role="tabpanel"
+          aria-label="Tela Sobre"
+          hidden
+          aria-hidden="true"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Sobre</p>
+            <h2>Informações institucionais</h2>
+            <p>
+              Versão do app, créditos, manifesto e links para termos/políticas
+              conforme <code>docs/tela_sobre.md</code>.
+            </p>
+          </header>
+          <article class="placeholder-card">
+            <p>
+              Prever seção com histórico de versões, equipe e CTA para suporte.
+            </p>
+          </article>
+        </section>
+
+        <section
+          id="screen-missoes"
+          class="screen"
+          data-screen="missoes"
+          role="tabpanel"
+          aria-label="Tela Missões"
+          hidden
+          aria-hidden="true"
+          x-data="missoesStore()"
+          x-init="console.log('[Missões] x-init chamado'); init().then(() => console.log('[Missões] init() completo')).catch(err => console.error('[Missões] ERRO no init:', err));"
+          @screen-activated.window="if ($el === $event.target) { console.log('[Missões] Tela ativada, recarregando...'); load(); }"
+        >
+          <header class="screen__header missions__header">
+            <div>
+              <p class="screen__kicker">Tela • Missões</p>
+              <h2>Seu progresso devocional</h2>
+              <p>
+                Organize missões diárias, semanais e colaborativas. Filtros ajudam a
+                focar no que importa.
+              </p>
+            </div>
+            <button class="btn btn--ghost btn--sm" type="button" @click="load()">
+              <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+              Recarregar
+            </button>
+          </header>
+
+          <nav class="missions__filters" aria-label="Filtros de missões">
+            <template x-for="filter in filters" :key="filter.id">
+              <button
+                type="button"
+                class="missions__filter"
+                  x-bind:class="{'missions__filter--active': activeFilter === filter.id}"
+                @click="setFilter(filter.id)"
+              >
+                <span x-text="filter.label"></span>
+              </button>
+            </template>
+          </nav>
+
+          <template x-if="loading">
+            <div class="screen__loading missions__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Carregando missões...</p>
+            </div>
+          </template>
+
+          <template x-if="!loading && !filteredMissions.length">
+            <article class="missions__empty" x-cloak>
+              <span class="material-symbols-outlined" aria-hidden="true">sentiment_satisfied</span>
+              <div>
+                <h3>Nada por aqui</h3>
+                <p x-text="emptyMessage"></p>
+              </div>
+            </article>
+          </template>
+
+          <div class="missions__list" x-show="!loading && filteredMissions.length > 0" x-cloak>
+            <template x-for="mission in filteredMissions" :key="mission.id">
+      <article
+        class="mission-card"
+        x-bind:class="{
+          'mission-card--blocked': mission.blockInfo,
+          'mission-card--success': mission.statusKey === 'concluida'
+        }"
+      >
+        <header class="mission-card__header">
+          <div>
+            <h3 x-text="mission.titulo"></h3>
+            <p class="mission-card__type">
+              <span class="material-symbols-outlined" aria-hidden="true">category</span>
+              <span x-text="`${mission.tipo} · ${mission.categoria}`"></span>
+            </p>
+          </div>
+          <div class="mission-card__reward">
+            <span class="material-symbols-outlined" aria-hidden="true">redeem</span>
+            <strong x-text="mission.rewardLabel"></strong>
+          </div>
+        </header>
+        <p class="mission-card__description" x-text="mission.descricao"></p>
+        <div class="mission-card__badges">
+          <span
+            class="mission-badge"
+            x-bind:class="`mission-badge--${mission.statusMeta.tone}`"
+          >
+            <span x-text="mission.statusMeta.label"></span>
+          </span>
+          <template x-if="mission.attrInfo.hasHealing">
+            <span class="mission-badge mission-badge--info" title="Esta missão ajuda a reduzir obras da carne.">
+              <span class="material-symbols-outlined" aria-hidden="true">healing</span>
+              Cura/buff
+            </span>
+          </template>
+          <template x-if="mission.blockInfo">
+            <span class="mission-badge mission-badge--danger" :title="mission.blockInfo.reason">
+              <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+              Bloqueada
+            </span>
+          </template>
+        </div>
+        <div class="mission-card__actions">
+          <button
+            class="btn btn--primary"
+            type="button"
+            x-bind:disabled="!!mission.blockInfo"
+            @click="performAction(mission)"
+          >
+            <span x-text="mission.statusKey === 'concluida' ? 'Revisar evidências' : 'Iniciar/Concluir'"></span>
+          </button>
+          <button class="btn btn--ghost" type="button" @click="openModal(mission)">
+            Ver detalhes
+          </button>
+        </div>
+      </article>
+    </template>
+          </div>
+
+          <aside
+            class="missions__banner"
+            x-show="showSpiritBanner"
+            x-cloak
+          >
+            <div>
+              <h3>Reforce o Espírito Santo</h3>
+              <p>
+                Seu nível está diminuindo. Complete missões de oração ou estudo para restaurar rapidamente.
+              </p>
+            </div>
+            <a class="btn btn--ghost" href="#estudos">Ir para estudos</a>
+          </aside>
+
+          <div
+            class="modal"
+            x-show="selectedMission"
+            x-transition.opacity
+            x-cloak
+            @keydown.escape.window="closeModal"
+          >
+            <div class="modal__overlay" @click="closeModal"></div>
+            <article class="modal__panel" role="dialog" aria-modal="true">
+              <header>
+                <div>
+                  <p class="screen__kicker">Missão selecionada</p>
+                  <h3 x-text="selectedMission?.titulo"></h3>
+                </div>
+                <button
+                  class="icon-btn"
+                  type="button"
+                  aria-label="Fechar detalhes da missão"
+                  @click="closeModal"
+                >
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </header>
+              <p x-text="selectedMission?.descricao"></p>
+
+              <dl class="modal__details">
+                <div>
+                  <dt>Categoria</dt>
+                  <dd>
+                    <span x-text="`${selectedMission?.tipo || ''} • ${selectedMission?.categoria || ''}`"></span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Recompensa</dt>
+                  <dd x-text="selectedMission?.rewardLabel"></dd>
+                </div>
+                <div>
+                  <dt>Requisitos</dt>
+                  <dd>
+                    Nível mínimo: <span x-text="selectedMission?.requisitos?.nivel ?? 1"></span>
+                    <template x-if="selectedMission?.requisitos?.itensRequeridos?.length">
+                      <span>• Itens necessários: <span x-text="selectedMission?.requisitos?.itensRequeridos?.length || 0"></span></span>
+                    </template>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Evidências aceitas</dt>
+                  <dd>
+                    <template x-if="selectedMission?.evidenciasAceitas?.length">
+                      <span x-text="selectedMission?.evidenciasAceitas?.join(', ') || 'Nenhuma'"></span>
+                    </template>
+                    <template x-if="!selectedMission?.evidenciasAceitas?.length">
+                      <span>Não requer evidências específicas.</span>
+                    </template>
+                  </dd>
+                </div>
+              </dl>
+
+              <template x-if="selectedMission?.blockInfo">
+                <div class="missions__alert">
+                  <strong>Bloqueada por status</strong>
+                  <p x-text="selectedMission.blockInfo.reason"></p>
+                  <a class="btn btn--ghost btn--sm" href="#configuracoes">
+                    Confessar / Restaurar
+                  </a>
+                </div>
+              </template>
+            </article>
+          </div>
+        </section>
+
+        <section
+          id="screen-estudos"
+          class="screen"
+          data-screen="estudos"
+          role="tabpanel"
+          aria-label="Tela Estudos"
+          hidden
+          aria-hidden="true"
+          x-data="estudosStore()"
+          x-init="console.log('[Estudos] x-init chamado'); init().then(() => console.log('[Estudos] init() completo')).catch(err => console.error('[Estudos] ERRO no init:', err));"
+        >
+          <template x-if="loading">
+            <div class="screen__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Carregando trilhas de estudo...</p>
+            </div>
+          </template>
+
+          <div class="estudos" x-show="!loading" x-cloak>
+            <section class="estudos__testaments">
+              <template x-for="testament in testaments" :key="testament.id">
+                <button
+                  type="button"
+                  class="testament-card"
+                  x-bind:class="{'testament-card--active': selectedTestament === testament.id}"
+                  @click="selectTestament(testament.id)"
+                >
+                  <span class="material-symbols-outlined" aria-hidden="true" x-text="testament.icon"></span>
+                  <div>
+                    <h3 x-text="testament.nome"></h3>
+                    <p x-text="testament.descricao"></p>
+                  </div>
+                  <span class="material-symbols-outlined testament-card__chevron" aria-hidden="true">chevron_right</span>
+                </button>
+              </template>
+            </section>
+
+            <section class="estudos__books">
+              <header>
+                <h3>Selecione um livro</h3>
+                <p>
+                  Livretes com progresso e bloqueios por status. Continue de onde parou em
+                  <strong x-text="selectedBook?.nome ?? ''"></strong>.
+                </p>
+              </header>
+              <div class="estudos__books-grid" x-show="books.length > 0" x-cloak>
+                <template x-for="book in books" :key="book.id">
+                  <article
+                    class="book-card"
+                    x-bind:class="{
+                      'book-card--active': selectedBook?.id === book.id,
+                      'book-card--blocked': book.bloqueado
+                    }"
+                  >
+                    <header>
+                      <div>
+                        <h4 x-text="book.nome"></h4>
+                        <p x-text="book.resumo"></p>
+                      </div>
+                      <span class="material-symbols-outlined" aria-hidden="true" x-text="book.icon"></span>
+                    </header>
+                    <div class="hud__bar-track hud__bar-track--mini">
+                      <span class="hud__bar-fill" x-bind:style="`width: ${book.progresso}%`"></span>
+                    </div>
+                    <div class="book-card__footer">
+                      <span x-text="`${book.progresso}% concluído`"></span>
+                      <template x-if="book.blockMessage">
+                        <span class="mission-badge mission-badge--danger">
+                          <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+                          Bloqueado
+                        </span>
+                      </template>
+                    </div>
+                    <button
+                      class="btn btn--ghost btn--sm"
+                      type="button"
+                      x-bind:disabled="book.bloqueado"
+                      @click="selectBook(book.id)"
+                    >
+                      Acessar trilha
+                    </button>
+                  </article>
+                </template>
+              </div>
+            </section>
+
+            <section class="estudos__cycle" x-show="selectedBook" x-cloak>
+              <header class="estudos__cycle-header">
+                <div>
+                  <p class="screen__kicker">Trilha ativa</p>
+                  <h3 x-text="selectedBook?.nome"></h3>
+                  <p x-text="selectedBook?.resumo"></p>
+                </div>
+                <a class="btn btn--ghost btn--sm" href="#trilha">Ver trilha completa</a>
+              </header>
+
+              <template x-if="bannerMessage">
+                <div class="missions__alert">
+                  <strong>Atenção</strong>
+                  <p x-text="bannerMessage"></p>
+                  <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+                </div>
+              </template>
+
+              <div class="estudos__chapters" x-show="chapters.length > 0" x-cloak>
+                <template x-for="chapter in chapters" :key="chapter.numero">
+                  <button
+                    type="button"
+                    class="chapter-node"
+                    x-bind:class="{
+                      'chapter-node--done': chapter.status === 'done',
+                      'chapter-node--current': chapter.status === 'current',
+                      'chapter-node--locked': chapter.blocked
+                    }"
+                    x-bind:disabled="chapter.blocked"
+                    @click="startChapter(chapter)"
+                  >
+                    <span x-text="chapter.numero"></span>
+                    <small x-text="chapter.titulo"></small>
+                    <template x-if="chapter.blockMessage">
+                      <em x-text="chapter.blockMessage"></em>
+                    </template>
+                  </button>
+                </template>
+              </div>
+
+              <div class="estudos__cycle-panel" x-show="showCyclePanel" x-cloak>
+                <header>
+                  <div>
+                    <p class="screen__kicker">Ciclo de aprendizado</p>
+                    <h4>
+                      <span x-text="`Capítulo ${selectedChapter?.numero || ''} · ${selectedChapter?.titulo || ''}`"></span>
+                    </h4>
+                  </div>
+                  <button
+                    class="icon-btn"
+                    type="button"
+                    aria-label="Fechar ciclo"
+                    @click="showCyclePanel = false"
+                  >
+                    <span class="material-symbols-outlined">close</span>
+                  </button>
+                </header>
+                <div class="estudos__timeline">
+                  <template x-for="step in cycleTimeline" :key="step.id">
+                    <div
+                      class="timeline-step"
+                      x-bind:class="{
+                        'timeline-step--done': step.state === 'done',
+                        'timeline-step--current': step.state === 'current'
+                      }"
+                    >
+                      <span x-text="step.id"></span>
+                      <p x-text="step.title"></p>
+                    </div>
+                  </template>
+                </div>
+                <article class="estudos__cycle-card">
+                  <h5 x-text="selectedCycle?.title"></h5>
+                  <p x-text="selectedCycle?.description"></p>
+                  <button class="btn btn--primary" type="button" @click="advanceCycle()">
+                    <span x-text="cycleStep < 4 ? 'Avançar ciclo' : 'Concluir capítulo'"></span>
+                  </button>
+                </article>
+              </div>
+
+              <template x-if="!showCyclePanel">
+                <div class="estudos__cycle-placeholder">
+                  <h4>Selecione um capítulo</h4>
+                  <p>Escolha uma bolha desbloqueada acima para iniciar o ciclo de leitura e quizzes.</p>
+                </div>
+              </template>
+            </section>
+          </div>
+        </section>
+
+        <section
+          id="screen-trilha"
+          class="screen"
+          data-screen="trilha"
+          role="tabpanel"
+          aria-label="Tela Trilha"
+          hidden
+          aria-hidden="true"
+          x-data="$store.estudos"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Trilha</p>
+            <h2>Roadmap visual de capítulos</h2>
+            <p>
+              Visualize todo o progresso do livro selecionado e veja quais capítulos estão
+              bloqueados por status.
+            </p>
+          </header>
+
+          <template x-if="!selectedBook">
+            <article class="missions__empty" x-cloak>
+              <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+              <div>
+                <h3>Nenhum livro selecionado</h3>
+                <p>Volte à tela Estudos e escolha um livro para ver a trilha de capítulos.</p>
+              </div>
+            </article>
+          </template>
+
+          <div class="trilha" x-show="selectedBook" x-cloak>
+            <header class="trilha__header">
+              <div>
+                <h3 x-text="selectedBook?.nome"></h3>
+                <p x-text="selectedBook?.resumo"></p>
+              </div>
+              <div class="trilha__stats">
+                <span x-text="`${selectedBook?.progresso || 0}% concluído`"></span>
+                <span x-text="`${chapters.length || 0} capítulos`"></span>
+              </div>
+            </header>
+
+            <template x-if="chapters.some(ch => ch.blockMessage)">
+              <div class="missions__alert">
+                <strong>Capítulos bloqueados</strong>
+                <p>Algumas bolhas possuem cadeado devido ao seu status atual. Busque restauração.</p>
+                <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+              </div>
+            </template>
+
+            <ol class="trilha__list" x-show="chapters.length > 0" x-cloak>
+              <template x-for="chapter in chapters" :key="chapter.numero">
+                <li>
+                  <button
+                    class="trilha__node"
+                    x-bind:class="{
+                      'trilha__node--done': chapter.status === 'done',
+                      'trilha__node--current': chapter.status === 'current',
+                      'trilha__node--locked': chapter.blocked
+                    }"
+                    x-bind:disabled="chapter.blocked"
+                    @click="startChapter(chapter)"
+                  >
+                    <span class="trilha__number" x-text="chapter.numero"></span>
+                    <div>
+                      <strong x-text="chapter.titulo"></strong>
+                      <small x-show="chapter.blockMessage" x-text="chapter.blockMessage"></small>
+                      <small x-show="!chapter.blockMessage && chapter.status === 'done'">
+                        Capítulo concluído
+                      </small>
+                      <small x-show="chapter.status === 'current'">
+                        Em andamento
+                      </small>
+                    </div>
+                    <span class="material-symbols-outlined trilha__icon" aria-hidden="true">
+                      <span x-text="chapter.blocked ? 'lock' : chapter.status === 'done' ? 'check_circle' : 'menu_book'"></span>
+                    </span>
+                  </button>
+                </li>
+              </template>
+            </ol>
+          </div>
+        </section>
+
+        <section
+          id="screen-inventario"
+          class="screen"
+          data-screen="inventario"
+          role="tabpanel"
+          aria-label="Tela Inventário"
+          hidden
+          aria-hidden="true"
+          x-data="inventoryStore()"
+          x-init="init()"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Inventário</p>
+            <h2>Itens equipados e consumíveis</h2>
+            <p>
+              Filtre por tipo, verifique bloqueios por status e abra os detalhes para usar/equipar.
+            </p>
+          </header>
+
+          <nav class="inventory__filters" aria-label="Filtros do inventário">
+            <template x-for="filter in filters" :key="filter.id">
+              <button
+                class="inventory__filter"
+                type="button"
+                x-bind:class="{'inventory__filter--active': activeFilter === filter.id}"
+                @click="setFilter(filter.id)"
+              >
+                <span x-text="filter.label"></span>
+              </button>
+            </template>
+          </nav>
+
+          <template x-if="loading">
+            <div class="screen__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Sincronizando itens...</p>
+            </div>
+          </template>
+
+          <template x-if="bannerMessage">
+            <div class="missions__alert" x-cloak>
+              <strong>Bloqueio detectado</strong>
+              <p x-text="bannerMessage"></p>
+              <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+            </div>
+          </template>
+
+          <div class="inventory__grid" x-show="!loading && filteredItems.length > 0" x-cloak>
+            <template x-for="item in filteredItems" :key="item.id">
+              <article
+                class="inventory-card"
+                x-bind:class="{'inventory-card--blocked': item.blocked}"
+              >
+                <div class="inventory-card__media">
+                  <span class="material-symbols-outlined" aria-hidden="true">
+                    <span x-text="item.tipo === 'consumivel' ? 'science' : item.tipo === 'armadura' ? 'shield' : 'workspace_premium'"></span>
+                  </span>
+                  <span class="inventory-card__qty" x-text="`x${item.quantidade}`"></span>
+                </div>
+                <h3 x-text="item.nome"></h3>
+                <p x-text="item.descricao"></p>
+                <div class="inventory-card__actions">
+                  <button
+                    class="btn btn--primary btn--sm"
+                    type="button"
+                    x-bind:disabled="item.blocked"
+                    @click="openModal(item)"
+                  >
+                    Ver detalhes
+                  </button>
+                </div>
+                <template x-if="item.blockMessage">
+                  <span class="mission-badge mission-badge--danger" x-text="item.blockMessage"></span>
+                </template>
+              </article>
+            </template>
+          </div>
+
+          <template x-if="!loading && !filteredItems.length">
+            <article class="missions__empty" x-cloak>
+              <span class="material-symbols-outlined">inventory_2</span>
+              <div>
+                <h3>Inventário vazio</h3>
+                <p>Sem itens no filtro selecionado. Explore a loja para adquirir novos equipamentos.</p>
+              </div>
+            </article>
+          </template>
+
+          <div
+            class="modal"
+            x-show="selectedItem"
+            x-transition.opacity
+            x-cloak
+            @keydown.escape.window="closeModal"
+          >
+            <div class="modal__overlay" @click="closeModal"></div>
+            <article class="modal__panel" role="dialog" aria-modal="true">
+              <header>
+                <div>
+                  <p class="screen__kicker">Detalhes do item</p>
+                  <h3 x-text="selectedItem?.nome"></h3>
+                </div>
+                <button class="icon-btn" type="button" aria-label="Fechar modal" @click="closeModal">
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </header>
+              <p x-text="selectedItem?.descricao"></p>
+              <p><strong>Quantidade: </strong><span x-text="selectedItem?.quantidade || 0"></span></p>
+              <template x-if="selectedItem?.blockMessage">
+                <div class="missions__alert">
+                  <strong>Item bloqueado</strong>
+                  <p x-text="selectedItem.blockMessage"></p>
+                  <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+                </div>
+              </template>
+              <div class="inventory-card__actions">
+                <button class="btn btn--primary" type="button" x-bind:disabled="selectedItem?.blocked">
+                  <span x-text="selectedItem?.tipo === 'consumivel' ? 'Usar' : 'Equipar'"></span>
+                </button>
+                <button class="btn btn--ghost" type="button" @click="closeModal">Fechar</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section
+          id="screen-loja"
+          class="screen"
+          data-screen="loja"
+          role="tabpanel"
+          aria-label="Tela Loja"
+          hidden
+          aria-hidden="true"
+          x-data="lojaStore()"
+          x-init="init()"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Loja</p>
+            <h2>Ofertas espirituais</h2>
+            <p>
+              Compre consumíveis, pacotes e cosméticos usando moedas da fé. Alguns itens podem estar bloqueados pelo seu status atual.
+            </p>
+          </header>
+
+          <nav class="shop__filters" aria-label="Filtros da loja">
+            <template x-for="filter in filters" :key="filter.id">
+              <button
+                class="shop__filter"
+                type="button"
+                x-bind:class="{'shop__filter--active': activeFilter === filter.id}"
+                @click="setFilter(filter.id)"
+              >
+                <span x-text="filter.label"></span>
+              </button>
+            </template>
+          </nav>
+
+          <template x-if="loading">
+            <div class="screen__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Carregando catálogo...</p>
+            </div>
+          </template>
+
+          <template x-if="bannerMessage">
+            <div class="missions__alert" x-cloak>
+              <strong>Itens bloqueados</strong>
+              <p x-text="bannerMessage"></p>
+              <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+            </div>
+          </template>
+
+          <div class="shop__grid" x-show="!loading && filteredOffers.length > 0" x-cloak>
+            <template x-for="offer in filteredOffers" :key="offer.id">
+              <article
+                class="shop-card"
+                x-bind:class="{'shop-card--blocked': offer.blocked}"
+              >
+                <header>
+                  <div>
+                    <h3 x-text="offer.nome"></h3>
+                    <p x-text="offer.descricao"></p>
+                  </div>
+                  <span class="shop-card__price">
+                    <span class="material-symbols-outlined" aria-hidden="true">paid</span>
+                    <span x-text="offer.preco?.moeda ?? 0"></span>
+                  </span>
+                </header>
+                <div class="shop-card__tags">
+                  <template x-for="tag in offer.tags ?? []" :key="tag">
+                    <span x-text="tag"></span>
+                  </template>
+                </div>
+                <div class="shop-card__actions">
+                  <button
+                    class="btn btn--primary btn--sm"
+                    type="button"
+                    x-bind:disabled="offer.blocked"
+                    @click="purchase(offer)"
+                  >
+                    Comprar
+                  </button>
+                  <button class="btn btn--ghost btn--sm" type="button" @click="openModal(offer)">
+                    Detalhes
+                  </button>
+                </div>
+                <template x-if="offer.blockMessage">
+                  <span class="mission-badge mission-badge--danger" x-text="offer.blockMessage"></span>
+                </template>
+              </article>
+            </template>
+          </div>
+
+          <template x-if="!loading && !filteredOffers.length">
+            <article class="missions__empty" x-cloak>
+              <span class="material-symbols-outlined">shopping_bag</span>
+              <div>
+                <h3>Nada nesta categoria</h3>
+                <p>Tente outro filtro ou volte mais tarde para novas ofertas.</p>
+              </div>
+            </article>
+          </template>
+
+          <div
+            class="modal"
+            x-show="selectedOffer"
+            x-transition.opacity
+            x-cloak
+            @keydown.escape.window="closeModal"
+          >
+            <div class="modal__overlay" @click="closeModal"></div>
+            <article class="modal__panel" role="dialog" aria-modal="true">
+              <header>
+                <div>
+                  <p class="screen__kicker">Oferta</p>
+                  <h3 x-text="selectedOffer?.nome"></h3>
+                </div>
+                <button class="icon-btn" type="button" aria-label="Fechar modal" @click="closeModal">
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </header>
+              <p x-text="selectedOffer?.descricao"></p>
+              <p>
+                <strong>Preço:</strong>
+                <span class="shop-card__price">
+                  <span class="material-symbols-outlined" aria-hidden="true">paid</span>
+                  <span x-text="selectedOffer?.preco?.moeda ?? 0"></span>
+                </span>
+              </p>
+              <template x-if="selectedOffer?.blockMessage">
+                <div class="missions__alert">
+                  <strong>Oferta bloqueada</strong>
+                  <p x-text="selectedOffer.blockMessage"></p>
+                  <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+                </div>
+              </template>
+              <div class="shop-card__actions">
+                <button
+                  class="btn btn--primary"
+                  type="button"
+                  x-bind:disabled="selectedOffer?.blocked"
+                  @click="purchase(selectedOffer)"
+                >
+                  Confirmar compra
+                </button>
+                <button class="btn btn--ghost" type="button" @click="closeModal">
+                  Fechar
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section
+          id="screen-conquistas"
+          class="screen"
+          data-screen="conquistas"
+          role="tabpanel"
+          aria-label="Tela Conquistas"
+          hidden
+          aria-hidden="true"
+          x-data="conquistasStore()"
+          x-init="init()"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Conquistas</p>
+            <h2>Metas e recompensas</h2>
+            <p>
+              Acompanhe conquistas desbloqueadas, em progresso ou ocultas. Toque para ver detalhes.
+            </p>
+          </header>
+
+          <nav class="achievements__filters" aria-label="Filtros de conquistas">
+            <template x-for="filter in filters" :key="filter.id">
+              <button
+                class="achievements__filter"
+                type="button"
+                x-bind:class="{'achievements__filter--active': activeFilter === filter.id}"
+                @click="setFilter(filter.id)"
+              >
+                <span x-text="filter.label"></span>
+              </button>
+            </template>
+          </nav>
+
+          <template x-if="loading">
+            <div class="screen__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Carregando conquistas...</p>
+            </div>
+          </template>
+
+          <div class="achievements__grid" x-show="!loading && filteredConquistas.length > 0" x-cloak>
+            <template x-for="ach in filteredConquistas" :key="ach.id">
+              <article
+                class="achievement-card"
+                x-bind:class="`achievement-card--${ach.status}`"
+                @click="openModal(ach)"
+              >
+                <div class="achievement-card__icon">
+                  <span class="material-symbols-outlined" aria-hidden="true">
+                    <span x-text="ach.status === 'desbloqueada' ? 'stars' : ach.status === 'em-progresso' ? 'hourglass_empty' : 'help'"></span>
+                  </span>
+                </div>
+                <div>
+                  <h3 x-text="ach.titulo ?? ach.nome"></h3>
+                  <p x-text="ach.descricao ?? 'Descrição não disponível'"></p>
+                  <template x-if="ach.recompensa?.xp">
+                    <small>Recompensa: <span x-text="`${ach.recompensa.xp || 0} XP`"></span></small>
+                  </template>
+                  <template x-if="ach.progresso">
+                    <div class="hud__bar-track hud__bar-track--mini">
+                      <span class="hud__bar-fill" x-bind:style="`width: ${ach.progresso}%`"></span>
+                    </div>
+                    <small x-text="`${ach.progresso}% concluído`"></small>
+                  </template>
+                </div>
+                <span class="mission-badge mission-badge--info" x-text="ach.status"></span>
+              </article>
+            </template>
+          </div>
+
+          <template x-if="!loading && !filteredConquistas.length">
+            <article class="missions__empty" x-cloak>
+              <span class="material-symbols-outlined">emoji_objects</span>
+              <div>
+                <h3>Nenhuma conquista</h3>
+                <p>Não há conquistas para este filtro ainda.</p>
+              </div>
+            </article>
+          </template>
+
+          <div class="modal" x-show="selected" x-transition.opacity x-cloak @keydown.escape.window="closeModal">
+            <div class="modal__overlay" @click="closeModal"></div>
+            <article class="modal__panel" role="dialog" aria-modal="true">
+              <header>
+                <div>
+                  <p class="screen__kicker">Conquista</p>
+                  <h3 x-text="selected?.titulo ?? selected?.nome"></h3>
+                </div>
+                <button class="icon-btn" type="button" aria-label="Fechar modal" @click="closeModal">
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </header>
+              <p x-text="selected?.descricao ?? 'Descrição não disponível'"></p>
+              <p><strong>Status:</strong> <span x-text="selected?.status"></span></p>
+              <template x-if="selected?.recompensa?.xp">
+                <p><strong>Recompensa:</strong> <span x-text="`${selected.recompensa.xp} XP`"></span></p>
+              </template>
+              <button class="btn btn--ghost" type="button" @click="closeModal">
+                Fechar
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <section
+          id="screen-ranking"
+          class="screen"
+          data-screen="ranking"
+          role="tabpanel"
+          aria-label="Tela Ranking"
+          hidden
+          aria-hidden="true"
+          x-data="rankingStore()"
+          x-init="init()"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Ranking</p>
+            <h2>Leaderboards espirituais</h2>
+            <p>
+              Visualize o desempenho semanal, mensal ou all-time. Jogadores bloqueados por status são destacados.
+            </p>
+          </header>
+
+          <nav class="shop__filters" aria-label="Filtros de ranking">
+            <template x-for="filter in filters" :key="filter.id">
+              <button
+                class="shop__filter"
+                type="button"
+                x-bind:class="{'shop__filter--active': activeFilter === filter.id}"
+                @click="setFilter(filter.id)"
+              >
+                <span x-text="filter.label"></span>
+              </button>
+            </template>
+          </nav>
+
+          <template x-if="loading">
+            <div class="screen__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Carregando ranking...</p>
+            </div>
+          </template>
+
+          <div class="ranking" x-show="!loading" x-cloak>
+            <header class="ranking__header">
+              <div>
+                <h3 x-text="currentBoard?.metrica ?? 'Ranking'"></h3>
+                <p x-text="currentBoard?.inicio ? `Período: ${currentBoard.inicio} → ${currentBoard.fim}` : 'Período contínuo'"></p>
+              </div>
+              <a class="btn btn--ghost btn--sm" href="#configuracoes">Ver ligas</a>
+            </header>
+
+            <div class="ranking__list" x-show="(currentBoard?.entries ?? []).length > 0" x-cloak>
+              <template x-for="entry in currentBoard?.entries ?? []" :key="entry.uid">
+                <article
+                  class="ranking-card"
+                  x-bind:class="{
+                    'ranking-card--top': entry.rank <= 3,
+                    'ranking-card--blocked': entry.blocked
+                  }"
+                  @click="openModal(entry)"
+                >
+                  <div class="ranking-card__rank" x-text="entry.rank"></div>
+                  <div class="ranking-card__info">
+                    <strong x-text="entry.nome"></strong>
+                    <p x-text="`${entry.valor} pts`"></p>
+                    <small x-text="entry.meta ? `Missões: ${entry.meta.missoes_concluidas ?? 0}` : ''"></small>
+                  </div>
+                  <span class="material-symbols-outlined ranking-card__icon" aria-hidden="true" x-text="entry.blocked ? 'lock' : entry.rank <= 3 ? 'emoji_events' : 'person'"></span>
+                </article>
+              </template>
+            </div>
+          </div>
+
+          <template x-if="!loading && !(currentBoard?.entries?.length)">
+            <article class="missions__empty" x-cloak>
+              <span class="material-symbols-outlined">leaderboard</span>
+              <div>
+                <h3>Nenhum dado</h3>
+                <p>Não há participantes neste ranking ainda.</p>
+              </div>
+            </article>
+          </template>
+
+          <div class="modal" x-show="selectedPlayer" x-transition.opacity x-cloak @keydown.escape.window="closeModal">
+            <div class="modal__overlay" @click="closeModal"></div>
+            <article class="modal__panel" role="dialog" aria-modal="true">
+              <header>
+                <div>
+                  <p class="screen__kicker">Jogador</p>
+                  <h3 x-text="selectedPlayer?.nome"></h3>
+                </div>
+                <button class="icon-btn" type="button" aria-label="Fechar modal" @click="closeModal">
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </header>
+              <p>Posição: <span x-text="selectedPlayer?.rank"></span></p>
+              <p>Pontos: <span x-text="selectedPlayer?.valor"></span></p>
+              <template x-if="selectedPlayer?.blockMessage">
+                <div class="missions__alert">
+                  <strong>Interação bloqueada</strong>
+                  <p x-text="selectedPlayer.blockMessage"></p>
+                </div>
+              </template>
+              <div class="shop-card__actions">
+                <button class="btn btn--ghost" type="button">Parabenizar</button>
+                <button class="btn btn--ghost" type="button" @click="closeModal">
+                  Fechar
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section
+          id="screen-perfil"
+          class="screen"
+          data-screen="perfil"
+          role="tabpanel"
+          aria-label="Tela Perfil"
+          hidden
+          aria-hidden="true"
+          x-data="perfilStore()"
+          x-init="init()"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Perfil</p>
+            <h2>Identidade, status e histórico</h2>
+            <p>
+              Veja seu avatar, dados principais e estatísticas espirituais. Bloqueios por status são destacados.
+            </p>
+          </header>
+
+          <template x-if="loading">
+            <div class="screen__loading" x-cloak>
+              <span class="material-symbols-outlined">hourglass_top</span>
+              <p>Carregando perfil...</p>
+            </div>
+          </template>
+
+          <div class="perfil" x-show="!loading" x-cloak>
+            <section class="perfil__hero">
+              <div class="perfil__avatar">
+                <img x-bind:src="avatar" x-bind:alt="`Avatar de ${nome}`" />
+                <button
+                  class="btn btn--ghost btn--sm"
+                  type="button"
+                  x-bind:disabled="hasBlock"
+                  @click="window.location.hash = '#editar-personagem'"
+                >
+                  Editar avatar
+                </button>
+              </div>
+              <div class="perfil__info">
+                <h2 x-text="nome"></h2>
+                <p x-text="email"></p>
+                <div class="perfil__badges">
+                  <span class="mission-badge mission-badge--info">Nv <span x-text="nivel"></span></span>
+                  <span class="mission-badge mission-badge--warning"><span x-text="`${xpPercent}% XP`"></span></span>
+                  <span class="mission-badge mission-badge--success">Reputação <span x-text="reputacao"></span></span>
+                </div>
+              </div>
+              <div class="perfil__actions">
+                <button class="btn btn--primary btn--sm" type="button" x-bind:disabled="hasBlock">
+                  Editar dados
+                </button>
+                <button class="btn btn--ghost btn--sm" type="button">Ver auditoria</button>
+              </div>
+            </section>
+
+            <template x-if="hasBlock">
+              <div class="missions__alert">
+                <strong>Funções bloqueadas</strong>
+                <p>Algumas edições estão bloqueadas devido ao seu status atual. Considere confessar.</p>
+                <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+              </div>
+            </template>
+
+            <section class="perfil__stats">
+              <template x-for="card in stats" :key="card.label">
+                <article class="stat-card">
+                  <span class="material-symbols-outlined" x-text="card.icon"></span>
+                  <strong x-text="card.value"></strong>
+                  <p x-text="card.label"></p>
+                </article>
+              </template>
+            </section>
+
+            <section class="perfil__settings">
+              <header>
+                <h3>Preferências rápidas</h3>
+                <p>Controle notificações, privacidade e acessibilidade.</p>
+              </header>
+              <div class="perfil__settings-list">
+                <article>
+                  <h4>Notificações</h4>
+                  <p>Push e email</p>
+                  <button class="btn btn--ghost btn--sm" type="button">Configurar</button>
+                </article>
+                <article x-bind:class="{'inventory-card--blocked': hasBlock}">
+                  <h4>Privacidade</h4>
+                  <p>Perfil público</p>
+                  <button class="btn btn--ghost btn--sm" type="button" x-bind:disabled="hasBlock">
+                    Ajustar
+                  </button>
+                </article>
+                <article>
+                  <h4>Tema</h4>
+                  <p>Claro</p>
+                  <button class="btn btn--ghost btn--sm" type="button">Alterar</button>
+                </article>
+                <article>
+                  <h4>Acessibilidade</h4>
+                  <p>TTS ativo</p>
+                  <button class="btn btn--ghost btn--sm" type="button">Gerenciar</button>
+                </article>
+              </div>
+            </section>
+
+            <section class="perfil__danger">
+              <button class="btn btn--ghost" type="button">Solicitar auditoria</button>
+              <button class="btn btn--ghost" type="button" x-bind:disabled="hasBlock">Deslogar</button>
+            </section>
+          </div>
+        </section>
+
+        <section
+          id="screen-configuracoes"
+          class="screen"
+          data-screen="configuracoes"
+          role="tabpanel"
+          aria-label="Tela Configurações"
+          hidden
+          aria-hidden="true"
+          x-data="configuracoesStore()"
+          x-init="init()"
+        >
+          <header class="screen__header">
+            <p class="screen__kicker">Tela • Configurações</p>
+            <h2>Preferências e acessibilidade</h2>
+            <p>
+              Ajuste notificações, privacidade, idioma e recursos de acessibilidade. Alguns controles podem ser bloqueados pelo status.
+            </p>
+          </header>
+
+          <template x-if="bannerMessage">
+            <div class="missions__alert" x-cloak>
+              <strong>Configurações bloqueadas</strong>
+              <p x-text="bannerMessage"></p>
+              <a class="btn btn--ghost btn--sm" href="#configuracoes">Confessar / Restaurar</a>
+            </div>
+          </template>
+
+          <section class="config">
+            <article>
+              <header>
+                <h3>Notificações</h3>
+                <p>Controle push e email</p>
+              </header>
+              <div class="config__option">
+                <label>
+                  <input type="checkbox" x-model="settings.notificacoes.push" x-bind:disabled="blocked" />
+                  Push ativado
+                </label>
+              </div>
+              <div class="config__option">
+                <label>
+                  <input type="checkbox" x-model="settings.notificacoes.email" x-bind:disabled="blocked" />
+                  Email ativado
+                </label>
+              </div>
+            </article>
+
+            <article x-bind:class="{'inventory-card--blocked': blocked}">
+              <header>
+                <h3>Privacidade</h3>
+                <p>Controle de perfil público</p>
+              </header>
+              <label>
+                <input type="checkbox" x-model="settings.privacidade.perfilPublico" x-bind:disabled="blocked" />
+                Perfil público
+              </label>
+            </article>
+
+            <article>
+              <header>
+                <h3>Idioma</h3>
+                <p>Selecione o idioma padrão</p>
+              </header>
+              <select x-model="settings.idioma">
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="en-US">English</option>
+                <option value="es-ES">Español</option>
+              </select>
+            </article>
+
+            <article>
+              <header>
+                <h3>Tema</h3>
+                <p>Claro, escuro ou alto contraste</p>
+              </header>
+              <div class="config__option">
+                <label>
+                  <input type="radio" value="claro" x-model="settings.tema" />
+                  Claro
+                </label>
+                <label>
+                  <input type="radio" value="escuro" x-model="settings.tema" />
+                  Escuro
+                </label>
+                <label>
+                  <input type="radio" value="alto-contraste" x-model="settings.tema" />
+                  Alto contraste
+                </label>
+              </div>
+            </article>
+
+            <article>
+              <header>
+                <h3>Acessibilidade</h3>
+                <p>Recursos adicionais</p>
+              </header>
+              <div class="config__option">
+                <label>
+                  <input type="checkbox" x-model="settings.acessibilidade.tts" />
+                  Narrador (TTS)
+                </label>
+                <label>
+                  <input type="checkbox" x-model="settings.acessibilidade.altoContraste" />
+                  Alto contraste
+                </label>
+                <label>
+                  <input type="checkbox" x-model="settings.acessibilidade.libras" />
+                  Suporte a Libras (beta)
+                </label>
+              </div>
+            </article>
+
+            <article>
+              <header>
+                <h3>Sobre</h3>
+                <p>Versão e documentos</p>
+              </header>
+              <p>Versão 0.2 · Atualizado em 24/11/2025</p>
+              <div class="config__links">
+                <a href="docs/tela_sobre.md" target="_blank" rel="noopener">Sobre</a>
+                <a href="docs/tela_termos.md" target="_blank" rel="noopener">Termos</a>
+                <a href="docs/tela_politica.md" target="_blank" rel="noopener">Política</a>
+              </div>
+            </article>
+
+            <article class="config__danger">
+              <button class="btn btn--ghost" type="button">Ver tutorial novamente</button>
+              <button class="btn btn--ghost" type="button" x-bind:disabled="blocked">Sair da conta</button>
+            </article>
+          </section>
+        </section>
+
+        <section
+          id="screen-login"
+          class="screen screen--fullscreen"
+          data-screen="login"
+          role="tabpanel"
+          aria-label="Tela Login"
+          aria-hidden="true"
+          x-data="loginStore()"
+          x-init="init()"
+        >
+          <div class="login-screen">
+            <div class="login-screen__container">
+              <img
+                src="assets/logotipos/notext-perfil-logo/favicon-96x96.png"
+                alt="Logo Bíblia GamePray"
+                class="login-screen__logo"
+              />
+              <h1 class="login-screen__title">Bem-vindo ao Bíblia GamePray</h1>
+              <p class="login-screen__subtitle">Entre, crie sua conta ou explore como visitante.</p>
+
+              <div class="login-screen__tabs">
+                <button
+                  type="button"
+                  role="tab"
+                  x-bind:aria-selected="activeTab === 'entrar'"
+                  x-bind:class="{'login-screen__tab--active': activeTab === 'entrar'}"
+                  class="login-screen__tab"
+                  @click="setTab('entrar')"
+                  onclick="if (typeof window.loginStore === 'function') { const store = window.loginStore(); if (store && typeof store.setTab === 'function') { store.setTab('entrar'); } }"
+                >
+                  Entrar
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  x-bind:aria-selected="activeTab === 'criar'"
+                  x-bind:class="{'login-screen__tab--active': activeTab === 'criar'}"
+                  class="login-screen__tab"
+                  @click="setTab('criar')"
+                  onclick="if (typeof window.loginStore === 'function') { const store = window.loginStore(); if (store && typeof store.setTab === 'function') { store.setTab('criar'); } }"
+                >
+                  Criar conta
+                </button>
+              </div>
+
+              <!-- Tab: Entrar -->
+              <form
+                class="login-screen__form"
+                x-show="activeTab === 'entrar'"
+                @submit.prevent="handleLogin"
+                onsubmit="event.preventDefault(); if (typeof window.loginStore === 'function') { const store = window.loginStore(); if (store && typeof store.handleLogin === 'function') { store.handleLogin(event); } } return false;"
+                x-cloak
+              >
+                <div class="login-screen__input-group">
+                  <label for="login-email" class="login-screen__label">Email</label>
+                  <input
+                    type="email"
+                    id="login-email"
+                    x-model="formData.email"
+                    placeholder="seu@email.com"
+                    required
+                    x-bind:disabled="loading"
+                    class="login-screen__input"
+                  />
+                </div>
+                <div class="login-screen__input-group">
+                  <label for="login-password" class="login-screen__label">Senha</label>
+                  <input
+                    x-bind:type="showPassword ? 'text' : 'password'"
+                    id="login-password"
+                    x-model="formData.password"
+                    placeholder="••••••••"
+                    required
+                    x-bind:disabled="loading"
+                    class="login-screen__input"
+                  />
+                </div>
+                
+                <div class="login-screen__error" x-show="error" x-text="error" x-cloak></div>
+
+                <button type="submit" class="login-screen__btn" x-bind:disabled="loading">
+                  <span x-show="!loading">Entrar</span>
+                  <span x-show="loading" x-cloak>Entrando...</span>
+                </button>
+                
+                <button
+                  type="button"
+                  class="login-screen__link"
+                  @click="handlePasswordRecovery()"
+                  onclick="if (typeof window.loginStore === 'function') { const store = window.loginStore(); if (store && typeof store.handlePasswordRecovery === 'function') { store.handlePasswordRecovery(); } }"
+                >
+                  Esqueceu a senha?
+                </button>
+              </form>
+
+              <!-- Tab: Criar Conta -->
+              <form
+                class="login-screen__form"
+                x-show="activeTab === 'criar'"
+                @submit.prevent="handleSignup"
+                onsubmit="event.preventDefault(); if (typeof window.loginStore === 'function') { const store = window.loginStore(); if (store && typeof store.handleSignup === 'function') { store.handleSignup(event); } } return false;"
+                x-cloak
+              >
+                <div class="login-screen__input-group">
+                  <label for="signup-nome" class="login-screen__label">Nome</label>
+                  <input
+                    type="text"
+                    id="signup-nome"
+                    x-model="formData.nome"
+                    placeholder="Seu nome completo"
+                    required
+                    x-bind:disabled="loading"
+                    class="login-screen__input"
+                  />
+                </div>
+                <div class="login-screen__input-group">
+                  <label for="signup-email" class="login-screen__label">Email</label>
+                  <input
+                    type="email"
+                    id="signup-email"
+                    x-model="formData.email"
+                    placeholder="seu@email.com"
+                    required
+                    x-bind:disabled="loading"
+                    class="login-screen__input"
+                  />
+                </div>
+                <div class="login-screen__input-group">
+                  <label for="signup-password" class="login-screen__label">Senha</label>
+                  <input
+                    x-bind:type="showPassword ? 'text' : 'password'"
+                    id="signup-password"
+                    x-model="formData.password"
+                    placeholder="Mínimo 6 caracteres"
+                    required
+                    minlength="6"
+                    x-bind:disabled="loading"
+                    class="login-screen__input"
+                  />
+                </div>
+                <div class="login-screen__input-group">
+                  <label for="signup-confirm" class="login-screen__label">Confirmar senha</label>
+                  <input
+                    x-bind:type="showPassword ? 'text' : 'password'"
+                    id="signup-confirm"
+                    x-model="formData.confirmPassword"
+                    placeholder="Digite novamente"
+                    required
+                    x-bind:disabled="loading"
+                    class="login-screen__input"
+                  />
+                </div>
+
+                <div class="login-screen__error" x-show="error" x-text="error" x-cloak></div>
+
+                <button type="submit" class="login-screen__btn" x-bind:disabled="loading">
+                  <span x-show="!loading">Criar conta</span>
+                  <span x-show="loading" x-cloak>Criando...</span>
+                </button>
+              </form>
+
+              <!-- Modo Demo -->
+              <div class="login-screen__divider">ou</div>
+
+              <button
+                type="button"
+                class="login-screen__demo-btn"
+                @click="handleDemo()"
+                onclick="if (typeof window.loginStore === 'function') { const store = window.loginStore(); if (store && typeof store.handleDemo === 'function') { store.handleDemo(); } }"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">explore</span>
+                Explorar como visitante
+              </button>
+
+              <!-- Login Social -->
+              <div class="login-screen__divider">Login rápido:</div>
+              <div class="login-screen__social">
+                <button
+                  type="button"
+                  class="login-screen__social-btn"
+                  @click="handleSocialLogin('Google')"
+                  onclick="if (typeof window.loginStore === 'function') { const store = window.loginStore(); if (store && typeof store.handleSocialLogin === 'function') { store.handleSocialLogin('Google'); } }"
+                  aria-label="Login com Google"
+                >
+                  <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                  </svg>
+                  Google
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- NAVBAR: escondida em splash, login, tutorial -->
+      <nav 
+        class="app-navbar" 
+        role="tablist" 
+        aria-label="Navegação principal"
+        x-data="{}"
+        x-show="!['splash', 'login', 'tutorial'].includes(window.location.hash.replace('#', ''))"
+        x-cloak
+      >
+        <button
+          class="app-navbar__item app-navbar__item--active"
+          data-screen-target="inicio"
+          id="tab-inicio"
+          role="tab"
+          aria-controls="screen-inicio"
+          aria-selected="true"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">home</span>
+          <span>Início</span>
+        </button>
+        <button
+          class="app-navbar__item"
+          data-screen-target="missoes"
+          id="tab-missoes"
+          role="tab"
+          aria-controls="screen-missoes"
+          aria-selected="false"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">map</span>
+          <span>Missões</span>
+        </button>
+        <button
+          class="app-navbar__item"
+          data-screen-target="inventario"
+          id="tab-inventario"
+          role="tab"
+          aria-controls="screen-inventario"
+          aria-selected="false"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">backpack</span>
+          <span>Inventário</span>
+        </button>
+        <button
+          class="app-navbar__item"
+          data-screen-target="estudos"
+          id="tab-estudos"
+          role="tab"
+          aria-controls="screen-estudos"
+          aria-selected="false"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+          <span>Estudos</span>
+        </button>
+        <button
+          class="app-navbar__item"
+          data-screen-target="conquistas"
+          id="tab-conquistas"
+          role="tab"
+          aria-controls="screen-conquistas"
+          aria-selected="false"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">trophy</span>
+          <span>Conquistas</span>
+        </button>
+        <button
+          class="app-navbar__item"
+          type="button"
+          data-drawer-open
+          aria-label="Abrir menu de mais opções"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">menu_open</span>
+          <span>Mais</span>
+        </button>
+      </nav>
+
+      <footer class="app-footer">
+        <small>v0.2 • Shell SPA + Drawer • Atualizado em 23/11/2025</small>
+      </footer>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <!-- Carregar stores ANTES do Alpine.js -->
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/bloqueios.js"></script>
+    <script type="module" src="js/hud.js"></script>
+    <script type="module" src="js/inicio.js"></script>
+    <script type="module" src="js/missoes.js"></script>
+    <script type="module" src="js/estudos.js"></script>
+    <script type="module" src="js/inventario.js"></script>
+    <script type="module" src="js/loja.js"></script>
+    <script type="module" src="js/perfil.js"></script>
+    <script type="module" src="js/configuracoes.js"></script>
+    <script type="module" src="js/ranking.js"></script>
+    <script type="module" src="js/conquistas.js"></script>
+    <script type="module" src="js/splash.js"></script>
+    <script type="module" src="js/login.js"></script>
+    <script type="module" src="js/tutorial.js"></script>
+    <script type="module" src="js/avatar-editor.js"></script>
+    
+    <!-- Globais por último (inicializa app) -->
+    <script type="module" src="js/globais.js"></script>
+    
+    <!-- Alpine.js carregado após todos os módulos -->
+    <script>
+      // Aguarda todos os módulos ES6 carregarem
+      (async () => {
+        // Lista de stores necessários
+        const requiredStores = [
+          'tutorialStore',
+          'loginStore', 
+          'hudStore',
+          'inicioStore',
+          'missoesStore',
+          'estudosStore',
+          'inventoryStore',
+          'lojaStore',
+          'perfilStore',
+          'configuracoesStore',
+          'rankingStore',
+          'conquistasStore',
+          'avatarEditorStore'
+        ];
+        
+        // Aguarda até todos os stores estarem definidos
+        const waitForStores = () => {
+          return new Promise((resolve) => {
+            const check = () => {
+              const allDefined = requiredStores.every(
+                store => typeof window[store] === 'function'
+              );
+              if (allDefined) {
+                resolve();
+              } else {
+                setTimeout(check, 50);
+              }
+            };
+            check();
+          });
+        };
+        
+        // Aguarda stores e então carrega Alpine.js
+        await waitForStores();
+        
+        // Aguarda um pouco mais para garantir que os módulos terminaram de executar
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        // Carrega Alpine.js
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js';
+        script.defer = true;
+        
+        // Remove x-cloak após Alpine inicializar
+        script.onload = () => {
+          // Aguarda Alpine inicializar completamente
+          setTimeout(() => {
+            if (window.Alpine) {
+              // Remove x-cloak imediatamente após Alpine inicializar
+              document.body.removeAttribute('x-cloak');
+              console.log('[BGP] Alpine.js inicializado, x-cloak removido');
+              
+              // Verifica se tutorialStore está disponível
+              if (typeof window.tutorialStore === 'function') {
+                console.log('[BGP] tutorialStore está disponível');
+                // Testa se pode criar uma instância
+                try {
+                  const testStore = window.tutorialStore();
+                  console.log('[BGP] tutorialStore testado:', {
+                    hasNextStep: typeof testStore.nextStep === 'function',
+                    hasPrevStep: typeof testStore.prevStep === 'function',
+                    hasSkip: typeof testStore.skip === 'function'
+                  });
+                } catch (error) {
+                  console.error('[BGP] ERRO ao testar tutorialStore:', error);
+                }
+              } else {
+                console.error('[BGP] tutorialStore NÃO está disponível!');
+              }
+            } else {
+              // Fallback: remove x-cloak mesmo se Alpine não inicializar
+              setTimeout(() => {
+                document.body.removeAttribute('x-cloak');
+                console.log('[BGP] Timeout: x-cloak removido (Alpine pode não ter inicializado)');
+              }, 2000);
+            }
+          }, 500); // Aumentado para 500ms para garantir inicialização
+        };
+        
+        // Fallback: remove x-cloak após 3 segundos mesmo se script não carregar
+        setTimeout(() => {
+          if (document.body.hasAttribute('x-cloak')) {
+            document.body.removeAttribute('x-cloak');
+            console.log('[BGP] Fallback: x-cloak removido após timeout');
+          }
+        }, 3000);
+        
+        document.body.appendChild(script);
+      })();
+    </script>
+  </body>
+</html>
+

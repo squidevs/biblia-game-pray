@@ -1,0 +1,86 @@
+{
+  "categorias": [
+    { "id": "armadura", "nome": "Armadura Divina", "icone": "shield" },
+    { "id": "consumivel", "nome": "Consumíveis", "icone": "lunch_dining" },
+    { "id": "permanente", "nome": "Permanentes", "icone": "star" },
+    { "id": "especial", "nome": "Especiais", "icone": "diamond" }
+  ],
+  "itens_usuario": [
+    {
+      "id": "item001",
+      "item_id": "cinto_verdade",
+      "nome": "Cinto da Verdade",
+      "descricao": "Aumenta resistência a mentiras e enganos",
+      "categoria": "armadura",
+      "tipo": "permanente",
+      "raridade": "epico",
+      "nivel": 5,
+      "quantidade": 1,
+      "equipado": true,
+      "icone": "shield",
+      "efeitos": [
+        { "atributo": "fidelidade", "valor": +10 }
+      ]
+    },
+    {
+      "id": "item002",
+      "item_id": "couraca_justica",
+      "nome": "Couraça da Justiça",
+      "descricao": "Protege contra tentações morais",
+      "categoria": "armadura",
+      "tipo": "permanente",
+      "raridade": "epico",
+      "nivel": 4,
+      "quantidade": 1,
+      "equipado": true,
+      "icone": "shield",
+      "efeitos": [
+        { "atributo": "mansidao", "valor": +8 }
+      ]
+    },
+    {
+      "id": "item003",
+      "item_id": "pao_vida",
+      "nome": "Pão da Vida",
+      "descricao": "Restaura 2 corações",
+      "categoria": "consumivel",
+      "tipo": "consumivel",
+      "raridade": "comum",
+      "quantidade": 5,
+      "equipado": false,
+      "icone": "lunch_dining",
+      "efeitos": [
+        { "atributo": "coracoes", "valor": +2 }
+      ]
+    },
+    {
+      "id": "item004",
+      "item_id": "agua_viva",
+      "nome": "Água Viva",
+      "descricao": "Restaura 20% do Espírito Santo",
+      "categoria": "consumivel",
+      "tipo": "consumivel",
+      "raridade": "raro",
+      "quantidade": 3,
+      "equipado": true,
+      "icone": "water_drop",
+      "efeitos": [
+        { "atributo": "espiritoSanto", "valor": +20 }
+      ]
+    },
+    {
+      "id": "item005",
+      "item_id": "chave_sabedoria",
+      "nome": "Chave da Sabedoria",
+      "descricao": "Desbloqueia conteúdo especial",
+      "categoria": "especial",
+      "tipo": "permanente",
+      "raridade": "lendario",
+      "quantidade": 2,
+      "equipado": false,
+      "icone": "key",
+      "efeitos": []
+    }
+  ]
+}
+

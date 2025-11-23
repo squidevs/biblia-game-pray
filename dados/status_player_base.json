@@ -1,13 +1,34 @@
 {
   "userID": "<usuario-id>",
+  "perfil": {
+    "nome": "Matheus Bonotto",
+    "titulo": "Discípulo",
+    "avatar": "assets/logotipos/notext-perfil-logo/perfil-colorido.png"
+  },
+  "recursos": {
+    "moedas": 245,
+    "ouroFe": 245,
+    "coracoes": 4,
+    "coracoesMax": 5,
+    "chaves": 2
+  },
   "atributos": {
-    "nivel": 1,
-    "xp": 0,
-    "xpProximoNivel": 100,
+    "nivel": 4,
+    "xp": 265,
+    "xpProximoNivel": 400,
     "atributosPrincipais": {
-      "fe": 0,
-      "sabedoria": 0,
+      "fe": 42,
+      "sabedoria": 18,
       "espiritoSanto": 100
+    },
+    "efeitosAtivos": {
+      "buffs": [
+        { "id": "defesa-extra", "nome": "Defesa Extra", "icone": "shield", "tempoRestante": "00:45" },
+        { "id": "velocidade-divina", "nome": "Velocidade Divina", "icone": "bolt", "tempoRestante": "00:30" }
+      ],
+      "debuffs": [
+        { "id": "veneno", "nome": "Veneno", "icone": "skull", "tempoRestante": "00:12" }
+      ]
     },
     "armaduraDeus": {
       "cintoVerdade": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}},
@@ -18,15 +39,15 @@
       "espadaEspirito": {"valor": 0, "buffs": {"frutosEspirito": [], "obrasCarne": []}}
     },
     "frutosEspirito": {
-      "amor": 0,
-      "alegria": 0,
-      "paz": 0,
-      "paciencia": 0,
-      "bondade": 0,
-      "benignidade": 0,
-      "fidelidade": 0,
-      "mansidao": 0,
-      "dominioProprio": 0
+      "amor": 38,
+      "alegria": 24,
+      "paz": 42,
+      "paciencia": 31,
+      "bondade": 27,
+      "benignidade": 19,
+      "fidelidade": 33,
+      "mansidao": 21,
+      "dominioProprio": 29
     },
     "pecados": {
       "obrasCarne": {
@@ -42,22 +63,22 @@
       }
     },
     "obrasCarneAgrupadas": {
-      "imoralidadeImpureza": 0,
-      "idolatriaFeiticaria": 0,
-      "inimizadeOdio": 0,
-      "ciumesInveja": 0,
-      "ira": 0,
-      "dissensaoFaccao": 0,
-      "orgiasBebedices": 0,
-      "ambicaoEgoista": 0,
-      "orgulhoEgoismo": 0
+      "imoralidadeImpureza": 14,
+      "idolatriaFeiticaria": 7,
+      "inimizadeOdio": 9,
+      "ciumesInveja": 68,
+      "ira": 18,
+      "dissensaoFaccao": 8,
+      "orgiasBebedices": 3,
+      "ambicaoEgoista": 82,
+      "orgulhoEgoismo": 76
     },
     "limites": {
       "maxBuffs": 5,
       "maxDebuffs": 5
     },
     "espiritoSanto": {
-      "valor": 100,
+      "valor": 88,
       "reduzPorHora": 1,
       "travaBatizado": 50,
       "travaNaoBatizado": 15,
@@ -77,8 +98,8 @@
       "proximaRecarga": null,
       "ultimoUso": null
     },
-    "sequenciaAtual": 0,
-    "melhorSequencia": 0,
+    "sequenciaAtual": 9,
+    "melhorSequencia": 21,
     "diasOfensiva": 0,
     "dataInicioOfensiva": null
   },
@@ -104,15 +125,15 @@
     "rollbackDisponivel": true
   },
   "estatisticas": {
-    "missoesCompletas": 0,
-    "missoesFalhas": 0,
-    "quizAcertos": 0,
-    "quizErros": 0,
-    "tempoOracaoMinutos": 0,
-    "diasConsecutivos": 0,
-    "itensColetados": 0,
-    "conquistasDesbloqueadas": 0,
-    "livrosEstudados": 0
+    "missoesCompletas": 34,
+    "missoesFalhas": 3,
+    "quizAcertos": 87,
+    "quizErros": 12,
+    "tempoOracaoMinutos": 640,
+    "diasConsecutivos": 12,
+    "itensColetados": 18,
+    "conquistasDesbloqueadas": 7,
+    "livrosEstudados": 6
   },
   "configuracoes": {
     "notificacoes": true,

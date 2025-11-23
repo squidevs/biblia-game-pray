@@ -1,154 +1,151 @@
 {
-  "estudos": [
+  "testamentos": [
     {
-      "id": 1,
-      "codigo": "CAM_FUND",
-      "titulo": "Caminho: Fundamentos da Palavra",
-      "descricao": "Introdução à leitura bíblica, estrutura da Bíblia e prática de leitura diária.",
-      "nivelRecomendado": 1,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "modulos": [101],
-      "recompensaConclusao": { "xp": 500, "itens": [117], "conquistaId": null },
-      "dataCriado": "2025-11-13T10:05:00Z"
+      "id": "velho",
+      "titulo": "Antigo Testamento",
+      "descricao": "A Lei e os Profetas",
+      "progresso": 15,
+      "livros_total": 39,
+      "capitulos_total": 929
     },
-
     {
-      "id": 2,
-      "codigo": "CAM_DEV",
-      "titulo": "Caminho: Prática Devocional",
-      "descricao": "Ferramentas práticas para Jornada, oração e aplicação diária da Palavra.",
-      "nivelRecomendado": 1,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [1, 7], "conquistasRequeridas": [] },
-      "modulos": [102],
-      "recompensaConclusao": { "xp": 700, "itens": [100], "conquistaId": null },
-      "dataCriado": "2025-11-13T10:05:00Z"
+      "id": "novo",
+      "titulo": "Novo Testamento",
+      "descricao": "O Evangelho e as Epístolas",
+      "progresso": 30,
+      "livros_total": 27,
+      "capitulos_total": 260
     }
   ],
-
-  "modulos": [
+  "livros": [
     {
-      "id": 101,
-      "titulo": "Módulo 1 — Fundamentos",
-      "descricao": "Compreender a divisão da Bíblia, como ler um capítulo e marcar versículos.",
-      "ordem": 1,
-  "licoes": [1001, 1002, 1003],
-      "quizFinalId": 2001,
-      "recompensaModulo": { "xp": 200, "itens": [] }
+      "id": "genesis",
+      "testamento": "velho",
+      "titulo": "Gênesis",
+      "abreviacao": "Gn",
+      "capitulos_total": 50,
+      "capitulos_lidos": 12,
+      "progresso": 24,
+      "categoria": "pentateuco",
+      "icone": "menu_book"
     },
-
     {
-      "id": 102,
-      "titulo": "Módulo 2 — Devocional e Aplicação",
-      "descricao": "Como transformar leitura em oração e anotações no caderno devocional.",
-      "ordem": 2,
-  "licoes": [1004, 1005, 1006],
-      "quizFinalId": 2002,
-      "recompensaModulo": { "xp": 300, "itens": [] }
+      "id": "exodo",
+      "testamento": "velho",
+      "titulo": "Êxodo",
+      "abreviacao": "Êx",
+      "capitulos_total": 40,
+      "capitulos_lidos": 0,
+      "progresso": 0,
+      "categoria": "pentateuco",
+      "icone": "menu_book"
+    },
+    {
+      "id": "salmos",
+      "testamento": "velho",
+      "titulo": "Salmos",
+      "abreviacao": "Sl",
+      "capitulos_total": 150,
+      "capitulos_lidos": 45,
+      "progresso": 30,
+      "categoria": "poeticos",
+      "icone": "music_note"
+    },
+    {
+      "id": "proverbios",
+      "testamento": "velho",
+      "titulo": "Provérbios",
+      "abreviacao": "Pv",
+      "capitulos_total": 31,
+      "capitulos_lidos": 10,
+      "progresso": 32,
+      "categoria": "sabedoria",
+      "icone": "psychology"
+    },
+    {
+      "id": "mateus",
+      "testamento": "novo",
+      "titulo": "Mateus",
+      "abreviacao": "Mt",
+      "capitulos_total": 28,
+      "capitulos_lidos": 20,
+      "progresso": 71,
+      "categoria": "evangelhos",
+      "icone": "auto_stories"
+    },
+    {
+      "id": "joao",
+      "testamento": "novo",
+      "titulo": "João",
+      "abreviacao": "Jo",
+      "capitulos_total": 21,
+      "capitulos_lidos": 21,
+      "progresso": 100,
+      "categoria": "evangelhos",
+      "icone": "auto_stories"
+    },
+    {
+      "id": "romanos",
+      "testamento": "novo",
+      "titulo": "Romanos",
+      "abreviacao": "Rm",
+      "capitulos_total": 16,
+      "capitulos_lidos": 8,
+      "progresso": 50,
+      "categoria": "epistolas",
+      "icone": "mail"
+    },
+    {
+      "id": "efesios",
+      "testamento": "novo",
+      "titulo": "Efésios",
+      "abreviacao": "Ef",
+      "capitulos_total": 6,
+      "capitulos_lidos": 6,
+      "progresso": 100,
+      "categoria": "epistolas",
+      "icone": "mail"
+    },
+    {
+      "id": "apocalipse",
+      "testamento": "novo",
+      "titulo": "Apocalipse",
+      "abreviacao": "Ap",
+      "capitulos_total": 22,
+      "capitulos_lidos": 0,
+      "progresso": 0,
+      "categoria": "profetico",
+      "icone": "auto_stories"
     }
   ],
-
-  "licoes": [
+  "ciclos_aprendizagem": [
     {
-      "id": 1001,
-      "tipo": "aula",
-      "titulo": "Lição 1 — Estrutura da Bíblia",
-      "descricao": "Visão geral: Antigo e Novo Testamento, tipos de livros e como navegar.",
-      "duracaoMinutos": 10,
-      "ordem": 1,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "conteudo": { "versiculosExemplo": ["Gênesis 1:1", "Mateus 1:1"], "recursos": [] },
-      "recompensa": { "xp": 50, "itens": [] }
-    },
-
-    {
-      "id": 1002,
-      "tipo": "aula",
-      "titulo": "Lição 2 — Como Ler um Capítulo",
-      "descricao": "Técnicas simples de leitura: contexto, repetições e marcar versículos-chave.",
-      "duracaoMinutos": 12,
-      "ordem": 2,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "conteudo": { "versiculosExemplo": ["Salmos 1:1-3"], "recursos": [] },
-      "recompensa": { "xp": 60, "itens": [] }
-    },
-
-    {
-      "id": 1003,
-      "tipo": "quiz",
-      "titulo": "Quiz 1 — Fundamentos Básicos",
-      "descricao": "Pequeno quiz para fixar a estrutura e leitura de capítulos.",
-      "duracaoMinutos": 8,
-      "ordem": 3,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [1], "conquistasRequeridas": [] },
-      "questoes": [
-        { "id": 1, "pergunta": "Quantos testamentos existem na Bíblia?", "tipo": "unica", "opcoes": ["1","2","3","4"], "respostaCorreta": 1 },
-        { "id": 2, "pergunta": "Qual livro geralmente começa o Antigo Testamento?", "tipo": "unica", "opcoes": ["Mateus","Gênesis","Salmos","Romanos"], "respostaCorreta": 1 }
-      ],
-      "recompensa": { "xp": 120, "itens": [] }
-    },
-
-    {
-      "id": 1004,
-      "tipo": "aula",
-      "titulo": "Lição 3 — Devocional com Caderno",
-      "descricao": "Como usar o Caderno Devocional para registrar orações e insights.",
-      "duracaoMinutos": 15,
-      "ordem": 1,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [7], "conquistasRequeridas": [] },
-      "conteudo": { "exercicio": "Registre uma oração de gratidão no caderno", "recursos": [] },
-      "recompensa": { "xp": 80, "itens": [] }
-    },
-
-    {
-      "id": 1005,
-      "tipo": "aula",
-      "titulo": "Lição 4 — Oração Aplicada",
-      "descricao": "Combinar leitura com oração e aplicação prática do texto.",
-      "duracaoMinutos": 12,
-      "ordem": 2,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [1,7], "conquistasRequeridas": [] },
-      "conteudo": { "exercicio": "Leia Mateus 6 e escreva um pedido de oração", "recursos": [] },
-      "recompensa": { "xp": 90, "itens": [] }
-    },
-
-    {
-      "id": 1006,
-      "tipo": "quiz",
-      "titulo": "Quiz 2 — Aplicação Devocional",
-      "descricao": "Verifica se o aluno aplicou as práticas devocionais apresentadas.",
-      "duracaoMinutos": 10,
-      "ordem": 3,
-      "requisitos": { "nivelMinimo": 1, "itensRequeridos": [1,7], "conquistasRequeridas": [] },
-      "questoes": [
-        { "id": 1, "pergunta": "Qual é a finalidade principal do journaling devocional?", "tipo": "unica", "opcoes": ["Acumular XP","Registrar oração e reflexão","Comprar itens","Compartilhar fotos"], "respostaCorreta": 1 },
-        { "id": 2, "pergunta": "Que prática ajuda a transformar leitura em ação?", "tipo": "unica", "opcoes": ["Ignorar versículos","Orar e anotar","Só ler rápido","Compartilhar sem refletir"], "respostaCorreta": 1 }
-      ],
-      "recompensa": { "xp": 150, "itens": [100] }
-    }
-  ],
-
-  "quizzes": [
-    {
-      "id": 2001,
-      "titulo": "Quiz Final módulo 1",
-      "descricao": "Avaliação do Módulo 1.",
-      "questoesIds": [1,2],
-      "recompensa": { "xp": 200 }
+      "id": "ciclo1",
+      "nome": "Leitura",
+      "icone": "menu_book",
+      "descricao": "Leia o capítulo com atenção",
+      "duracao_estimada": "5-10min"
     },
     {
-      "id": 2002,
-      "titulo": "Quiz Final módulo 2",
-      "descricao": "Avaliação do Módulo 2.",
-      "questoesIds": [1,2],
-      "recompensa": { "xp": 300 }
+      "id": "ciclo2",
+      "nome": "Reflexão",
+      "icone": "psychology",
+      "descricao": "Responda perguntas sobre o conteúdo",
+      "duracao_estimada": "3-5min"
     },
     {
-      "id": 2003,
-      "titulo": "Avaliação do Caminho Bíblico",
-      "descricao": "Quiz final que exige conclusão dos dois módulos para desbloquear.",
-      "questoesIds": [],
-      "requisitos": { "conclusaoModulos": [101,102] },
-      "recompensa": { "xp": 500, "conquistaId": null }
+      "id": "ciclo3",
+      "nome": "Quiz",
+      "icone": "quiz",
+      "descricao": "Teste seus conhecimentos",
+      "duracao_estimada": "2-3min"
+    },
+    {
+      "id": "ciclo4",
+      "nome": "Aplicação",
+      "icone": "check_circle",
+      "descricao": "Como aplicar na vida diária",
+      "duracao_estimada": "5min"
     }
   ]
 }

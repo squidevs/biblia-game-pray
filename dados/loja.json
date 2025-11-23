@@ -1,120 +1,140 @@
 {
-  "loja": [
+  "ofertas": [
     {
-      "id": 1,
-      "sku": "poçao_fe_peq_x5",
-      "nome": "Pacote Poção de Fé (x5)",
-      "descricao": "Pacote com 5 Poções de Fé pequenas. Restaura 10 pontos de fé cada.",
-      "conteudo": [ { "itemId": 100, "quantidade": 5 } ],
-      "preco": { "moeda": 50, "real": null },
-      "disponibilidade": { "estoque": null, "limitePorUsuario": 5 },
-      "categoriaLoja": "consumiveis",
-      "tags": ["starter","curativo"],
-      "ativo": true,
-      "dataCriado": "2025-11-13T09:30:00Z"
+      "id": "offer001",
+      "nome": "Pão da Vida",
+      "descricao": "Restaura 2 corações imediatamente",
+      "categoria": "consumivel",
+      "tipo": "consumivel",
+      "raridade": "comum",
+      "preco": {
+        "moedas": 50,
+        "ouro_fe": 0
+      },
+      "estoque": "ilimitado",
+      "requisitos": {
+        "nivel_minimo": 1,
+        "obras_max": 100
+      },
+      "icone": "lunch_dining",
+      "tags": ["basico", "curativo"]
     },
-
     {
-      "id": 2,
-      "sku": "poçao_fe_grande",
-      "nome": "Poção de Fé (Grande)",
-      "descricao": "Restaura 50 pontos de fé. Uso único.",
-      "conteudo": [ { "itemId": 102, "quantidade": 1 } ],
-      "preco": { "moeda": 120, "real": null },
-      "disponibilidade": { "estoque": 250, "limitePorUsuario": 2 },
-      "categoriaLoja": "consumiveis",
-      "tags": ["cura","rare"],
-      "ativo": true,
-      "dataCriado": "2025-11-13T09:30:00Z"
+      "id": "offer002",
+      "nome": "Água Viva",
+      "descricao": "Restaura 20% do Espírito Santo",
+      "categoria": "consumivel",
+      "tipo": "consumivel",
+      "raridade": "raro",
+      "preco": {
+        "moedas": 150,
+        "ouro_fe": 0
+      },
+      "estoque": "ilimitado",
+      "requisitos": {
+        "nivel_minimo": 3,
+        "obras_max": 100
+      },
+      "icone": "water_drop",
+      "tags": ["espiritual", "curativo"]
     },
-
     {
-      "id": 3,
-      "sku": "pacote_versiculos_10",
-      "nome": "Pacote Versículos (10)",
-      "descricao": "10 versículos curtos desbloqueáveis para usar como versículo do dia ou compartilhar.",
-      "conteudo": [ { "itemId": 117, "quantidade": 10 } ],
-      "preco": { "moeda": 30, "real": null },
-      "disponibilidade": { "estoque": null, "limitePorUsuario": 10 },
-      "categoriaLoja": "recursos",
-      "tags": ["devocional"],
-      "ativo": true,
-      "dataCriado": "2025-11-13T09:30:00Z"
+      "id": "offer003",
+      "nome": "Escudo da Fé (Lv1)",
+      "descricao": "Peça da Armadura Divina - Bloqueia ataques espirituais",
+      "categoria": "armadura",
+      "tipo": "permanente",
+      "raridade": "epico",
+      "preco": {
+        "moedas": 500,
+        "ouro_fe": 10
+      },
+      "estoque": 1,
+      "requisitos": {
+        "nivel_minimo": 5,
+        "obras_max": 74,
+        "frutos_min": 50
+      },
+      "icone": "shield",
+      "tags": ["armadura", "divino"]
     },
-
     {
-      "id": 4,
-      "sku": "moldura_ouro_1dia",
-      "nome": "Moldura Dourada (1 dia)",
-      "descricao": "Decoração temporária para perfil por 24h.",
-      "conteudo": [ { "itemId": 146, "quantidade": 1 } ],
-      "preco": { "moeda": 500, "real": null },
-      "disponibilidade": { "estoque": 50, "limitePorUsuario": 1 },
-      "categoriaLoja": "cosmeticos",
-      "tags": ["estetica","temporario","epic"],
-      "ativo": true,
-      "dataCriado": "2025-11-13T09:30:00Z"
+      "id": "offer004",
+      "nome": "Espada do Espírito (Lv1)",
+      "descricao": "Peça da Armadura Divina - Palavra de Deus viva e eficaz",
+      "categoria": "armadura",
+      "tipo": "permanente",
+      "raridade": "lendario",
+      "preco": {
+        "moedas": 1000,
+        "ouro_fe": 25
+      },
+      "estoque": 1,
+      "requisitos": {
+        "nivel_minimo": 10,
+        "obras_max": 49,
+        "frutos_min": 75
+      },
+      "icone": "swords",
+      "tags": ["armadura", "divino", "premium"]
     },
-
     {
-      "id": 5,
-      "sku": "bundle_inicial",
-      "nome": "Pacote Inicial - Começo da Jornada",
-      "descricao": "Bundle econômico contendo Bíblia (digital), Caderno de Estudos e 10 Poções de Fé pequenas.",
-      "conteudo": [
-        { "itemId": 1, "quantidade": 1 },
-        { "itemId": 7, "quantidade": 1 },
-        { "itemId": 100, "quantidade": 10 }
-      ],
-      "preco": { "moeda": 300, "real": null },
-      "disponibilidade": { "estoque": 1000, "limitePorUsuario": 1 },
-      "categoriaLoja": "bundles",
-      "tags": ["starter","economia"],
-      "ativo": true,
-      "dataCriado": "2025-11-13T09:30:00Z"
+      "id": "offer005",
+      "nome": "Chave da Sabedoria",
+      "descricao": "Desbloqueia conteúdos secretos e especiais",
+      "categoria": "especial",
+      "tipo": "permanente",
+      "raridade": "lendario",
+      "preco": {
+        "moedas": 800,
+        "ouro_fe": 20
+      },
+      "estoque": 5,
+      "requisitos": {
+        "nivel_minimo": 8,
+        "obras_max": 60
+      },
+      "icone": "key",
+      "tags": ["especial", "desbloqueio"]
     },
-
     {
-      "id": 6,
-      "sku": "oferta_semanal_avatar_seed",
-      "nome": "Semente Avatar - Oferta Semanal",
-      "descricao": "Semente DiceBear exclusiva da semana para gerar avatares únicos.",
-      "conteudo": [ { "itemId": 145, "quantidade": 1 } ],
-      "preco": { "moeda": 20, "real": null },
-      "disponibilidade": { "estoque": 5000, "limitePorUsuario": 3 },
-      "categoriaLoja": "avatar",
-      "tags": ["cosmetico","semente","promo"],
-      "ativo": true,
-      "promocional": { "tipo": "semanal", "inicio": "2025-11-13T00:00:00Z", "fim": "2025-11-20T00:00:00Z" },
-      "dataCriado": "2025-11-13T09:30:00Z"
+      "id": "offer006",
+      "nome": "Bênção Dupla XP",
+      "descricao": "Dobra ganho de XP por 24h",
+      "categoria": "buff",
+      "tipo": "consumivel",
+      "raridade": "raro",
+      "preco": {
+        "moedas": 300,
+        "ouro_fe": 0
+      },
+      "estoque": "ilimitado",
+      "requisitos": {
+        "nivel_minimo": 5,
+        "obras_max": 100
+      },
+      "icone": "bolt",
+      "tags": ["buff", "temporario"]
     },
-
     {
-      "id": 7,
-      "sku": "pack_testemunho_5",
-      "nome": "Pacote Testemunho (x5)",
-      "descricao": "Itens para criar e publicar 5 pequenos testemunhos (evidências). Inclui 5 tokens de publicação.",
-      "conteudo": [ { "itemId": 176, "quantidade": 5 } ],
-      "preco": { "moeda": 40, "real": null },
-      "disponibilidade": { "estoque": null, "limitePorUsuario": 20 },
-      "categoriaLoja": "recursos",
-      "tags": ["social","publicar"],
-      "ativo": true,
-      "dataCriado": "2025-11-13T09:30:00Z"
-    },
-
-    {
-      "id": 8,
-      "sku": "benção_persistencia",
-      "nome": "Bênção da Persistência",
-      "descricao": "Consumível raro que dá +25 de sabedoria por 4 horas.",
-      "conteudo": [ { "itemId": 131, "quantidade": 1 } ],
-      "preco": { "moeda": 1200, "real": null },
-      "disponibilidade": { "estoque": 100, "limitePorUsuario": 1 },
-      "categoriaLoja": "consumiveis",
-      "tags": ["buff","rare"],
-      "ativo": true,
-      "dataCriado": "2025-11-13T09:30:00Z"
+      "id": "offer007",
+      "nome": "Pacote Iniciante",
+      "descricao": "3x Pão da Vida + 2x Água Viva + 100 moedas bônus",
+      "categoria": "pacote",
+      "tipo": "pacote",
+      "raridade": "comum",
+      "preco": {
+        "moedas": 250,
+        "ouro_fe": 0
+      },
+      "estoque": "ilimitado",
+      "requisitos": {
+        "nivel_minimo": 1,
+        "nivel_maximo": 5,
+        "obras_max": 100
+      },
+      "icone": "card_giftcard",
+      "tags": ["pacote", "oferta"]
     }
   ]
 }

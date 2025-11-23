@@ -18,7 +18,7 @@
     "titulo": "Espírito Cheio!",
     "descricao": "Manteve o Espírito Santo acima de 90% por 30 dias.",
     "recompensa": { "xp": 200, "itens": ["medalha-espirito"] }
-  }
+  },
     { "id": 1, "codigo": "GEN", "titulo": "Gênesis Lido", "descricao": "Leu o livro de Gênesis completo.", "tipo": "leitura", "requisitos": { "lerLivro": "Gênesis" }, "recompensa": { "xp": 200, "badge": "genesis", "item": null }, "imagem": "/imagens/conquistas/genesis.png" },
     { "id": 2, "codigo": "EXO", "titulo": "Êxodo Lido", "descricao": "Leu o livro de Êxodo completo.", "tipo": "leitura", "requisitos": { "lerLivro": "Êxodo" }, "recompensa": { "xp": 200, "badge": "exodo", "item": null }, "imagem": "/imagens/conquistas/exodo.png" },
     { "id": 3, "codigo": "LEV", "titulo": "Levítico Lido", "descricao": "Leu o livro de Levítico completo.", "tipo": "leitura", "requisitos": { "lerLivro": "Levítico" }, "recompensa": { "xp": 200, "badge": "levitico", "item": null }, "imagem": "/imagens/conquistas/levitico.png" },

@@ -64,3 +64,14 @@ Balanceamento: Testar valores de bloqueio/desbloqueio para evitar frustração.
 Recuperação fácil: Consumíveis acessíveis, missões frequentes, confissão simples.
 Prevenção de abuso: Limitar uso de consumíveis, cooldown em confissão.
 Clareza: Mensagens explicativas em todos os bloqueios/desbloqueios.
+
+## Histórico de Execução
+- 23/11/2025 — Prompt 1 concluído: estrutura base do PWA criada (index, manifest, service worker, CSS globais, utilitários JS).
+- 23/11/2025 — Prompt 2 concluído: shell SPA com header, drawer acessível, navegação entre telas e placeholders documentados.
+- 24/11/2025 — Prompt 3 concluído: HUD minimizada/expandida com dados reais de status, slots de itens, armadura, atributos e efeitos ativos.
+- 24/11/2025 — Prompt 4 concluído: Tela Início funcional com cards de estatísticas, alertas por obras da carne, ações rápidas e destaques de conquistas.
+- 24/11/2025 — Prompt 5 concluído: Tela Missões com filtros dinâmicos, cards com bloqueios por status, banner motivacional e modal detalhado acessível.
+- 24/11/2025 — Prompt 6 concluído: Tela Estudos + Trilha com seleção de testamento/livro, progresso por capítulos, ciclo de aprendizado e bloqueios por status.
+- 24/11/2025 — Prompt 7 concluído: Telas Inventário e Loja com filtros, grids responsivos, blocos motivacionais e modais de detalhes/compra integrados aos status.
+- 24/11/2025 — Prompt 8 concluído: Telas Perfil e Configurações com dados reais, bloqueios por status, preferências e modais prontos para integração.
+- 24/11/2025 — Prompt 9 concluído: Telas Ranking e Conquistas com filtros, cards responsivos, bloqueios por status e modais de detalhes.
